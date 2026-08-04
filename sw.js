@@ -1,10 +1,8 @@
-const CACHE_NAME = "bcf-app-cache-v1";
+const CACHE_NAME = "bcf-app-cache-v2";
 const urlsToCache = [
   "./",
   "./index.html",
-  "./firebase-config.js",
-  "./manifest.json",
-  "./icon-192.png"
+  "./firebase-config.js"
 ];
 
 self.addEventListener("install", event => {
