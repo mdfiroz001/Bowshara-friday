@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>এডমিন প্যানেল - বউ ছাড়া কততম শুক্রবার</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --primary: #FF6A1A; --bg: #121212; --card: #1E1E1E; --text: #FFFFFF; }
+  body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+  h1, h2 { font-family: 'Baloo Da 2', sans-serif; }
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 15px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+  .card { background: var(--card); padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+  .stat-num { font-size: 28px; font-weight: bold; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+  th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+  th { background: #2A2A2A; color: var(--primary); }
+  .btn { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  .btn-danger { background: #E53935; color: white; }
+  .btn-success { background: #4CAF50; color: white; }
+  .chat-box { max-height: 400px; overflow-y: auto; background: #181818; padding: 10px; border-radius: 8px; }
+  .chat-msg { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #282828; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>বউ ছাড়া কততম শুক্রবার — এডমিন ড্যাশবোর্ড</h1>
+  <button class="btn btn-danger" onclick="logoutAdmin()">লগআউট</button>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div>মোট ব্যবহারকারী</div>
+    <div class="stat-num" id="totalUsers">০</div>
+  </div>
+  <div class="card">
+    <div>সক্রিয় চ্যাট বার্তা</div>
+    <div class="stat-num" id="totalMessages">০</div>
+  </div>
+</div>
+
+<h2>অনলাইন চ্যাট মডারেশন</h2>
+<div class="card">
+  <div class="chat-box" id="adminChatList">লোড হচ্ছে...</div>
+</div>
+
+<h2>ব্যবহারকারী ব্যবস্থাপনা (User Management)</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>নাম</th>
+        <th>ইমেইল</th>
+        <th>স্ট্যাটাস</th>
+        <th>অ্যাকশন</th>
+      </tr>
+    </thead>
+    <tbody id="userTableBody">
+      <!-- Dynamic Data -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+
+<script>
+  const db = firebase.database();
+  
+  // ১. চ্যাট মেসেজ মনিটর ও ডিলিট
+  db.ref("chatRooms/global/messages").on("value", snap => {
+    const messages = snap.val() || {};
+    const chatContainer = document.getElementById("adminChatList");
+    chatContainer.innerHTML = "";
+    let count = 0;
+    
+    Object.keys(messages).forEach(key => {
+      count++;
+      const msg = messages[key];
+      const div = document.createElement("div");
+      div.className = "chat-msg";
+      div.innerHTML = `
+        <div><strong>${msg.name || 'User'}:</strong> ${msg.text}</div>
+        <button class="btn btn-danger" onclick="deleteMessage('${key}')">ডিলিট</button>
+      `;
+      chatContainer.appendChild(div);
+    });
+    document.getElementById("totalMessages").innerText = count;
+  });
+
+  function deleteMessage(key) {
+    if(confirm("মেসেজটি ডিলিট করতে চান?")) {
+      db.ref(`chatRooms/global/messages/${key}`).remove();
+    }
+  }
+
+  // ২. ইউজার লিস্ট ও ব্যান ম্যানেজমেন্ট
+  db.ref("users").on("value", snap => {
+    const users = snap.val() || {};
+    const tableBody = document.getElementById("userTableBody");
+    tableBody.innerHTML = "";
+    let count = 0;
+
+    Object.keys(users).forEach(uid => {
+      count++;
+      const u = users[uid];
+      const isBanned = u.banned || false;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${u.name || 'N/A'}</td>
+        <td>${u.email || 'N/A'}</td>
+        <td><span style="color:${isBanned?'#E53935':'#4CAF50'}">${isBanned?'ব্যানড':'অ্যাক্টিভ'}</span></td>
+        <td>
+          <button class="btn ${isBanned?'btn-success':'btn-danger'}" onclick="toggleBan('${uid}', ${isBanned})">
+            ${isBanned?'আনব্যান':'ব্যান করুন'}
+          </button>
+        </td>
+      `;
+      tableBody.appendChild(tr);
+    });
+    document.getElementById("totalUsers").innerText = count;
+  });
+
+  function toggleBan(uid, currentStatus) {
+    db.ref(`users/${uid}/banned`).set(!currentStatus);
+  }
+
+  function logoutAdmin() {
+    firebase.auth().signOut().then(() => { window.location.href = "index.html"; });
+  }
+</script>
+</body>
+</html>
