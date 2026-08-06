@@ -8,10 +8,8 @@
 <style>
   :root {
     --primary: #FF6A1A;
-    --primary-dark: #E85A0C;
     --bg: #12100E;
     --card: #1D1814;
-    --card-hover: #26201B;
     --text: #F7EBE0;
     --muted: #A6907C;
     --border: rgba(255,106,26,0.2);
@@ -23,65 +21,37 @@
   body { background: var(--bg); color: var(--text); margin: 0; padding: 0; min-height: 100vh; }
   h1, h2, h3 { font-family: 'Baloo Da 2', sans-serif; margin: 0; }
   
-  /* পাসকোড লগইন মডাল */
   #adminAuthGate {
     position: fixed; inset: 0; background: var(--bg); z-index: 999;
     display: flex; align-items: center; justify-content: center; padding: 20px;
   }
   .auth-box {
     background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 20px;
-    width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 100%; max-width: 380px; text-align: center;
   }
   .auth-input {
     width: 100%; padding: 12px; margin: 12px 0; border-radius: 10px; border: 1px solid var(--border);
     background: #12100E; color: #fff; font-size: 15px;
   }
   
-  /* এডমিন হেডার */
   .navbar {
     background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 24px;
-    display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center; sticky; top: 0; z-index: 100;
   }
   .logo-title { color: var(--primary); font-size: 20px; font-weight: 700; }
-  
   .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
   
-  /* স্ট্যাটস গ্রিড */
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .stat-num { font-size: 32px; font-weight: 800; color: var(--primary); font-family: 'Baloo Da 2'; }
-  .stat-label { color: var(--muted); font-size: 14px; }
-  
-  /* ট্যাব সিস্টেম */
   .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; flex-wrap: wrap; }
   .tab-btn {
     background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 8px 18px;
-    border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all .2s ease;
+    border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 14px;
   }
   .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   
-  /* ডাটা সেকশন */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
   .data-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
   
-  /* টেবিল স্টাইল */
-  .table-responsive { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; text-align: left; }
-  th { background: rgba(255,106,26,0.1); color: var(--primary); padding: 14px; font-weight: 700; border-bottom: 1px solid var(--border); }
-  td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14.5px; }
-  
-  /* চ্যাট মডারেশন */
-  .chat-list { display: flex; flex-direction: column; gap: 10px; max-height: 480px; overflow-y: auto; padding-right: 6px; }
-  .chat-item {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 12px 16px;
-    border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px;
-  }
-  
-  /* ফর্ম ফিল্ড */
   .form-group { margin-bottom: 16px; }
   .form-group label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
   .form-control {
@@ -89,469 +59,173 @@
     background: #12100E; color: #fff; font-size: 14.5px;
   }
 
-  /* বাটন */
   .btn {
-    border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px;
-    cursor: pointer; transition: transform .15s ease; display: inline-flex; align-items: center; justify-content: center;
+    border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px; cursor: pointer;
   }
-  .btn:active { transform: scale(0.95); }
   .btn-primary { background: var(--primary); color: #fff; }
   .btn-danger { background: var(--danger); color: #fff; }
-  .btn-success { background: var(--success); color: #fff; }
-  
-  /* এম্পটি ও স্ট্যাটাস */
-  .empty-state { text-align: center; padding: 40px; color: var(--muted); }
-  .badge { padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; }
-  .badge-danger { background: rgba(255,71,87,0.15); color: var(--danger); }
-  .badge-success { background: rgba(46,213,115,0.15); color: var(--success); }
-  .badge-bot { background: rgba(255,106,26,0.2); color: var(--primary); }
-
-  /* টগল সুইচ */
-  .switch-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
-  .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
-  .switch input { opacity: 0; width: 0; height: 0; }
-  .slider { position: absolute; cursor: pointer; inset: 0; background-color: #332b24; transition: .3s; border-radius: 34px; }
-  .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .3s; border-radius: 50%; }
-  input:checked + .slider { background-color: var(--primary); }
-  input:checked + .slider:before { transform: translateX(22px); }
 </style>
 </head>
 <body>
 
-<!-- সিকিউরিটি প্রবেশ দ্বার -->
 <div id="adminAuthGate">
   <div class="auth-box">
     <h2>এডমিন প্রবেশ</h2>
-    <p style="color:var(--muted); font-size:14px;">প্রবেশ করতে এডমিন পাসকোড দিন</p>
     <input type="password" id="adminPassInput" class="auth-input" placeholder="পাসকোড দিন" style="text-align:center;">
     <button class="btn btn-primary" style="width:100%; padding:12px;" onclick="verifyAdminPass()">প্রবেশ করুন</button>
   </div>
 </div>
 
-<!-- হেডার -->
 <div class="navbar">
-  <div class="logo-title">বউ ছাড়া কততম শুক্রবার — এডমিন প্যানেল</div>
+  <div class="logo-title">বউ ছাড়া কততম শুক্রবার — এডমিন কন্ট্রোল</div>
   <button class="btn btn-danger" onclick="logoutAdmin()">লগআউট</button>
 </div>
 
 <div class="container">
-
-  <!-- স্ট্যাটস ওভারভিউ -->
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-label">মোট নিবন্ধিত ব্যবহারকারী</div>
-      <div class="stat-num" id="statUserCount">০</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">গ্লোবাল চ্যাট মেসেজ</div>
-      <div class="stat-num" id="statMsgCount">০</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">মোট কাস্টম উক্তি</div>
-      <div class="stat-num" id="statQuoteCount">০</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">AI বট স্ট্যাটাস</div>
-      <div class="stat-num" id="statAiStatus" style="font-size:22px;">বন্ধ</div>
-    </div>
-  </div>
-
-  <!-- নেভিগেশন ট্যাব -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('users', event)">ইউজার লিস্ট</button>
-    <button class="tab-btn" onclick="switchTab('chat', event)">চ্যাট মডারেশন</button>
+    <button class="tab-btn active" onclick="switchTab('dev', event)">📱 ডেভেলপার ও সোশ্যাল মিডিয়া</button>
     <button class="tab-btn" onclick="switchTab('quotes', event)">উক্তি ম্যানেজার</button>
     <button class="tab-btn" onclick="switchTab('ai', event)">🤖 AI এজেন্ট সেটআপ</button>
   </div>
 
-  <!-- ১. ইউজার লিস্ট ট্যাব -->
-  <div class="tab-content active" id="tab-users">
+  <!-- ১. ডেভেলপার ও সোশ্যাল সেটিংস -->
+  <div class="tab-content active" id="tab-dev">
     <div class="data-card">
-      <h3>ইউজার অ্যাকাউন্ট ম্যানেজমেন্ট</h3>
-      <div class="table-responsive" style="margin-top:15px;">
-        <table>
-          <thead>
-            <tr>
-              <th>নাম</th>
-              <th>ইমেইল</th>
-              <th>যোগদানের তারিখ</th>
-              <th>স্ট্যাটাস</th>
-              <th>অ্যাকশন</th>
-            </tr>
-          </thead>
-          <tbody id="userTableBody">
-            <tr><td colspan="5" class="empty-state">ইউজার তথ্য লোড হচ্ছে...</td></tr>
-          </tbody>
-        </table>
+      <h3>ডেভেলপার ইনফরমেশন ও সোশ্যাল অ্যাকাউন্ট</h3>
+      <p style="color:var(--muted); font-size:14px;">এখান থেকে সেট করা নাম ও লিংকগুলো ইউজার প্যানেলে সরাসরি শো করবে।</p>
+      
+      <div class="form-group">
+        <label>ডেভেলপার নাম</label>
+        <input type="text" id="devNameInput" class="form-control" value="MD FIROZ HOSSAIN">
       </div>
+      <div class="form-group">
+        <label>টেলিগ্রাম অ্যাকাউন্ট / চ্যানেল লিংক (Telegram)</label>
+        <input type="url" id="devTelegramInput" class="form-control" placeholder="https://t.me/yourusername">
+      </div>
+      <div class="form-group">
+        <label>ফেসবুক প্রোফাইল / পেজ লিংক (Facebook)</label>
+        <input type="url" id="devFbInput" class="form-control" placeholder="https://facebook.com/yourprofile">
+      </div>
+      <div class="form-group">
+        <label>হোয়াটসঅ্যাপ নম্বর / গ্রুপ লিংক (WhatsApp)</label>
+        <input type="url" id="devWaInput" class="form-control" placeholder="https://wa.me/8801700000000">
+      </div>
+      <button class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveDevSettings()">সেটিংস সেভ করুন</button>
     </div>
   </div>
 
-  <!-- ২. চ্যাট মডারেশন ট্যাব -->
-  <div class="tab-content" id="tab-chat">
-    <div class="data-card">
-      <h3>লাইভ চ্যাট মেসেজ মডারেশন</h3>
-      <div class="chat-list" id="chatListContainer" style="margin-top:15px;">
-        <div class="empty-state">মেসেজ লোড হচ্ছে...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ৩. উক্তি ম্যানেজার ট্যাব -->
+  <!-- ২. উক্তি ম্যানেজার -->
   <div class="tab-content" id="tab-quotes">
     <div class="data-card">
       <h3>নতুন মজার উক্তি যোগ করুন</h3>
-      <div style="display:flex; gap:10px; margin:15px 0 20px;">
-        <input type="text" id="newQuoteInput" placeholder="এখানে মজার বা কৌতুকপূর্ণ উক্তি লিখুন..." class="form-control">
-        <button class="btn btn-primary" style="white-space:nowrap;" onclick="addCustomQuote()">যোগ করুন</button>
+      <div style="display:flex; gap:10px; margin:15px 0;">
+        <input type="text" id="newQuoteInput" placeholder="এখানে উক্তি লিখুন..." class="form-control">
+        <button class="btn btn-primary" onclick="addQuote()">যোগ করুন</button>
       </div>
-
-      <h3>বিদ্যমান উক্তি তালিকা</h3>
-      <div id="quoteAdminList" style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
-        <div class="empty-state">উক্তি লোড হচ্ছে...</div>
-      </div>
+      <div id="quoteAdminList" style="display:flex; flex-direction:column; gap:8px;"></div>
     </div>
   </div>
 
-  <!-- ৪. AI এজেন্ট সেটআপ ট্যাব -->
+  <!-- ৩. AI এজেন্ট সেটআপ -->
   <div class="tab-content" id="tab-ai">
     <div class="data-card">
-      <h3>🤖 AI চ্যাটবট এজেন্ট কনফিগারেশন (Ollama / Cloud AI API)</h3>
-      <p style="color:var(--muted); font-size:14px; margin-bottom:20px;">
-        এই সেটিংস সক্রিয় থাকলে গ্লোবাল চ্যাটে ইউজার মেসেজ দিলে AI এজেন্ট স্বয়ংক্রিয়ভাবে রসাত্মক ও কৌতুকপূর্ণ উত্তর দেবে।
-      </p>
-
-      <div class="switch-row">
-        <div>
-          <strong style="font-size:16px;">AI অটো-রিপ্লাই এজেন্ট সক্রিয় করুন</strong>
-          <div style="font-size:13px; color:var(--muted);">চ্যাটে ব্যবহারকারীর মেসেজের সাথে সাথে AI উত্তর পাঠাবে।</div>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="aiEnabledToggle">
-          <span class="slider"></span>
-        </label>
-      </div>
-
+      <h3>🤖 AI এজেন্ট সেটআপ (Ollama / Groq / OpenRouter)</h3>
       <div class="form-group">
-        <label>AI সার্ভিস প্রোভাইডার (Provider)</label>
-        <select id="aiProviderSelect" class="form-control" onchange="toggleAiFields()">
-          <option value="ollama">Ollama (Local / Cloud)</option>
-          <option value="groq">Groq AI (Fast Cloud API)</option>
-          <option value="openrouter">OpenRouter API</option>
-          <option value="custom">কাস্টম OpenAI Compatible Endpoint</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label id="lblEndpoint">Ollama / API Endpoint URL</label>
+        <label>API Endpoint URL</label>
         <input type="text" id="aiEndpointInput" class="form-control" placeholder="http://localhost:11434/api/generate">
       </div>
-
-      <div class="form-group" id="grpApiKey">
-        <label>API Key (Ollama-এর ক্ষেত্রে খালি রাখতে পারেন)</label>
-        <input type="password" id="aiApiKeyInput" class="form-control" placeholder="gsk_... অথবা sk-or-v1-...">
-      </div>
-
       <div class="form-group">
-        <label>AI মডেল নেম (Model Name)</label>
-        <input type="text" id="aiModelInput" class="form-control" placeholder="llama3, mistral, gemma2-9b-it, ইত্যাদি">
+        <label>API Key (যদি থাকে)</label>
+        <input type="password" id="aiApiKeyInput" class="form-control" placeholder="gsk_...">
       </div>
-
       <div class="form-group">
-        <label>সিস্টেম প্রম্পট (AI ব্যক্তিত্ব ও আচরণ নির্দেশিকা)</label>
-        <textarea id="aiSystemPromptInput" class="form-control" rows="4" placeholder="AI কিভাবে আচরণ করবে নির্দেশ দিন..."></textarea>
+        <label>মডেল নেম (Model Name)</label>
+        <input type="text" id="aiModelInput" class="form-control" placeholder="llama3">
       </div>
-
-      <button class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAiSettings()">সেটিংস সংরক্ষণ করুন</button>
+      <button class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAiSettings()">AI সেটিংস সংরক্ষণ করুন</button>
     </div>
   </div>
-
 </div>
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="firebase-config.js"></script>
 
 <script>
-  const DEFAULT_ADMIN_PASS = "admin123"; // আপনার পছন্দমত পরিবর্তন করতে পারেন
+  const DEFAULT_ADMIN_PASS = "admin123";
 
   function verifyAdminPass() {
-    const input = document.getElementById("adminPassInput").value;
-    if (input === DEFAULT_ADMIN_PASS) {
-      sessionStorage.setItem("bcf_admin_logged", "true");
+    if (document.getElementById("adminPassInput").value === DEFAULT_ADMIN_PASS) {
+      sessionStorage.setItem("admin_logged", "true");
       document.getElementById("adminAuthGate").style.display = "none";
       loadAdminData();
-    } else {
-      alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।");
-    }
+    } else { alert("ভুল পাসওয়ার্ড!"); }
   }
 
-  if (sessionStorage.getItem("bcf_admin_logged") === "true") {
+  if (sessionStorage.getItem("admin_logged") === "true") {
     document.getElementById("adminAuthGate").style.display = "none";
     window.addEventListener("DOMContentLoaded", loadAdminData);
   }
 
-  function logoutAdmin() {
-    sessionStorage.removeItem("bcf_admin_logged");
-    location.reload();
-  }
+  function logoutAdmin() { sessionStorage.removeItem("admin_logged"); location.reload(); }
 
   function switchTab(tabId, event) {
     document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
     document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    if(event && event.target) event.target.classList.add("active");
+    if(event) event.target.classList.add("active");
     document.getElementById("tab-" + tabId).classList.add("active");
   }
 
   const db = firebase.database();
-  let aiConfig = {};
 
   function loadAdminData() {
-    // ১. ইউজার তালিকা লোড
-    db.ref("users").on("value", snap => {
-      const users = snap.val() || {};
-      const body = document.getElementById("userTableBody");
-      body.innerHTML = "";
-      const keys = Object.keys(users);
-      document.getElementById("statUserCount").innerText = keys.length;
-
-      if (keys.length === 0) {
-        body.innerHTML = `<tr><td colspan="5" class="empty-state">কোন রেজিস্টার্ড ইউজার পাওয়া যায়নি</td></tr>`;
-        return;
-      }
-
-      keys.forEach(uid => {
-        const u = users[uid];
-        const isBanned = u.banned || false;
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><strong>${u.name || 'অজানা'}</strong></td>
-          <td>${u.email || 'N/A'}</td>
-          <td>${u.joinDate ? new Date(u.joinDate).toLocaleDateString('bn-BD') : '-'}</td>
-          <td><span class="badge ${isBanned ? 'badge-danger' : 'badge-success'}">${isBanned ? 'ব্যানড' : 'অ্যাক্টিভ'}</span></td>
-          <td>
-            <button class="btn ${isBanned ? 'btn-success' : 'btn-danger'}" onclick="toggleBanUser('${uid}', ${isBanned})">
-              ${isBanned ? 'আনব্যান করুন' : 'ব্যান করুন'}
-            </button>
-          </td>
-        `;
-        body.appendChild(tr);
-      });
-    }, err => {
-      document.getElementById("userTableBody").innerHTML = `<tr><td colspan="5" class="empty-state" style="color:red">ডাটাবেস ত্রুটি: ${err.message}</td></tr>`;
+    // Dev Links
+    db.ref("settings/developer").on("value", snap => {
+      const d = snap.val() || {};
+      document.getElementById("devNameInput").value = d.name || "MD FIROZ HOSSAIN";
+      document.getElementById("devTelegramInput").value = d.telegram || "";
+      document.getElementById("devFbInput").value = d.facebook || "";
+      document.getElementById("devWaInput").value = d.whatsapp || "";
     });
 
-    // ২. চ্যাট মেসেজ মডারেশন
-    db.ref("chatRooms/global/messages").on("value", snap => {
-      const msgs = snap.val() || {};
-      const container = document.getElementById("chatListContainer");
-      container.innerHTML = "";
-      const keys = Object.keys(msgs);
-      document.getElementById("statMsgCount").innerText = keys.length;
-
-      if (keys.length === 0) {
-        container.innerHTML = `<div class="empty-state">গ্লোবাল চ্যাটে কোন মেসেজ নেই</div>`;
-        return;
-      }
-
-      keys.reverse().forEach(id => {
-        const m = msgs[id];
-        const isBot = m.isBot || false;
-        const div = document.createElement("div");
-        div.className = "chat-item";
-        div.innerHTML = `
-          <div>
-            <div style="font-weight:700; font-size:14px; color:var(--primary); display:flex; gap:6px; align-items:center;">
-              ${m.name || 'User'} ${isBot ? '<span class="badge badge-bot">BOT</span>' : ''}
-            </div>
-            <div style="margin-top:3px; font-size:14px;">${escapeHtml(m.text)}</div>
-          </div>
-          <button class="btn btn-danger" onclick="deleteMessage('${id}')">মুছুন</button>
-        `;
-        container.appendChild(div);
-      });
-    });
-
-    // ৩. উক্তি মনিটর
+    // Quotes
     db.ref("quotes").on("value", snap => {
       const quotes = snap.val() || {};
       const container = document.getElementById("quoteAdminList");
       container.innerHTML = "";
-      const keys = Object.keys(quotes);
-      document.getElementById("statQuoteCount").innerText = keys.length;
-
-      if (keys.length === 0) {
-        container.innerHTML = `<div class="empty-state">কোন উক্তি যোগ করা হয়নি</div>`;
-        return;
-      }
-
-      keys.forEach(id => {
-        const q = quotes[id];
+      Object.keys(quotes).forEach(id => {
         const div = document.createElement("div");
-        div.className = "chat-item";
-        div.innerHTML = `
-          <div>${escapeHtml(q.text)}</div>
-          <button class="btn btn-danger" onclick="deleteQuote('${id}')">মুছুন</button>
-        `;
+        div.style.cssText = "background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;";
+        div.innerHTML = `<span>${quotes[id].text}</span> <button class="btn btn-danger" onclick="deleteQuote('${id}')">মুছুন</button>`;
         container.appendChild(div);
       });
     });
-
-    // ৪. AI সেটিংস লোড
-    db.ref("settings/ai").on("value", snap => {
-      aiConfig = snap.val() || {};
-      document.getElementById("aiEnabledToggle").checked = aiConfig.enabled || false;
-      document.getElementById("aiProviderSelect").value = aiConfig.provider || "ollama";
-      document.getElementById("aiEndpointInput").value = aiConfig.endpoint || "http://localhost:11434/api/generate";
-      document.getElementById("aiApiKeyInput").value = aiConfig.apiKey || "";
-      document.getElementById("aiModelInput").value = aiConfig.model || "llama3";
-      document.getElementById("aiSystemPromptInput").value = aiConfig.systemPrompt || "তুমি 'বউ ছাড়া কততম শুক্রবার' অ্যাপের হাস্যরসাত্মক এআই অ্যাসিস্ট্যান্ট। তোমার কাজ হলো ব্যবহারকারীদের সাথে খাঁটি বাংলায় রসাত্মক, বিনোদনমূলক ও কৌতুকপূর্ণ মেজাজে কথা বলা।";
-
-      const isAct = aiConfig.enabled || false;
-      const statElem = document.getElementById("statAiStatus");
-      statElem.innerText = isAct ? "সক্রিয় 🟢" : "বন্ধ 🔴";
-      statElem.style.color = isAct ? "var(--success)" : "var(--danger)";
-
-      toggleAiFields();
-    });
-
-    // AI Auto-Reply Listener on Chat
-    listenForAiTrigger();
   }
 
-  function toggleBanUser(uid, currentBannedState) {
-    db.ref(`users/${uid}/banned`).set(!currentBannedState);
+  function saveDevSettings() {
+    db.ref("settings/developer").set({
+      name: document.getElementById("devNameInput").value.trim(),
+      telegram: document.getElementById("devTelegramInput").value.trim(),
+      facebook: document.getElementById("devFbInput").value.trim(),
+      whatsapp: document.getElementById("devWaInput").value.trim()
+    }).then(() => alert("ডেভেলপার ইনফো সফলভাবে সংরক্ষিত হয়েছে!"));
   }
 
-  function deleteMessage(msgId) {
-    if (confirm("মেসেজটি ডিলিট করতে চান?")) {
-      db.ref(`chatRooms/global/messages/${msgId}`).remove();
-    }
-  }
-
-  function addCustomQuote() {
+  function addQuote() {
     const text = document.getElementById("newQuoteInput").value.trim();
-    if (!text) return alert("উক্তি লিখুন");
-    db.ref("quotes").push({ text, createdAt: Date.now() });
+    if(text) db.ref("quotes").push({ text, createdAt: Date.now() });
     document.getElementById("newQuoteInput").value = "";
   }
 
-  function deleteQuote(quoteId) {
-    if (confirm("উক্তিটি মুছে ফেলতে চান?")) {
-      db.ref(`quotes/${quoteId}`).remove();
-    }
-  }
-
-  function toggleAiFields() {
-    const provider = document.getElementById("aiProviderSelect").value;
-    const endpointInput = document.getElementById("aiEndpointInput");
-    
-    if (provider === "ollama") {
-      endpointInput.placeholder = "http://localhost:11434/api/generate";
-    } else if (provider === "groq") {
-      endpointInput.placeholder = "https://api.groq.com/openai/v1/chat/completions";
-    } else if (provider === "openrouter") {
-      endpointInput.placeholder = "https://openrouter.ai/api/v1/chat/completions";
-    } else {
-      endpointInput.placeholder = "https://your-custom-endpoint.com/v1/chat/completions";
-    }
-  }
+  function deleteQuote(id) { db.ref(`quotes/${id}`).remove(); }
 
   function saveAiSettings() {
-    const enabled = document.getElementById("aiEnabledToggle").checked;
-    const provider = document.getElementById("aiProviderSelect").value;
-    const endpoint = document.getElementById("aiEndpointInput").value.trim();
-    const apiKey = document.getElementById("aiApiKeyInput").value.trim();
-    const model = document.getElementById("aiModelInput").value.trim();
-    const systemPrompt = document.getElementById("aiSystemPromptInput").value.trim();
-
     db.ref("settings/ai").set({
-      enabled,
-      provider,
-      endpoint,
-      apiKey,
-      model,
-      systemPrompt,
-      updatedAt: Date.now()
-    }).then(() => {
-      alert("AI কনফিগারেশন সফলভাবে সংরক্ষিত হয়েছে!");
-    }).catch(err => alert("রক্ষা করা সম্ভব হয়নি: " + err.message));
-  }
-
-  // AI Auto Engine
-  let lastProcessedMsgKey = null;
-  function listenForAiTrigger() {
-    db.ref("chatRooms/global/messages").limitToLast(1).on("child_added", snap => {
-      const msgKey = snap.key;
-      const m = snap.val();
-
-      if (!aiConfig.enabled || !m || m.isBot || msgKey === lastProcessedMsgKey) return;
-      lastProcessedMsgKey = msgKey;
-
-      // Call AI Engine
-      generateAiResponse(m.text, m.name || "ব্যবহারকারী");
-    });
-  }
-
-  async function generateAiResponse(userText, userName) {
-    if (!aiConfig.endpoint) return;
-
-    try {
-      let replyText = "";
-      const prompt = `${aiConfig.systemPrompt}\n\nইউজার (${userName}) বলেছে: "${userText}"\nউত্তর:`;
-
-      if (aiConfig.provider === "ollama") {
-        const res = await fetch(aiConfig.endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: aiConfig.model || "llama3",
-            prompt: prompt,
-            stream: false
-          })
-        });
-        const data = await res.json();
-        replyText = data.response;
-      } else {
-        // OpenAI Compatible APIs (Groq, OpenRouter, Custom)
-        const headers = { "Content-Type": "application/json" };
-        if (aiConfig.apiKey) headers["Authorization"] = `Bearer ${aiConfig.apiKey}`;
-
-        const res = await fetch(aiConfig.endpoint, {
-          method: "POST",
-          headers,
-          body: JSON.stringify({
-            model: aiConfig.model || "gemma2-9b-it",
-            messages: [
-              { role: "system", content: aiConfig.systemPrompt },
-              { role: "user", content: `${userName}: ${userText}` }
-            ]
-          })
-        });
-        const data = await res.json();
-        replyText = data.choices[0].message.content;
-      }
-
-      if (replyText && replyText.trim()) {
-        db.ref("chatRooms/global/messages").push({
-          uid: "ai-bot-system",
-          name: "বউ ছাড়া AI 🤖",
-          text: replyText.trim(),
-          isBot: true,
-          time: Date.now()
-        });
-      }
-    } catch (err) {
-      console.error("AI Error:", err);
-    }
-  }
-
-  function escapeHtml(str) {
-    const div = document.createElement("div");
-    div.textContent = str || "";
-    return div.innerHTML;
+      endpoint: document.getElementById("aiEndpointInput").value.trim(),
+      apiKey: document.getElementById("aiApiKeyInput").value.trim(),
+      model: document.getElementById("aiModelInput").value.trim()
+    }).then(() => alert("AI সেটিংস সংরক্ষিত হয়েছে!"));
   }
 </script>
 </body>
