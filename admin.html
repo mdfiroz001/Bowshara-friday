@@ -132,7 +132,7 @@
   <div class="tabs">
     <button type="button" class="tab-btn active" onclick="switchTab('support', event)">🎧 সাপোর্ট চ্যাট রিপ্লাই</button>
     <button type="button" class="tab-btn" onclick="switchTab('users', event)">👥 ইউজার অ্যাকাউন্টস</button>
-    <button type="button" class="tab-btn" onclick="switchTab('ads', event)">📢 এডস ও লোগো</button>
+    <button type="button" class="tab-btn" onclick="switchTab('ads', event)">📢 পেজ-ওয়াইজ এডস ও লোগো</button>
     <button type="button" class="tab-btn" onclick="switchTab('quotes', event)">💬 উক্তি ম্যানেজার</button>
     <button type="button" class="tab-btn" onclick="switchTab('apk', event)">📦 APK অ্যাপ লিংক</button>
     <button type="button" class="tab-btn" onclick="switchTab('ai', event)">🤖 AI এজেন্ট সেটআপ</button>
@@ -193,22 +193,52 @@
     </div>
   </div>
 
-  <!-- ৩. এডভারটাইজমেন্ট ও লোগো ম্যানেজমেন্ট -->
+  <!-- ৩. পেজ-ওয়াইজ এডভারটাইজমেন্ট ও লোগো ম্যানেজমেন্ট -->
   <div class="tab-content" id="tab-ads">
     <div class="data-card">
-      <h3>📢 এডভারটাইজমেন্ট ও লোগো সেটআপ</h3>
-      
+      <h3>📢 ফেভিকন লোগো সেটআপ</h3>
       <div class="form-group">
         <label>ফেভিকন লোগো ডিরেক্ট লিংক (Favicon Logo URL)</label>
         <input type="url" id="faviconUrlInput" class="form-control" placeholder="https://example.com/logo.png">
       </div>
-      <button type="button" class="btn btn-primary" onclick="saveFaviconUrl()" style="margin-bottom:20px;">লোগো সেভ করুন</button>
+      <button type="button" class="btn btn-primary" onclick="saveFaviconUrl()" style="margin-bottom:24px;">লোগো সেভ করুন</button>
+
+      <hr style="border:0; border-top:1px solid var(--border); margin:20px 0;">
+
+      <h3>📢 পেজ-ওয়াইজ এডভারটাইজমেন্ট স্ক্রিপ্ট সেটআপ</h3>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:16px;">প্রতিটি পেজের নিচের ফ্রেমের জন্য আলাদা আলাদা HTML/Script এড কোড বসান:</p>
 
       <div class="form-group">
-        <label>এডভারটাইজমেন্ট কোড বা স্ক্রিপ্ট (Google AdSense/Adsterra/HTML Ad Script)</label>
-        <textarea id="adScriptInput" class="form-control" rows="5" placeholder="<script>...</script> বা HTML এড কোড এখানে বসান..."></textarea>
+        <label>১. ঘর পেজ এড কোড (Home Page Ad Script)</label>
+        <textarea id="adScriptHomeInput" class="form-control" rows="3" placeholder="ঘর পেজের এড কোড..."></textarea>
       </div>
-      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAdScript()">এড স্ক্রিপ্ট সেভ করুন</button>
+
+      <div class="form-group">
+        <label>২. হিসাব পেজ এড কোড (Counter Page Ad Script)</label>
+        <textarea id="adScriptCounterInput" class="form-control" rows="3" placeholder="হিসাব পেজের এড কোড..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>৩. উক্তি পেজ এড কোড (Quotes Page Ad Script)</label>
+        <textarea id="adScriptQuotesInput" class="form-control" rows="3" placeholder="উক্তি পেজের এড কোড..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>৪. চ্যাট পেজ এড কোড (Chat Page Ad Script)</label>
+        <textarea id="adScriptChatInput" class="form-control" rows="3" placeholder="চ্যাট পেজের এড কোড..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>৫. প্রোফাইল পেজ এড কোড (Profile Page Ad Script)</label>
+        <textarea id="adScriptProfileInput" class="form-control" rows="3" placeholder="প্রোফাইল পেজের এড কোড..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>৬. সেটিংস পেজ এড কোড (Settings Page Ad Script)</label>
+        <textarea id="adScriptSettingsInput" class="form-control" rows="3" placeholder="সেটিংস পেজের এড কোড..."></textarea>
+      </div>
+
+      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAdScripts()">সবগুলো পেজের এড সেভ করুন</button>
     </div>
   </div>
 
@@ -403,12 +433,19 @@
       });
     });
 
-    // Favicon & Ads
+    // Favicon & Page-wise Ads
     db.ref("settings/app/faviconUrl").on("value", snap => {
       document.getElementById("faviconUrlInput").value = snap.val() || "";
     });
-    db.ref("settings/app/adScript").on("value", snap => {
-      document.getElementById("adScriptInput").value = snap.val() || "";
+    
+    db.ref("settings/app/adScripts").on("value", snap => {
+      const ads = snap.val() || {};
+      document.getElementById("adScriptHomeInput").value = ads.home || "";
+      document.getElementById("adScriptCounterInput").value = ads.counter || "";
+      document.getElementById("adScriptQuotesInput").value = ads.quotes || "";
+      document.getElementById("adScriptChatInput").value = ads.chat || "";
+      document.getElementById("adScriptProfileInput").value = ads.profile || "";
+      document.getElementById("adScriptSettingsInput").value = ads.settings || "";
     });
 
     // APK
@@ -544,9 +581,17 @@
     db.ref("settings/app/faviconUrl").set(url).then(() => alert("✅ ফেভিকন লোগো লিংক সেভ হয়েছে!"));
   }
 
-  function saveAdScript() {
-    const script = document.getElementById("adScriptInput").value.trim();
-    db.ref("settings/app/adScript").set(script).then(() => alert("✅ এডভারটাইজমেন্ট স্ক্রিপ্ট সেভ হয়েছে!"));
+  function saveAdScripts() {
+    const adsObj = {
+      home: document.getElementById("adScriptHomeInput").value.trim(),
+      counter: document.getElementById("adScriptCounterInput").value.trim(),
+      quotes: document.getElementById("adScriptQuotesInput").value.trim(),
+      chat: document.getElementById("adScriptChatInput").value.trim(),
+      profile: document.getElementById("adScriptProfileInput").value.trim(),
+      settings: document.getElementById("adScriptSettingsInput").value.trim(),
+      updatedAt: Date.now()
+    };
+    db.ref("settings/app/adScripts").set(adsObj).then(() => alert("✅ সকল পেজের এডভারটাইজমেন্ট স্ক্রিপ্ট সফলভাবে সেভ হয়েছে!"));
   }
 
   function saveApkUrl() {
