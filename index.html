@@ -43,71 +43,234 @@ button{font-family:inherit;}
 ::selection{background:var(--orange-1);color:#fff;}
 
 /* ----------------------------------------------------------
-   PURE CSS ICONS & EMOJIS (No Unicode Emojis Used)
+   PURE CSS ICONS — প্রতিটি পেজের জন্য স্বতন্ত্র আইকন
    ---------------------------------------------------------- */
-/* CSS Balloon Emoji */
-.css-balloon{
-  display:inline-block; width:14px; height:18px; background:#FF4757; border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
-  position:relative; margin-left:4px; vertical-align:middle; box-shadow:inset -2px -2px 0 rgba(0,0,0,0.15);
+
+/* হোম পেজ আইকন — ঘরের ছাদ */
+.icon-home {
+  width: 22px;
+  height: 18px;
+  position: relative;
+  margin: 3px auto 0;
+  /* ছাদের ত্রিভুজ */
 }
-.css-balloon::before{
-  content:""; position:absolute; bottom:-3px; left:50%; transform:translateX(-50%);
-  width:0; height:0; border-left:3px solid transparent; border-right:3px solid transparent; border-bottom:4px solid #FF4757;
+.icon-home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 10px solid currentColor;
 }
-.css-balloon::after{
-  content:""; position:absolute; bottom:-12px; left:50%; width:1px; height:10px; background:rgba(0,0,0,0.25);
-  transform:rotate(10deg);
+/* ঘরের বডি */
+.icon-home::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 10px;
+  background: currentColor;
+  border-radius: 0 0 2px 2px;
 }
 
-/* CSS Refresh Icon */
-.ico-refresh{
-  width:14px; height:14px; border:2px solid currentColor; border-right-color:transparent;
-  border-radius:50%; display:inline-block; position:relative; vertical-align:middle;
+/* হিসাব পেজ আইকন — ক্যালেন্ডার ও সংখ্যা */
+.icon-calculator {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  margin: 2px auto 0;
+  border: 2px solid currentColor;
+  border-radius: 4px;
 }
-.ico-refresh::after{
-  content:""; position:absolute; top:-2px; right:-3px; width:0; height:0;
-  border-left:4px solid transparent; border-right:4px solid transparent; border-bottom:5px solid currentColor;
-  transform:rotate(45deg);
+.icon-calculator::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 4px;
+  width: 2px;
+  height: 5px;
+  background: currentColor;
+  box-shadow: 8px 0 0 currentColor;
 }
-
-/* CSS Star Icon */
-.ico-star{
-  width:0; height:0; margin:4px; color:currentColor;
-  border-right:6px solid transparent; border-bottom:4px solid currentColor; border-left:6px solid transparent;
-  transform:rotate(35deg); display:inline-block; position:relative; vertical-align:middle;
-}
-.ico-star::before{
-  content:""; border-bottom:4px solid currentColor; border-left:2px solid transparent; border-right:2px solid transparent;
-  position:absolute; height:0; width:0; top:-2.5px; left:-4px; transform:rotate(-35deg);
-}
-.ico-star::after{
-  content:""; position:absolute; color:currentColor; top:0.5px; left:-6px; width:0; height:0;
-  border-right:6px solid transparent; border-bottom:4px solid currentColor; border-left:6px solid transparent;
-  transform:rotate(-70deg);
-}
-
-/* CSS Copy Icon */
-.ico-copy{
-  width:10px; height:12px; border:1.5px solid currentColor; border-radius:2px; display:inline-block;
-  position:relative; vertical-align:middle; margin-right:2px;
-}
-.ico-copy::before{
-  content:""; position:absolute; top:-4px; right:-4px; width:8px; height:10px;
-  border-top:1.5px solid currentColor; border-right:1.5px solid currentColor; border-radius:1px;
+.icon-calculator::after {
+  content: "৫";
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  color: currentColor;
+  font-family: 'Baloo Da 2', sans-serif;
 }
 
-/* CSS Share Icon */
-.ico-share{
-  width:10px; height:10px; border-top:2px solid currentColor; border-right:2px solid currentColor;
-  display:inline-block; position:relative; transform:rotate(-45deg); vertical-align:middle;
+/* উক্তি পেজ আইকন — কোটেশন মার্ক */
+.icon-quote {
+  width: 20px;
+  height: 16px;
+  position: relative;
+  margin: 4px auto 0;
 }
-.ico-share::before{
-  content:""; position:absolute; width:12px; height:2px; background:currentColor;
-  transform:rotate(45deg); transform-origin:right top; top:0; right:0;
+.icon-quote::before {
+  content: "“";
+  position: absolute;
+  top: -8px;
+  left: -2px;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  color: currentColor;
+  font-family: 'Baloo Da 2', sans-serif;
+}
+.icon-quote::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  width: 12px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* প্রোফাইল পেজ আইকন — ব্যক্তি */
+.icon-profile {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  margin: 2px auto 0;
+}
+.icon-profile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.icon-profile::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 9px;
+  background: currentColor;
+  border-radius: 10px 10px 0 0;
+}
+
+/* সেটিংস পেজ আইকন — গিয়ার */
+.icon-settings {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  margin: 2px auto 0;
+}
+.icon-settings .gear-ring {
+  position: absolute;
+  inset: 3px;
+  border: 2.5px solid currentColor;
+  border-radius: 50%;
+}
+.icon-settings .gear-spoke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 6px;
+  background: currentColor;
+  margin: -3px 0 0 -1px;
+  transform-origin: 1px 3px;
+  border-radius: 1px;
+}
+.icon-settings .gear-spoke:nth-child(1) { transform: rotate(0deg) translateY(-9px); }
+.icon-settings .gear-spoke:nth-child(2) { transform: rotate(60deg) translateY(-9px); }
+.icon-settings .gear-spoke:nth-child(3) { transform: rotate(120deg) translateY(-9px); }
+.icon-settings .gear-spoke:nth-child(4) { transform: rotate(180deg) translateY(-9px); }
+.icon-settings .gear-spoke:nth-child(5) { transform: rotate(240deg) translateY(-9px); }
+.icon-settings .gear-spoke:nth-child(6) { transform: rotate(300deg) translateY(-9px); }
+
+/* ----------------------------------------------------------
+   বাটন স্টাইল — আইকনের সাথে মিল রেখে
+   ---------------------------------------------------------- */
+.btn-primary, .btn-secondary, .btn-ghost-danger, .qa-btn {
+  transition: all 0.25s ease;
+  font-weight: 700;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-3));
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-btn);
+  border-radius: var(--radius-md);
+  padding: 15px 24px;
+  cursor: pointer;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 12px rgba(255,106,26,0.4);
+}
+.btn-secondary {
+  border: 2px solid var(--orange-2);
+  background: transparent;
+  color: var(--orange-3);
+  border-radius: var(--radius-md);
+  padding: 13px 24px;
+  cursor: pointer;
+}
+.btn-secondary:active {
+  background: rgba(255,106,26,0.08);
+}
+.qa-btn {
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--orange-3);
+  border-radius: 999px;
+  padding: 10px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.qa-btn:active {
+  background: var(--orange-3);
+  color: #fff;
+  border-color: var(--orange-3);
+  transform: scale(0.95);
+}
+.qa-btn.active {
+  background: var(--orange-3);
+  color: #fff;
+  border-color: var(--orange-3);
+}
+
+/* নেভ বার বাটন — অ্যাক্টিভ স্টেট */
+.nav-btn {
+  transition: color 0.2s ease;
+}
+.nav-btn.active {
+  color: var(--orange-3);
+  font-weight: 700;
+}
+.nav-indicator {
+  transition: opacity 0.25s ease;
 }
 
 /* ----------------------------------------------------------
-   UI LAYOUT & COMPONENTS
+   UI LAYOUT & COMPONENTS (বাকি অংশ অপরিবর্তিত)
    ---------------------------------------------------------- */
 .bg-shapes{position:fixed; inset:0; overflow:hidden; z-index:0; pointer-events:none;}
 .bg-shapes span{
@@ -192,13 +355,6 @@ button{font-family:inherit;}
 .quote-text{font-size:17px; font-weight:600; line-height:1.6; color:var(--ink); min-height:52px;}
 .quote-meta{color:var(--muted); font-size:13px; margin-top:10px;}
 .quote-actions{display:flex; justify-content:center; gap:10px; margin-top:16px; flex-wrap:wrap;}
-.qa-btn{
-  border:none; background:var(--card); color:var(--orange-3); font-weight:600; font-size:13px;
-  padding:10px 16px; border-radius:999px; cursor:pointer; box-shadow:0 4px 12px rgba(255,122,41,0.15);
-  display:flex; align-items:center; gap:6px; transition:all .2s ease;
-}
-.qa-btn:active{transform:scale(0.95);}
-.qa-btn.active{background:var(--orange-3); color:#fff;}
 
 .chat-entry{display:flex; align-items:center; gap:14px; cursor:pointer;}
 .chat-entry-ico{
@@ -210,17 +366,29 @@ button{font-family:inherit;}
 .chat-entry-sub{color:var(--muted); font-size:13px; margin-top:2px;}
 .chat-entry-arrow{margin-left:auto; width:9px;height:9px; border-top:2.5px solid var(--orange-3); border-right:2.5px solid var(--orange-3); transform:rotate(45deg);}
 
-.btn-primary{
-  border:none; width:100%; padding:15px; border-radius:var(--radius-md); font-weight:700; font-size:16px;
-  background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn);
-  cursor:pointer; transition:transform .2s ease;
+/* ----------------------------------------------------------
+   বাটন আইকন অ্যানিমেশন — ক্লিক করলে সুন্দর এফেক্ট
+   ---------------------------------------------------------- */
+.qa-btn .ico-refresh {
+  transition: transform 0.4s ease;
 }
-.btn-primary:active{transform:scale(0.98);}
-.btn-secondary{
-  border:2px solid var(--orange-2); background:transparent; color:var(--orange-3); font-weight:700;
-  width:100%; padding:13px; border-radius:var(--radius-md); cursor:pointer;
+.qa-btn:active .ico-refresh {
+  transform: rotate(360deg);
 }
-.btn-ghost-danger{border:none; background:transparent; color:#D64545; font-weight:700; width:100%; padding:13px; cursor:pointer;}
+.qa-btn .ico-star {
+  transition: transform 0.3s ease;
+}
+.qa-btn:active .ico-star {
+  transform: scale(1.3);
+}
+.qa-btn .ico-copy,
+.qa-btn .ico-share {
+  transition: transform 0.2s ease;
+}
+.qa-btn:active .ico-copy,
+.qa-btn:active .ico-share {
+  transform: scale(0.9);
+}
 
 .page{display:none;}
 .page.active{display:block; animation:fadeUp .45s ease both;}
@@ -288,42 +456,27 @@ button{font-family:inherit;}
 .chat-send{width:44px;height:44px; border-radius:50%; border:none; background:var(--orange-3); flex-shrink:0; cursor:pointer; position:relative;}
 .chat-send::after{content:""; position:absolute; top:50%; left:50%; width:9px;height:9px; border-top:2.5px solid #fff; border-right:2.5px solid #fff; transform:translate(-65%,-50%) rotate(45deg);}
 
+/* ----------------------------------------------------------
+   নিচের নেভিগেশন বার — আইকন ও লেবেল সুন্দর করে
+   ---------------------------------------------------------- */
 .bottom-nav{
   position:fixed; left:0; right:0; bottom:0; z-index:50; max-width:480px; margin:0 auto;
-  display:flex; padding:10px 10px calc(10px + var(--safe-bottom));
+  display:flex; padding:8px 8px calc(8px + var(--safe-bottom));
   background:var(--glass); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
   border-top:1px solid var(--line); box-shadow:0 -8px 24px rgba(255,106,26,0.1);
 }
 .nav-btn{
-  flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; padding:8px 0;
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 0;
   background:none; border:none; cursor:pointer; color:var(--muted); position:relative;
+  transition: color 0.2s ease;
 }
-.nav-btn .nav-label{font-size:11px; font-weight:600;}
+.nav-btn .nav-label{font-size:11px; font-weight:700; letter-spacing:0.3px;}
 .nav-btn.active{color:var(--orange-3);}
 .nav-indicator{
-  position:absolute; top:-10px; width:30px; height:3px; border-radius:3px; background:var(--orange-3);
-  opacity:0; transition:opacity .25s;
+  position:absolute; top:-8px; width:28px; height:3px; border-radius:3px; background:var(--orange-3);
+  opacity:0; transition:opacity .25s ease;
 }
 .nav-btn.active .nav-indicator{opacity:1;}
-.nav-icon{width:22px;height:22px; position:relative;}
-.icon-home{width:16px;height:13px; margin:5px auto 0; background:currentColor; border-radius:0 0 2px 2px; position:relative;}
-.icon-home::before{content:""; position:absolute; top:-8px; left:-2px; width:0;height:0; border-left:10px solid transparent; border-right:10px solid transparent; border-bottom:9px solid currentColor;}
-.icon-calendar{width:18px;height:16px; border:2px solid currentColor; border-radius:3px; margin:4px auto 0; position:relative;}
-.icon-calendar::before{content:""; position:absolute; top:-6px; left:3px; width:2px; height:5px; background:currentColor; box-shadow:8px 0 0 currentColor;}
-.icon-calendar::after{content:""; position:absolute; top:5px; left:3px; width:3px;height:3px; background:currentColor; box-shadow:6px 0 0 currentColor;}
-.icon-quote{width:19px;height:14px; background:currentColor; border-radius:7px 7px 7px 2px; margin:4px auto 0;}
-.icon-profile{width:20px;height:20px; position:relative; margin:2px auto 0;}
-.icon-profile::before{content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); width:9px;height:9px; border-radius:50%; background:currentColor;}
-.icon-profile::after{content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:16px;height:9px; background:currentColor; border-radius:9px 9px 0 0;}
-.icon-settings{width:18px;height:18px; margin:3px auto 0; position:relative;}
-.icon-settings .ring{position:absolute; inset:3px; border:2.5px solid currentColor; border-radius:50%;}
-.icon-settings i{position:absolute; top:50%; left:50%; width:3px; height:6px; background:currentColor; margin:-3px 0 0 -1.5px; transform-origin:1.5px 3px; border-radius:1px;}
-.icon-settings i:nth-child(1){transform:rotate(0deg) translateY(-8px);}
-.icon-settings i:nth-child(2){transform:rotate(60deg) translateY(-8px);}
-.icon-settings i:nth-child(3){transform:rotate(120deg) translateY(-8px);}
-.icon-settings i:nth-child(4){transform:rotate(180deg) translateY(-8px);}
-.icon-settings i:nth-child(5){transform:rotate(240deg) translateY(-8px);}
-.icon-settings i:nth-child(6){transform:rotate(300deg) translateY(-8px);}
 
 .modal-overlay{position:fixed; inset:0; background:rgba(30,20,14,0.55); z-index:200; display:none; align-items:flex-end; justify-content:center;}
 .modal-overlay.show{display:flex; animation:fadeIn .25s ease;}
@@ -416,7 +569,7 @@ button{font-family:inherit;}
     </div>
   </section>
 
-  <!-- ================= COUNTER ================= -->
+  <!-- ================= COUNTER (হিসাব) ================= -->
   <section class="page" id="page-counter">
     <div class="top-header" style="padding-bottom:20px;">
       <div class="logo-row"><span class="app-name" style="font-size:17px;">শুক্রবার হিসাব</span></div>
@@ -444,7 +597,7 @@ button{font-family:inherit;}
     </div>
   </section>
 
-  <!-- ================= QUOTES ================= -->
+  <!-- ================= QUOTES (উক্তি) ================= -->
   <section class="page" id="page-quotes">
     <div class="top-header" style="padding-bottom:20px;">
       <div class="logo-row"><span class="app-name" style="font-size:17px;">মজার উক্তি</span></div>
@@ -470,7 +623,7 @@ button{font-family:inherit;}
     </div>
   </section>
 
-  <!-- ================= PROFILE ================= -->
+  <!-- ================= PROFILE (প্রোফাইল) ================= -->
   <section class="page" id="page-profile">
     <div class="top-header" style="padding-bottom:34px;">
       <div class="logo-row"><span class="app-name" style="font-size:17px;">প্রোফাইল</span></div>
@@ -494,7 +647,7 @@ button{font-family:inherit;}
     <div class="btn-wrap" id="authAreaBtn"><button class="btn-primary" id="btnLoginOpen">লগইন / রেজিস্টার করুন</button></div>
   </section>
 
-  <!-- ================= SETTINGS ================= -->
+  <!-- ================= SETTINGS (সেটিংস) ================= -->
   <section class="page" id="page-settings">
     <div class="top-header" style="padding-bottom:20px;">
       <div class="logo-row"><span class="app-name" style="font-size:17px;">সেটিংস</span></div>
@@ -525,11 +678,41 @@ button{font-family:inherit;}
 </div>
 
 <nav class="bottom-nav">
-  <button class="nav-btn active" data-page="page-home"><span class="nav-indicator"></span><span class="nav-icon"><span class="icon-home"></span></span><span class="nav-label">ঘর</span></button>
-  <button class="nav-btn" data-page="page-counter"><span class="nav-indicator"></span><span class="nav-icon"><span class="icon-calendar"></span></span><span class="nav-label">হিসাব</span></button>
-  <button class="nav-btn" data-page="page-quotes"><span class="nav-indicator"></span><span class="nav-icon"><span class="icon-quote"></span></span><span class="nav-label">উক্তি</span></button>
-  <button class="nav-btn" data-page="page-profile"><span class="nav-indicator"></span><span class="nav-icon"><span class="icon-profile"></span></span><span class="nav-label">প্রোফাইল</span></button>
-  <button class="nav-btn" data-page="page-settings"><span class="nav-indicator"></span><span class="nav-icon"><span class="icon-settings"><span class="ring"></span><i></i><i></i><i></i><i></i><i></i><i></i></span></span><span class="nav-label">সেটিংস</span></button>
+  <button class="nav-btn active" data-page="page-home">
+    <span class="nav-indicator"></span>
+    <span class="nav-icon"><span class="icon-home"></span></span>
+    <span class="nav-label">হোম</span>
+  </button>
+  <button class="nav-btn" data-page="page-counter">
+    <span class="nav-indicator"></span>
+    <span class="nav-icon"><span class="icon-calculator"></span></span>
+    <span class="nav-label">হিসাব</span>
+  </button>
+  <button class="nav-btn" data-page="page-quotes">
+    <span class="nav-indicator"></span>
+    <span class="nav-icon"><span class="icon-quote"></span></span>
+    <span class="nav-label">উক্তি</span>
+  </button>
+  <button class="nav-btn" data-page="page-profile">
+    <span class="nav-indicator"></span>
+    <span class="nav-icon"><span class="icon-profile"></span></span>
+    <span class="nav-label">প্রোফাইল</span>
+  </button>
+  <button class="nav-btn" data-page="page-settings">
+    <span class="nav-indicator"></span>
+    <span class="nav-icon">
+      <span class="icon-settings">
+        <span class="gear-ring"></span>
+        <span class="gear-spoke"></span>
+        <span class="gear-spoke"></span>
+        <span class="gear-spoke"></span>
+        <span class="gear-spoke"></span>
+        <span class="gear-spoke"></span>
+        <span class="gear-spoke"></span>
+      </span>
+    </span>
+    <span class="nav-label">সেটিংস</span>
+  </button>
 </nav>
 
 <!-- Modals -->
@@ -596,6 +779,9 @@ function goToPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
   window.scrollTo({top:0, behavior:"smooth"});
+  
+  // হিসাব পেজে গেলে কাউন্টার রেন্ডার করব
+  if(id === "page-counter") renderCounterPage();
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
 document.getElementById("openChatFromHome").addEventListener("click", () => goToPage("page-chat"));
@@ -630,15 +816,92 @@ function calcStats(startDate){
 
 function renderHome(){
   const start = getStartDate();
-  if(!start) return;
+  if(!start) {
+    // কোন তারিখ সেট না থাকলে দেখাবে না, কিন্তু 0 দেখাবে না
+    document.getElementById("fridayNumber").textContent = "০";
+    document.getElementById("statDays").textContent = "০";
+    document.getElementById("statWeeks").textContent = "০";
+    document.getElementById("statMonths").textContent = "০";
+    document.getElementById("startDateLabel").textContent = "শুরু তারিখ সেট করা হয়নি";
+    return;
+  }
   const st = calcStats(start);
   document.getElementById("fridayNumber").textContent = toBn(st.fridayCount) + "তম";
   document.getElementById("statDays").textContent = toBn(st.days);
   document.getElementById("statWeeks").textContent = toBn(st.weeks);
   document.getElementById("statMonths").textContent = toBn(st.months);
   document.getElementById("startDateLabel").textContent = `শুরু: ${bnWeekday[start.getDay()]}, ${toBn(start.getDate())} ${bnMonth[start.getMonth()]}`;
+  
+  // প্রোফাইল পেজের জন্যও আপডেট
+  document.getElementById("profileStartDate").textContent = `${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
+  document.getElementById("profileFridayCount").textContent = toBn(st.fridayCount);
 }
 renderHome();
+
+// ========== হিসাব পেজের লজিক (ঠিক করা) ==========
+function renderCounterPage() {
+  const input = document.getElementById("startDateInput");
+  const saved = getStartDate();
+  if(saved) {
+    // ISO ফরম্যাটে সেট করি (YYYY-MM-DD)
+    const yyyy = saved.getFullYear();
+    const mm = String(saved.getMonth() + 1).padStart(2, '0');
+    const dd = String(saved.getDate()).padStart(2, '0');
+    input.value = `${yyyy}-${mm}-${dd}`;
+    calculateAndShowCounter();
+  } else {
+    input.value = "";
+    // সব 0 দেখাবে না, বরং ফাঁকা বা ড্যাশ দেখাবে
+    document.getElementById("counterFridayNumber").textContent = "—";
+    document.getElementById("cStatDays").textContent = "—";
+    document.getElementById("cStatWeeks").textContent = "—";
+    document.getElementById("cStatMonths").textContent = "—";
+    document.getElementById("cStatYears").textContent = "—";
+  }
+}
+
+function calculateAndShowCounter() {
+  const input = document.getElementById("startDateInput");
+  const val = input.value;
+  if(!val) {
+    showToast("অনুগ্রহ করে একটি তারিখ নির্বাচন করুন");
+    return;
+  }
+  const selected = new Date(val + "T00:00:00");
+  if(isNaN(selected.getTime())) {
+    showToast("তারিখটি সঠিক নয়");
+    return;
+  }
+  // লোকাল স্টোরেজে সেভ করি
+  localStorage.setItem(DEFAULT_START_KEY, selected.toISOString());
+  
+  const st = calcStats(selected);
+  document.getElementById("counterFridayNumber").textContent = toBn(st.fridayCount) + "টি";
+  document.getElementById("cStatDays").textContent = toBn(st.days);
+  document.getElementById("cStatWeeks").textContent = toBn(st.weeks);
+  document.getElementById("cStatMonths").textContent = toBn(st.months);
+  document.getElementById("cStatYears").textContent = toBn(st.years);
+  
+  // হোম পেজও আপডেট
+  renderHome();
+  showToast("হিসাব সম্পন্ন হয়েছে!");
+}
+
+document.getElementById("btnCalcCounter").addEventListener("click", calculateAndShowCounter);
+
+// পেজ লোডের সময় যদি হিসাব পেজ ওপেন করা থাকে
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = getStartDate();
+  if(saved) {
+    const input = document.getElementById("startDateInput");
+    if(input) {
+      const yyyy = saved.getFullYear();
+      const mm = String(saved.getMonth() + 1).padStart(2, '0');
+      const dd = String(saved.getDate()).padStart(2, '0');
+      input.value = `${yyyy}-${mm}-${dd}`;
+    }
+  }
+});
 
 /* Firebase Sync */
 const auth = firebase.auth();
@@ -657,10 +920,11 @@ auth.onAuthStateChanged((user) => {
     });
     document.getElementById("profileName").textContent = user.displayName || "ব্যবহারকারী";
     document.getElementById("profileEmail").textContent = user.email || "";
-    document.getElementById("authAreaBtn").style.display = "none";
+    if(document.getElementById("authAreaBtn")) document.getElementById("authAreaBtn").style.display = "none";
   } else {
     document.getElementById("profileName").textContent = "অতিথি ব্যবহারকারী";
-    document.getElementById("authAreaBtn").style.display = "block";
+    document.getElementById("profileEmail").textContent = "লগইন করা নেই";
+    if(document.getElementById("authAreaBtn")) document.getElementById("authAreaBtn").style.display = "block";
   }
 });
 
