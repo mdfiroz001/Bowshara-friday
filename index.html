@@ -7,7 +7,7 @@
 <meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি প্রিমিয়াম অ্যাপ।">
 <title>বউ ছাড়া কততম শুক্রবার</title>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
+<link rel="icon" id="dynamicFavicon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* DESIGN TOKENS */
 :root{
   --orange-1:#FF9A4D; --orange-2:#FF7A29; --orange-3:#FF6A1A; --orange-deep:#E85A0C;
   --cream:#FFF6EC; --cream-2:#FFE9D6; --card:#FFFFFF; --card-2:#FFF1E2;
@@ -162,7 +163,14 @@ button, input, select{font-family:inherit;}
   border-right: 2px solid currentColor; transform: rotate(45deg); vertical-align: middle;
 }
 
-/* MANDATORY AUTH GATE OVERLAY */
+/* AD CONTAINER FRAME STYLING */
+.ad-frame-container {
+  margin: 16px 14px 0; padding: 10px; background: var(--card-2);
+  border: 1px dashed var(--line); border-radius: var(--radius-md); text-align: center;
+  min-height: 80px; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+
+/* AUTH GATE OVERLAY */
 #authGateOverlay {
   position: fixed; inset: 0; z-index: 900;
   background: linear-gradient(160deg, #1D1814 0%, #12100E 100%);
@@ -181,7 +189,6 @@ button, input, select{font-family:inherit;}
 .auth-gate-title { font-size: 22px; font-weight: 800; color: var(--orange-3); margin-bottom: 4px; }
 .auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
 
-/* AUTH GATE TABS (LOGIN / REGISTRATION / RESET) */
 .auth-tabs { display: flex; gap: 6px; margin-bottom: 16px; background: var(--cream-2); padding: 4px; border-radius: 99px; }
 .auth-tab-btn {
   flex: 1; border: none; background: transparent; padding: 8px; border-radius: 99px;
@@ -406,14 +413,13 @@ button, input, select{font-family:inherit;}
   <div class="splash-loader"><span></span></div>
 </div>
 
-<!-- MANDATORY AUTH GATE OVERLAY (LOGIN / REGISTRATION / PASSWORD RESET) -->
+<!-- MANDATORY AUTH GATE OVERLAY -->
 <div id="authGateOverlay">
   <div class="auth-gate-card">
     <div class="auth-gate-logo"><span class="css-ico-lock"></span></div>
     <div class="auth-gate-title" id="authGateTitle">সাইন-ইন করুন</div>
     <div class="auth-gate-sub" id="authGateSub">অ্যাপটিতে প্রবেশ করতে একাউন্ট দিন</div>
 
-    <!-- Auth View Tabs -->
     <div class="auth-tabs">
       <button type="button" class="auth-tab-btn active" id="btnAuthTabLogin" onclick="switchAuthView('login')">লগইন</button>
       <button type="button" class="auth-tab-btn" id="btnAuthTabReg" onclick="switchAuthView('register')">রেজিস্ট্রেশন</button>
@@ -449,7 +455,7 @@ button, input, select{font-family:inherit;}
         <input type="tel" id="regPhoneInput" placeholder="01700000000">
       </div>
       <div class="form-field">
-        <label>জন্ম তারিখ নির্বাচন করুন *</label>
+        <label>জন্ম তারিখ (এই তারিখ থেকে শুক্রবার কাউন্ট হবে) *</label>
         <input type="date" id="regDobInput">
       </div>
       <div class="form-field">
@@ -496,7 +502,7 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="card">
-      <div class="card-label">আজ বউ ছাড়া</div>
+      <div class="card-label">আজ বউ ছাড়া (জন্মদিন থেকে)</div>
       <div class="friday-count" id="fridayNumber">০তম</div>
       <div class="friday-word">শুক্রবার</div>
       <div style="text-align:center; color:var(--muted); font-size:13px; margin-top:8px;" id="startDateLabel">তারিখ লোড হচ্ছে...</div>
@@ -516,6 +522,11 @@ button, input, select{font-family:inherit;}
         <div class="cd-box"><div class="cd-num" id="cdMins">০০</div><div class="cd-lbl">মিনিট</div></div>
         <div class="cd-box"><div class="cd-num" id="cdSecs">০০</div><div class="cd-lbl">সেকেন্ড</div></div>
       </div>
+    </div>
+
+    <!-- AD CONTAINER FRAME 1 -->
+    <div class="ad-frame-container" id="adFrameHome">
+      <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
     </div>
   </section>
 
@@ -537,6 +548,11 @@ button, input, select{font-family:inherit;}
         <div class="stat-box"><div class="stat-num" id="cStatMonths">০</div><div class="stat-lbl">মাস</div></div>
         <div class="stat-box"><div class="stat-num" id="cStatYears">০</div><div class="stat-lbl">বছর</div></div>
       </div>
+
+      <!-- AD CONTAINER FRAME 2 -->
+      <div class="ad-frame-container" id="adFrameCounter" style="margin-top:16px;">
+        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
+      </div>
     </div>
   </section>
 
@@ -547,13 +563,17 @@ button, input, select{font-family:inherit;}
     </div>
     
     <div style="padding:14px;">
-      <!-- Quote Sub Filter Tabs -->
       <div class="quote-sub-tabs">
         <button type="button" class="q-tab-btn active" id="btnQuoteAll" onclick="switchQuoteTab('all')">সকল উক্তি</button>
         <button type="button" class="q-tab-btn" id="btnQuoteSaved" onclick="switchQuoteTab('saved')"><span class="css-ico-star"></span> সেভ করা উক্তি</button>
       </div>
 
       <div id="quoteFeed"></div>
+
+      <!-- AD CONTAINER FRAME 3 -->
+      <div class="ad-frame-container" id="adFrameQuotes">
+        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
+      </div>
     </div>
   </section>
 
@@ -565,7 +585,7 @@ button, input, select{font-family:inherit;}
 
     <!-- 3 Chat Mode Tabs -->
     <div class="chat-tabs">
-      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')"><span class="css-ico-chat"></span> গ্লোবাল আড্ডা (AI)</button>
+      <button type="button" class="chat-tab-btn active" id="btnTabAiChat" onclick="switchChatRoom('ai')"><span class="css-ico-chat"></span> AI চ্যাটবট (প্রাইভেট)</button>
       <button type="button" class="chat-tab-btn" id="btnTabCommunityChat" onclick="switchChatRoom('community')"><span class="css-ico-users"></span> পাবলিক গ্রুপ</button>
       <button type="button" class="chat-tab-btn" id="btnTabSupportChat" onclick="switchChatRoom('support')"><span class="css-ico-headset"></span> সাপোর্ট চ্যাট</button>
     </div>
@@ -577,6 +597,11 @@ button, input, select{font-family:inherit;}
     <div class="chat-input-bar">
       <input type="text" id="chatInput" placeholder="মেসেজ লিখুন..." maxlength="400">
       <button type="button" class="chat-send" onclick="sendChatMessage()"><span class="css-ico-arrow-right"></span></button>
+    </div>
+
+    <!-- AD CONTAINER FRAME 4 -->
+    <div class="ad-frame-container" id="adFrameChat">
+      <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
     </div>
   </section>
 
@@ -596,6 +621,7 @@ button, input, select{font-family:inherit;}
 
         <div style="text-align:center; margin-bottom:16px;">
           <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">ব্যবহারকারী</h3>
+          <div id="profileContactDisplay" style="font-size:12.5px; color:var(--muted); margin-top:2px;">-</div>
           <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:6px;" onclick="editProfileNameOnly()"><span class="css-ico-pencil"></span> নাম পরিবর্তন করুন</button>
         </div>
 
@@ -613,7 +639,7 @@ button, input, select{font-family:inherit;}
             <strong id="profileDobDisplay">সেট করা হয়নি</strong>
           </div>
           <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:13.5px;">
-            <span style="color:var(--muted);">শুরুর তারিখ:</span>
+            <span style="color:var(--muted);">হিসাবের শুরুর তারিখ:</span>
             <strong id="profileStartDate">সেট করা হয়নি</strong>
           </div>
         </div>
@@ -627,6 +653,11 @@ button, input, select{font-family:inherit;}
         <button type="button" class="btn-logout" onclick="logoutUser()">
           <span class="css-ico-logout"></span> অ্যাকাউন্ট থেকে লগআউট করুন
         </button>
+      </div>
+
+      <!-- AD CONTAINER FRAME 5 -->
+      <div class="ad-frame-container" id="adFrameProfile">
+        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
       </div>
     </div>
   </section>
@@ -669,6 +700,11 @@ button, input, select{font-family:inherit;}
         <div class="social-grid" id="socialSettingsGrid">
           <!-- Dynamic Links from Firebase -->
         </div>
+      </div>
+
+      <!-- AD CONTAINER FRAME 6 -->
+      <div class="ad-frame-container" id="adFrameSettings">
+        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
       </div>
     </div>
   </section>
@@ -735,7 +771,7 @@ function hideSplash() {
 }
 setTimeout(hideSplash, 800);
 
-// Identity Check
+// PERSISTENT AUTH SESSION CHECK
 let myUid = localStorage.getItem("bcf_my_uid");
 if(!myUid) {
   myUid = "usr_" + Math.random().toString(36).substring(2, 9);
@@ -756,6 +792,13 @@ function checkAuthGate() {
       if(app) app.style.display = "block";
       if(nav) nav.style.display = "flex";
       updateProfileUI();
+
+      // AUTO SET FRIDAY COUNTER START DATE FROM REGISTRATION DOB
+      if(userAccount.dob) {
+        updateCounterData(userAccount.dob);
+        const startDateInput = document.getElementById("startDateInput");
+        if(startDateInput) startDateInput.value = userAccount.dob;
+      }
     } else {
       if(authGate) authGate.classList.remove("hide");
       if(app) app.style.display = "none";
@@ -768,7 +811,7 @@ function checkAuthGate() {
   }
 }
 
-// Switch Auth Gate Views (Login / Register / Reset)
+// AUTH GATE VIEWS TOGGLE
 function switchAuthView(viewName) {
   document.getElementById("viewAuthLogin").style.display = (viewName === 'login') ? 'block' : 'none';
   document.getElementById("viewAuthRegister").style.display = (viewName === 'register') ? 'block' : 'none';
@@ -833,7 +876,6 @@ function submitLogin() {
       showToast("লগইন সমস্যা: " + err.message);
     });
   } else {
-    // Local fallback check
     const localUser = JSON.parse(localStorage.getItem("bcf_user_account") || "null");
     if(localUser && (localUser.email === contact || localUser.phone === contact) && localUser.pass === pass) {
       userAccount = localUser;
@@ -912,12 +954,10 @@ function submitPasswordReset() {
       if(matchedUid) {
         db.ref(`users/${matchedUid}/pass`).set(newPass).then(() => {
           showToast("পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে! এখন লগইন করুন।");
-          
           if(userAccount && userAccount.uid === matchedUid) {
             userAccount.pass = newPass;
             localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
           }
-          
           document.getElementById("loginContactInput").value = contact;
           document.getElementById("loginPassInput").value = "";
           switchAuthView("login");
@@ -1050,6 +1090,20 @@ if(typeof db !== "undefined") {
     document.getElementById("socialSettingsGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
 
+  // Dynamic Favicon Loader
+  db.ref("settings/app/faviconUrl").on("value", snap => {
+    const faviconUrl = snap.val();
+    if(faviconUrl) {
+      document.getElementById("dynamicFavicon").href = faviconUrl;
+    }
+  });
+
+  // Dynamic Ad Script Injector
+  db.ref("settings/app/adScript").on("value", snap => {
+    const adScriptHtml = snap.val();
+    injectAdScriptToFrames(adScriptHtml);
+  });
+
   db.ref("settings/app/apkUrl").on("value", snap => {
     apkDownloadUrl = snap.val() || "";
   });
@@ -1059,6 +1113,27 @@ if(typeof db !== "undefined") {
     renderQuotesFeed();
   });
 
+}
+
+// Inject Ad Script into Frames
+function injectAdScriptToFrames(scriptHtml) {
+  const frames = document.querySelectorAll(".ad-frame-container");
+  if(!scriptHtml || !scriptHtml.trim()) {
+    frames.forEach(f => f.style.display = "none");
+    return;
+  }
+  frames.forEach(f => {
+    f.style.display = "flex";
+    f.innerHTML = scriptHtml;
+    // Execute inner scripts
+    const scripts = f.querySelectorAll("script");
+    scripts.forEach(s => {
+      const newScript = document.createElement("script");
+      if(s.src) newScript.src = s.src;
+      else newScript.textContent = s.innerHTML;
+      document.body.appendChild(newScript);
+    });
+  });
 }
 
 window.switchQuoteTab = function(mode) {
@@ -1164,24 +1239,24 @@ window.downloadAppApk = function() {
 };
 
 /* ==========================================================
-   3 CHAT ROOMS & PRIVATE SUPPORT CHAT
+   3 CHAT ROOMS (AI CHAT IS PRIVATE TO EACH USER NOW)
    ========================================================== */
 if(typeof db !== "undefined") {
 
-  let activeChatMode = "global";
+  let activeChatMode = "ai";
 
   window.switchChatRoom = function(mode) {
     activeChatMode = mode;
-    document.getElementById("btnTabGlobalChat").classList.toggle("active", mode === "global");
+    document.getElementById("btnTabAiChat").classList.toggle("active", mode === "ai");
     document.getElementById("btnTabCommunityChat").classList.toggle("active", mode === "community");
     document.getElementById("btnTabSupportChat").classList.toggle("active", mode === "support");
     loadChatMessages();
   };
 
   function getChatRefPath() {
-    if(activeChatMode === "global") return "chatRooms/global/messages";
-    if(activeChatMode === "community") return "chatRooms/community/messages";
-    return `chatRooms/support/${myUid}/messages`;
+    if(activeChatMode === "ai") return `chatRooms/ai/${myUid}/messages`; // PRIVATE AI CHAT PER USER
+    if(activeChatMode === "community") return "chatRooms/community/messages"; // PUBLIC COMMUNITY
+    return `chatRooms/support/${myUid}/messages`; // PRIVATE SUPPORT
   }
 
   function loadChatMessages() {
@@ -1196,9 +1271,9 @@ if(typeof db !== "undefined") {
 
       if(keys.length === 0) {
         let emptyTxt = "মেসেজ পাঠাতে নিচে লিখুন!";
-        if(activeChatMode === "global") emptyTxt = "গ্লোবাল আড্ডা ও AI চ্যাট শুরু করুন!";
-        if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সবার সাথে চ্যাট করুন!";
-        if(activeChatMode === "support") emptyTxt = "আপনার নিজস্ব সাপোর্ট মেসেজ পাঠান (এখানে শুধু আপনার মেসেজ ও এডমিন রিপ্লাই থাকবে)।";
+        if(activeChatMode === "ai") emptyTxt = "আপনার নিজস্ব AI বটের সাথে প্রাইভেট চ্যাট শুরু করুন!";
+        if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সকল ব্যবহারকারীর সাথে চ্যাট করুন!";
+        if(activeChatMode === "support") emptyTxt = "সাপোর্টের জন্য এডমিনকে মেসেজ দিন (শুধু আপনার ও এডমিনের মেসেজ থাকবে)।";
 
         chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${emptyTxt}</div>`;
         return;
@@ -1237,7 +1312,7 @@ if(typeof db !== "undefined") {
     }).then(() => {
       input.value = "";
       
-      if(activeChatMode === "global") {
+      if(activeChatMode === "ai") {
         checkAndTriggerAi(text);
       }
     });
@@ -1290,7 +1365,7 @@ if(typeof db !== "undefined") {
       }
 
       if(reply && reply.trim()) {
-        db.ref("chatRooms/global/messages").push({
+        db.ref(`chatRooms/ai/${myUid}/messages`).push({
           uid: "bot_ai",
           name: "বউ ছাড়া AI (বট)",
           text: reply.trim(),
@@ -1349,16 +1424,6 @@ document.getElementById("btnResetCounter").addEventListener("click", () => {
   localStorage.removeItem("bcf_start_date");
   location.reload();
 });
-
-const savedStartDate = localStorage.getItem("bcf_start_date") || new Date(Date.now() - 30*86400000).toISOString().split('T')[0];
-document.getElementById("startDateInput").value = savedStartDate;
-updateCounterData(savedStartDate);
-
-function escapeHtml(str) {
-  const div = document.createElement("div");
-  div.textContent = str || "";
-  return div.innerHTML;
-}
 
 window.addEventListener("load", () => {
   checkAuthGate();
