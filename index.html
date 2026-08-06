@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
 <meta name="theme-color" content="#FF6A1A">
-<meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি অ্যাপ।">
+<meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি প্রিমিয়াম অ্যাপ।">
 <title>বউ ছাড়া কততম শুক্রবার</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
@@ -15,6 +15,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* ==========================================================
+   DESIGN TOKENS & THEMES
+   ========================================================== */
 :root{
   --orange-1:#FF9A4D; --orange-2:#FF7A29; --orange-3:#FF6A1A; --orange-deep:#E85A0C;
   --cream:#FFF6EC; --cream-2:#FFE9D6; --card:#FFFFFF; --card-2:#FFF1E2;
@@ -35,10 +38,10 @@ body{
   font-family:'Hind Siliguri', sans-serif; background:var(--cream); color:var(--ink);
   min-height:100vh; transition:background .4s ease, color .4s ease; overflow-x:hidden;
 }
-h1,h2,h3,.display{font-family:'Baloo Da 2', sans-serif;}
-button{font-family:inherit;}
+h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
+button, input, select{font-family:inherit;}
 
-/* PRO SPLASH SCREEN */
+/* PRO SPLASH SCREEN WITH CUSTOM SVG VECTOR ARTWORK */
 #splash{
   position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center;
   justify-content:center; padding:24px;
@@ -60,13 +63,13 @@ button{font-family:inherit;}
 .splash-loader span{display:block; height:100%; width:40%; background:#fff; border-radius:6px; animation:load 1.2s ease-in-out infinite;}
 @keyframes load{0%{transform:translateX(-100%);}100%{transform:translateX(280%);}}
 
-/* MAIN APP */
+/* MAIN CONTAINER */
 #app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom));}
 
 .top-header{
   margin:14px 14px 0; padding:20px 20px 22px; border-radius:var(--radius-lg);
   background:linear-gradient(150deg, var(--orange-1), var(--orange-2) 55%, var(--orange-deep));
-  color:#fff; box-shadow:var(--shadow-soft);
+  color:#fff; box-shadow:var(--shadow-soft); position:relative; overflow:hidden;
 }
 .header-row{display:flex; align-items:center; justify-content:space-between;}
 .header-date{font-size:14px; opacity:.92;}
@@ -91,10 +94,17 @@ button{font-family:inherit;}
 .stat-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
 .stat-lbl{font-size:12px; color:var(--muted);}
 
-/* QUOTES */
+/* COUNTDOWN */
+.section-title{display:flex; align-items:center; justify-content:center; gap:8px; font-weight:700; font-size:15px; color:var(--ink);}
+.countdown-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px;}
+.cd-box{background:var(--card-2); border-radius:var(--radius-sm); text-align:center; padding:10px 4px;}
+.cd-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
+.cd-lbl{font-size:11px; color:var(--muted);}
+
+/* QUOTES & REACTIONS */
 .quote-item {
   background: var(--card); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 .quote-body { font-size: 15.5px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 10px; }
 .reaction-bar { display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 10px; }
@@ -104,14 +114,51 @@ button{font-family:inherit;}
 }
 .react-btn.fav-active { background: #FFE0E3; color: #FF4757; }
 
-/* DEVELOPER BADGE */
-.dev-badge-container { text-align: center; margin-top: 20px; padding: 16px; background: var(--card-2); border-radius: var(--radius-md); }
-.dev-name { font-family: 'Baloo Da 2', sans-serif; font-weight: 800; font-size: 18px; color: var(--orange-3); }
-.social-grid { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-.social-btn {
-  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 99px;
-  font-size: 13px; font-weight: 700; text-decoration: none; color: #fff;
+/* CHAT ROOM STYLING */
+.chat-tabs { display: flex; gap: 8px; margin: 10px 14px 0; }
+.chat-tab-btn {
+  flex: 1; padding: 10px; border-radius: 99px; border: 1.5px solid var(--line);
+  background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 13.5px; cursor: pointer; text-align: center;
 }
+.chat-tab-btn.active { background: var(--orange-3); color: #fff; border-color: var(--orange-3); }
+
+.chat-container {
+  margin: 12px 14px 0; height: 50vh; min-height: 320px; overflow-y: auto; background: var(--cream-2);
+  border: 1px solid var(--line); border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; position: relative; }
+.msg.me { align-self: flex-end; background: linear-gradient(135deg,var(--orange-1),var(--orange-3)); color: #fff; border-bottom-right-radius: 4px; }
+.msg.them { align-self: flex-start; background: var(--card); color: var(--ink); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.msg.bot { align-self: flex-start; background: #FFF3E0; color: #E85A0C; border: 1px solid rgba(255,106,26,0.3); border-bottom-left-radius: 4px; }
+[data-theme="dark"] .msg.bot { background: #2D1D12; color: #FF9A4D; }
+
+.msg-header { font-size: 11px; font-weight: 700; opacity: 0.85; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
+.badge-bot { background: var(--orange-3); color: #fff; padding: 2px 6px; border-radius: 99px; font-size: 9px; }
+
+.chat-input-bar {
+  display: flex; gap: 8px; padding: 12px; margin: 0 14px; background: var(--card);
+  border: 1px solid var(--line); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+.chat-input-bar input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 16px; background: var(--cream); color: var(--ink); font-size: 14px; }
+.chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; font-size: 16px; flex-shrink: 0; }
+
+/* PROFILE SECTION */
+.profile-avatar-wrap { text-align: center; margin-bottom: 14px; }
+.avatar-img { width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--orange-2); box-shadow: var(--shadow-soft); object-fit: cover; }
+.badge-status { display: inline-block; background: var(--card-2); color: var(--orange-3); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--line); margin-top: 6px; }
+
+/* SETTINGS & DEV SECTION */
+.settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.settings-row:last-child { border-bottom: none; }
+.theme-pick { display: flex; gap: 6px; }
+.theme-chip { padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); font-size: 12.5px; font-weight: 700; cursor: pointer; color: var(--ink-soft); }
+.theme-chip.active { background: var(--orange-3); color: #fff; border-color: var(--orange-3); }
+
+.dev-card { background: var(--card-2); border-radius: var(--radius-md); padding: 16px; text-align: center; border: 1px solid var(--line); margin-top: 14px; }
+.dev-name { font-family: 'Baloo Da 2', sans-serif; font-weight: 800; font-size: 18px; color: var(--orange-3); }
+.social-grid { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.social-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 99px; font-size: 12.5px; font-weight: 700; text-decoration: none; color: #fff; }
 .btn-telegram { background: #0088cc; }
 .btn-facebook { background: #1877f2; }
 .btn-whatsapp { background: #25D366; }
@@ -134,7 +181,7 @@ button{font-family:inherit;}
 .page{display:none;}
 .page.active{display:block;}
 .btn-primary{
-  border:none; width:100%; padding:14px; border-radius:var(--radius-md); font-weight:700; font-size:16px;
+  border:none; width:100%; padding:14px; border-radius:var(--radius-md); font-weight:700; font-size:15.5px;
   background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn); cursor:pointer;
 }
 .toast{
@@ -147,7 +194,7 @@ button{font-family:inherit;}
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
+<!-- PRO SPLASH SCREEN WITH CUSTOM SVG ARTWORK -->
 <div id="splash">
   <svg class="splash-art" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="100" cy="100" r="90" fill="white" fill-opacity="0.15"/>
@@ -163,13 +210,13 @@ button{font-family:inherit;}
     <circle cx="122" cy="145" r="6" fill="#FF6A1A"/>
   </svg>
   <div class="splash-title">বউ ছাড়া কততম শুক্রবার</div>
-  <div class="splash-sub">ছুটির আনন্দময় মুহূর্তের ডিজিটাল ট্র্যাকার</div>
+  <div class="splash-sub">ছুটির আনন্দময় মুহূর্তের প্রিমিয়াম ট্র্যাকার</div>
   <div class="splash-loader"><span></span></div>
 </div>
 
 <div id="app">
 
-  <!-- ================= HOME ================= -->
+  <!-- ================= HOME PAGE ================= -->
   <section class="page active" id="page-home">
     <div class="top-header">
       <div class="header-row">
@@ -193,26 +240,39 @@ button{font-family:inherit;}
       <div class="stat-box"><div class="stat-num" id="statMonths">০</div><div class="stat-lbl">মাস</div></div>
     </div>
 
-    <div class="dev-badge-container">
-      <div style="font-size:12px; color:var(--muted);">অ্যাপ ডেভেলপার</div>
-      <div class="dev-name" id="devNameHome">MD FIROZ HOSSAIN</div>
-      <div class="social-grid" id="socialHomeGrid"></div>
+    <div class="card">
+      <div class="section-title">⏱️ পরবর্তী শুক্রবারের কাউন্টডাউন</div>
+      <div class="countdown-grid">
+        <div class="cd-box"><div class="cd-num" id="cdDays">০০</div><div class="cd-lbl">দিন</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdHours">০০</div><div class="cd-lbl">ঘণ্টা</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdMins">০০</div><div class="cd-lbl">মিনিট</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdSecs">০০</div><div class="cd-lbl">সেকেন্ড</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- ================= COUNTER ================= -->
+  <!-- ================= COUNTER PAGE ================= -->
   <section class="page" id="page-counter">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">শুক্রবার কাস্টম হিসাব</div>
     </div>
     <div style="padding:14px;">
-      <label style="font-size:14px; font-weight:600;">শুরুর তারিখ নির্বাচন করুন:</label>
-      <input type="date" id="startDateInput" style="width:100%; padding:12px; margin:10px 0; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--ink);">
-      <button type="button" class="btn-primary" id="btnCalcCounter">হিসাব আপডেট করুন</button>
+      <div class="card">
+        <label style="font-size:14px; font-weight:700; color:var(--ink-soft);">শুরুর তারিখ নির্বাচন করুন:</label>
+        <input type="date" id="startDateInput" style="width:100%; padding:12px; margin:12px 0; border-radius:12px; border:1.5px solid var(--line); background:var(--card); color:var(--ink);">
+        <button type="button" class="btn-primary" id="btnCalcCounter">হিসাব করুন</button>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr); margin:16px 0 0;">
+        <div class="stat-box"><div class="stat-num" id="cStatDays">০</div><div class="stat-lbl">দিন</div></div>
+        <div class="stat-box"><div class="stat-num" id="cStatWeeks">০</div><div class="stat-lbl">সপ্তাহ</div></div>
+        <div class="stat-box"><div class="stat-num" id="cStatMonths">০</div><div class="stat-lbl">মাস</div></div>
+        <div class="stat-box"><div class="stat-num" id="cStatYears">০</div><div class="stat-lbl">বছর</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- ================= QUOTES ================= -->
+  <!-- ================= QUOTES PAGE ================= -->
   <section class="page" id="page-quotes">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">মজার উক্তি ও রিয়্যাকশন</div>
@@ -220,35 +280,106 @@ button{font-family:inherit;}
     <div style="padding:14px;" id="quoteFeed"></div>
   </section>
 
-  <!-- ================= PROFILE ================= -->
+  <!-- ================= CHAT ROOM PAGE ================= -->
+  <section class="page" id="page-chat">
+    <div class="top-header" style="padding-bottom:16px;">
+      <div class="app-name" style="font-size:18px;">লাইভ চ্যাট ও সাপোর্ট</div>
+    </div>
+
+    <!-- Chat Mode Selector -->
+    <div class="chat-tabs">
+      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')">💬 গ্লোবাল আড্ডা</button>
+      <button type="button" class="chat-tab-btn" id="btnTabSupportChat" onclick="switchChatRoom('support')">🎧 সাপোর্ট চ্যাট</button>
+    </div>
+
+    <!-- Live Messages Box -->
+    <div class="chat-container" id="chatBox"></div>
+
+    <!-- Send Bar -->
+    <div class="chat-input-bar">
+      <input type="text" id="chatInput" placeholder="মেসেজ লিখুন..." maxlength="400">
+      <button type="button" class="chat-send" onclick="sendChatMessage()">➔</button>
+    </div>
+  </section>
+
+  <!-- ================= PROFILE PAGE ================= -->
   <section class="page" id="page-profile">
     <div class="top-header">
-      <div class="app-name" style="font-size:18px;">প্রোফাইল ও যোগাযোগ</div>
+      <div class="app-name" style="font-size:18px;">ইউজার প্রোফাইল</div>
     </div>
-    <div class="card" style="text-align:center;">
-      <h3 style="margin:0;">ব্যবহারকারী</h3>
-      <div class="dev-badge-container" style="margin-top:16px;">
-        <div style="font-size:12px; color:var(--muted);">ডেভেলপার ইনফরমেশন</div>
-        <div class="dev-name" id="devNameProfile">MD FIROZ HOSSAIN</div>
-        <div class="social-grid" id="socialProfileGrid"></div>
+
+    <div style="padding:14px;">
+      <div class="card">
+        <div class="profile-avatar-wrap">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Bachelor" id="userAvatarImg" class="avatar-img" alt="Avatar">
+          <br>
+          <span class="badge-status">স্বাধীন ব্যাচেলর 🔥</span>
+        </div>
+
+        <div style="text-align:center; margin-bottom:16px;">
+          <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">অতিথি ব্যবহারকারী</h3>
+          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:4px;" onclick="editUserName()">✏️ নাম পরিবর্তন করুন</button>
+        </div>
+
+        <div style="border-top:1px solid var(--line); padding-top:12px;">
+          <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
+            <span style="color:var(--muted);">শুরুর তারিখ:</span>
+            <strong id="profileStartDate">সেট করা হয়নি</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
+            <span style="color:var(--muted);">মোট পার হওয়া শুক্রবার:</span>
+            <strong id="profileFridayCount">০টি</strong>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SETTINGS ================= -->
+  <!-- ================= SETTINGS & DEVELOPER PAGE ================= -->
   <section class="page" id="page-settings">
     <div class="top-header">
-      <div class="app-name" style="font-size:18px;">সেটিংস</div>
+      <div class="app-name" style="font-size:18px;">সেটিংস ও অ্যাপ তথ্য</div>
     </div>
-    <div class="card">
-      <p style="color:var(--muted); font-size:14px;">অ্যাপটি সম্পূর্ণ বিনোদনের উদ্দেশ্যে তৈরি।</p>
-      <button type="button" class="btn-primary" id="btnResetCounter" style="background:var(--orange-deep);">ডাটা রিসেট করুন</button>
+
+    <div style="padding:14px;">
+      <div class="card">
+        <div class="settings-row">
+          <div>
+            <div style="font-weight:700; font-size:15px;">অ্যাপ থিম নির্বাচন</div>
+            <div style="font-size:12px; color:var(--muted);">লাইট, ডার্ক বা অটো মোড সিলেক্ট করুন</div>
+          </div>
+          <div class="theme-pick">
+            <div class="theme-chip" data-theme-choice="light" onclick="applyThemeChoice('light')">লাইট</div>
+            <div class="theme-chip" data-theme-choice="dark" onclick="applyThemeChoice('dark')">ডার্ক</div>
+            <div class="theme-chip" data-theme-choice="auto" onclick="applyThemeChoice('auto')">অটো</div>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div style="font-weight:700; font-size:15px;">কাউন্টার রিসেট</div>
+            <div style="font-size:12px; color:var(--muted);">শুরুর তারিখ নতুন করে সেট করতে ক্লিক করুন</div>
+          </div>
+          <button type="button" id="btnResetCounter" style="background:var(--orange-deep); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:700; cursor:pointer;">রিসেট</button>
+        </div>
+      </div>
+
+      <!-- DEVELOPER INFO SECTION INSIDE SETTINGS -->
+      <div class="dev-card">
+        <div style="font-size:12px; color:var(--muted); font-weight:700;">ডেভেলপার ও যোগাযোগ</div>
+        <div class="dev-name" id="devNameSettings">MD FIROZ HOSSAIN</div>
+        <div style="font-size:12.5px; color:var(--ink-soft); margin-top:2px;">সংস্করণ: v2.5 Pro (স্মার্ট AI সাপোর্ট সহ)</div>
+
+        <div class="social-grid" id="socialSettingsGrid">
+          <!-- Dynamic Links from Firebase -->
+        </div>
+      </div>
     </div>
   </section>
 
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- BOTTOM NAVIGATION BAR -->
 <nav class="bottom-nav">
   <button type="button" class="nav-btn active" data-page="page-home">
     <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -261,6 +392,10 @@ button{font-family:inherit;}
   <button type="button" class="nav-btn" data-page="page-quotes">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     <span class="nav-label">উক্তি</span>
+  </button>
+  <button type="button" class="nav-btn" data-page="page-chat">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <span class="nav-label">চ্যাট</span>
   </button>
   <button type="button" class="nav-btn" data-page="page-profile">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -280,24 +415,72 @@ button{font-family:inherit;}
 <script src="firebase-config.js"></script>
 
 <script>
+"use strict";
+
 const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
 function toBn(num){ return String(num).replace(/[0-9]/g, d => bnDigits[d]); }
 function pad2(n){ return n < 10 ? "0"+n : ""+n; }
 const bnWeekday = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 const bnMonth = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
+// Toast
+let toastTimer;
 function showToast(msg){
   const t = document.getElementById("toast");
   t.textContent = msg; t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2000);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
+// User Profile Data Init
+let myUid = localStorage.getItem("bcf_my_uid");
+if(!myUid) {
+  myUid = "usr_" + Math.random().toString(36).substring(2, 9);
+  localStorage.setItem("bcf_my_uid", myUid);
+}
+let myName = localStorage.getItem("bcf_my_name") || "ব্যাচেলর ব্যবহারকারী";
+
+function updateProfileNameUI() {
+  document.getElementById("profileNameDisplay").textContent = myName;
+  document.getElementById("userAvatarImg").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(myName)}`;
+}
+updateProfileNameUI();
+
+function editUserName() {
+  const newName = prompt("আপনার সুন্দর নাম লিখুন:", myName);
+  if(newName && newName.trim()) {
+    myName = newName.trim();
+    localStorage.setItem("bcf_my_name", myName);
+    updateProfileNameUI();
+    showToast("নাম পরিবর্তন করা হয়েছে!");
+  }
+}
+
+// Navigation System
 function goToPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
 
+// Theme Switcher (Light, Dark, Auto System Mode)
+function applyThemeChoice(choice) {
+  let mode = choice;
+  if(choice === "auto") {
+    mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-theme", mode);
+  localStorage.setItem("bcf_theme_choice", choice);
+  document.querySelectorAll(".theme-chip").forEach(c => c.classList.toggle("active", c.dataset.themeChoice === choice));
+}
+document.getElementById("quickThemeBtn").addEventListener("click", () => {
+  const cur = localStorage.getItem("bcf_theme_choice") || "light";
+  applyThemeChoice(cur === "light" ? "dark" : "light");
+});
+applyThemeChoice(localStorage.getItem("bcf_theme_choice") || "auto");
+
+// Live Clock
 function updateClock(){
   const now = new Date();
   document.getElementById("liveDate").textContent = `${bnWeekday[now.getDay()]}, ${toBn(now.getDate())} ${bnMonth[now.getMonth()]}`;
@@ -305,34 +488,52 @@ function updateClock(){
 }
 setInterval(updateClock, 1000); updateClock();
 
-if (typeof db !== "undefined") {
-  // ডেভেলপমেন্ট ও সোশ্যাল লিংক লোড
+// Next Friday Countdown
+function updateCountdown() {
+  const now = new Date();
+  let nextFriday = new Date(now);
+  nextFriday.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7));
+  nextFriday.setHours(0,0,0,0);
+  if(nextFriday <= now) nextFriday.setDate(nextFriday.getDate() + 7);
+
+  const diff = nextFriday - now;
+  document.getElementById("cdDays").textContent = toBn(pad2(Math.floor(diff / (1000 * 60 * 60 * 24))));
+  document.getElementById("cdHours").textContent = toBn(pad2(Math.floor((diff / (1000 * 60 * 60)) % 24)));
+  document.getElementById("cdMins").textContent = toBn(pad2(Math.floor((diff / 1000 / 60) % 60)));
+  document.getElementById("cdSecs").textContent = toBn(pad2(Math.floor((diff / 1000) % 60)));
+}
+setInterval(updateCountdown, 1000); updateCountdown();
+
+/* ==========================================================
+   FIREBASE INTEGRATION: DEVELOPER, QUOTES, CHAT ROOMS
+   ========================================================== */
+if(typeof db !== "undefined") {
+
+  // 1. Fetch Developer Info & Social Links
   db.ref("settings/developer").on("value", snap => {
     const d = snap.val() || {};
-    const name = d.name || "MD FIROZ HOSSAIN";
-    document.getElementById("devNameHome").textContent = name;
-    document.getElementById("devNameProfile").textContent = name;
+    const devName = d.name || "MD FIROZ HOSSAIN";
+    document.getElementById("devNameSettings").textContent = devName;
 
     let html = "";
     if(d.telegram) html += `<a href="${d.telegram}" target="_blank" class="social-btn btn-telegram">Telegram</a>`;
     if(d.facebook) html += `<a href="${d.facebook}" target="_blank" class="social-btn btn-facebook">Facebook</a>`;
     if(d.whatsapp) html += `<a href="${d.whatsapp}" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>`;
 
-    document.getElementById("socialHomeGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
-    document.getElementById("socialProfileGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
+    document.getElementById("socialSettingsGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
 
-  // উক্তি ও রিয়্যাকশন লোড
+  // 2. Quotes Feed with Reaction & Favorites
   let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
 
   db.ref("quotes").on("value", snap => {
     const data = snap.val() || {};
     const container = document.getElementById("quoteFeed");
     container.innerHTML = "";
-
     const keys = Object.keys(data);
+
     if(keys.length === 0) {
-      container.innerHTML = `<div style="text-align:center; padding:20px; color:gray;">কোন উক্তি যোগ করা হয়নি।</div>`;
+      container.innerHTML = `<div style="text-align:center; padding:30px; color:gray;">কোন উক্তি যোগ করা হয়নি।</div>`;
       return;
     }
 
@@ -344,12 +545,12 @@ if (typeof db !== "undefined") {
       const div = document.createElement("div");
       div.className = "quote-item";
       div.innerHTML = `
-        <div class="quote-body">${q.text}</div>
+        <div class="quote-body">${escapeHtml(q.text)}</div>
         <div class="reaction-bar">
           <button type="button" class="react-btn" onclick="addReaction('${key}', 'love')">❤️ ${toBn(reactions.love || 0)}</button>
           <button type="button" class="react-btn" onclick="addReaction('${key}', 'laugh')">😂 ${toBn(reactions.laugh || 0)}</button>
           <button type="button" class="react-btn" onclick="addReaction('${key}', 'like')">👍 ${toBn(reactions.like || 0)}</button>
-          <button type="button" class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')">${isFav ? '❤️ ফেভারিট' : '🤍 সেভ'}</button>
+          <button type="button" class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')">${isFav ? '❤️ সেভড' : '🤍 সেভ'}</button>
           <button type="button" class="react-btn" onclick="shareQuote('${q.text}')">🔗 শেয়ার</button>
         </div>
       `;
@@ -358,32 +559,161 @@ if (typeof db !== "undefined") {
   });
 
   window.addReaction = function(quoteId, type) {
-    db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(count => (count || 0) + 1);
-    showToast("রিয়্যাকশন যুক্ত করা হয়েছে!");
+    db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(c => (c || 0) + 1);
+    showToast("রিয়্যাকশন দেয়া হয়েছে!");
   };
 
   window.toggleFavorite = function(quoteId) {
-    if (favQuotes.includes(quoteId)) {
+    if(favQuotes.includes(quoteId)) {
       favQuotes = favQuotes.filter(id => id !== quoteId);
-      showToast("ফেভারিট থেকে সরানো হয়েছে");
+      showToast("ফেভারিট থেকে সরানো হলো");
     } else {
       favQuotes.push(quoteId);
-      showToast("ফেভারিটে সেভ করা হয়েছে!");
+      showToast("ফেভারিটে বুকমার্ক করা হলো!");
     }
     localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
   };
 
   window.shareQuote = function(text) {
     if (navigator.share) {
-      navigator.share({ title: "মজার উক্তি", text });
+      navigator.share({ title: "বউ ছাড়া উক্তি", text });
     } else {
       navigator.clipboard.writeText(text);
       showToast("উক্তি কপি করা হয়েছে!");
     }
   };
+
+  // 3. Chat Room Engine (Global & Support Chat)
+  let activeChatMode = "global";
+
+  window.switchChatRoom = function(mode) {
+    activeChatMode = mode;
+    document.getElementById("btnTabGlobalChat").classList.toggle("active", mode === "global");
+    document.getElementById("btnTabSupportChat").classList.toggle("active", mode === "support");
+    loadChatMessages();
+  };
+
+  function getChatRefPath() {
+    return activeChatMode === "global" ? "chatRooms/global/messages" : `chatRooms/support/${myUid}/messages`;
+  }
+
+  function loadChatMessages() {
+    const chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML = "<div style='text-align:center; padding:10px; font-size:12px; color:gray;'>মেসেজ লোড হচ্ছে...</div>";
+
+    db.ref(getChatRefPath()).off(); // Detach previous listener
+    db.ref(getChatRefPath()).limitToLast(50).on("value", snap => {
+      chatBox.innerHTML = "";
+      const msgs = snap.val() || {};
+      const keys = Object.keys(msgs);
+
+      if(keys.length === 0) {
+        chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${activeChatMode === 'global' ? 'আড্ডা শুরু করতে মেসেজ লিখুন!' : 'এডমিনকে সাপোর্ট মেসেজ পাঠান।'}</div>`;
+        return;
+      }
+
+      keys.forEach(k => {
+        const m = msgs[k];
+        const isMine = m.uid === myUid;
+        const isBot = m.isBot || false;
+
+        const div = document.createElement("div");
+        div.className = "msg " + (isMine ? "me" : (isBot ? "bot" : "them"));
+        div.innerHTML = `
+          <div class="msg-header">
+            ${escapeHtml(m.name || 'User')} ${isBot ? '<span class="badge-bot">BOT</span>' : ''}
+          </div>
+          <div>${escapeHtml(m.text)}</div>
+        `;
+        chatBox.appendChild(div);
+      });
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  }
+  loadChatMessages();
+
+  window.sendChatMessage = function() {
+    const input = document.getElementById("chatInput");
+    const text = input.value.trim();
+    if(!text) return;
+
+    db.ref(getChatRefPath()).push({
+      uid: myUid,
+      name: myName,
+      text: text,
+      time: Date.now()
+    }).then(() => {
+      input.value = "";
+      
+      // Trigger AI Response in Global Chat if AI Enabled
+      if(activeChatMode === "global") {
+        checkAndTriggerAi(text);
+      }
+    });
+  };
+
+  // AI Auto-Reply Call Logic
+  function checkAndTriggerAi(userMsg) {
+    db.ref("settings/ai").once("value", snap => {
+      const ai = snap.val();
+      if(!ai || !ai.enabled || !ai.endpoint) return;
+
+      // Call AI Endpoint
+      fetchAiReply(ai, userMsg);
+    });
+  }
+
+  async function fetchAiReply(aiConfig, userMsg) {
+    try {
+      let reply = "";
+      if(aiConfig.provider === "ollama") {
+        const res = await fetch(aiConfig.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: aiConfig.model || "llama3",
+            prompt: `${aiConfig.systemPrompt || ''}\nইউজার: ${userMsg}\nউত্তর:`,
+            stream: false
+          })
+        });
+        const data = await res.json();
+        reply = data.response;
+      } else {
+        const headers = { "Content-Type": "application/json" };
+        if(aiConfig.apiKey) headers["Authorization"] = `Bearer ${aiConfig.apiKey}`;
+
+        const res = await fetch(aiConfig.endpoint, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({
+            model: aiConfig.model || "llama-3.1-8b-instant",
+            messages: [
+              { role: "system", content: aiConfig.systemPrompt || "তুমি রসাত্মক কৌতুকপ্রিয় বট।" },
+              { role: "user", content: userMsg }
+            ]
+          })
+        });
+        const data = await res.json();
+        reply = data.choices[0].message.content;
+      }
+
+      if(reply && reply.trim()) {
+        db.ref("chatRooms/global/messages").push({
+          uid: "bot_ai",
+          name: "বউ ছাড়া AI 🤖",
+          text: reply.trim(),
+          isBot: true,
+          time: Date.now()
+        });
+      }
+    } catch(err) {
+      console.log("AI Call Error:", err);
+    }
+  }
+
 }
 
-// কাউন্টার লজিক
+// Counter Math Functions
 function countFridays(s, e) {
   let count = 0, cur = new Date(s);
   while (cur <= e) {
@@ -393,7 +723,7 @@ function countFridays(s, e) {
   return count;
 }
 
-function updateCounter(dateStr) {
+function updateCounterData(dateStr) {
   if (!dateStr) return;
   const start = new Date(dateStr), now = new Date();
   const diffDays = Math.max(0, Math.floor((now - start) / 86400000));
@@ -403,15 +733,23 @@ function updateCounter(dateStr) {
   document.getElementById("statDays").textContent = toBn(diffDays);
   document.getElementById("statWeeks").textContent = toBn(Math.floor(diffDays/7));
   document.getElementById("statMonths").textContent = toBn(Math.floor(diffDays/30));
+  
+  document.getElementById("cStatDays").textContent = toBn(diffDays);
+  document.getElementById("cStatWeeks").textContent = toBn(Math.floor(diffDays/7));
+  document.getElementById("cStatMonths").textContent = toBn(Math.floor(diffDays/30));
+  document.getElementById("cStatYears").textContent = toBn(Math.floor(diffDays/365));
+
   document.getElementById("startDateLabel").textContent = `শুরু: ${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
+  document.getElementById("profileStartDate").textContent = `${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
+  document.getElementById("profileFridayCount").textContent = `${toBn(fridays)}টি`;
 }
 
 document.getElementById("btnCalcCounter").addEventListener("click", () => {
   const dateVal = document.getElementById("startDateInput").value;
   if (dateVal) {
     localStorage.setItem("bcf_start_date", dateVal);
-    updateCounter(dateVal);
-    showToast("হিসাব আপডেট হয়েছে!");
+    updateCounterData(dateVal);
+    showToast("হিসাব আপডেট করা হয়েছে!");
   }
 });
 
@@ -420,9 +758,15 @@ document.getElementById("btnResetCounter").addEventListener("click", () => {
   location.reload();
 });
 
-const savedDate = localStorage.getItem("bcf_start_date") || new Date(Date.now() - 30*86400000).toISOString().split('T')[0];
-document.getElementById("startDateInput").value = savedDate;
-updateCounter(savedDate);
+const savedStartDate = localStorage.getItem("bcf_start_date") || new Date(Date.now() - 30*86400000).toISOString().split('T')[0];
+document.getElementById("startDateInput").value = savedStartDate;
+updateCounterData(savedStartDate);
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str || "";
+  return div.innerHTML;
+}
 
 window.addEventListener("load", () => {
   setTimeout(() => document.getElementById("splash").classList.add("hide"), 800);
