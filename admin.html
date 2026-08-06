@@ -11,6 +11,7 @@
     --primary-dark: #E85A0C;
     --bg: #12100E;
     --card: #1D1814;
+    --card-hover: #26201B;
     --text: #F7EBE0;
     --muted: #A6907C;
     --border: rgba(255,106,26,0.25);
@@ -20,8 +21,9 @@
   
   * { box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
   body { background: var(--bg); color: var(--text); margin: 0; padding: 0; min-height: 100vh; }
-  h1, h2, h3 { font-family: 'Baloo Da 2', sans-serif; margin: 0; }
+  h1, h2, h3, h4 { font-family: 'Baloo Da 2', sans-serif; margin: 0; }
   
+  /* পাসকোড লগইন মডাল */
   #adminAuthGate {
     position: fixed; inset: 0; background: var(--bg); z-index: 999;
     display: flex; align-items: center; justify-content: center; padding: 20px;
@@ -35,17 +37,19 @@
     background: #12100E; color: #fff; font-size: 15px; text-align: center;
   }
   
+  /* হেডার */
   .navbar {
     background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 24px;
-    display: flex; justify-content: space-between; align-items: center; sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;
   }
   .logo-title { color: var(--primary); font-size: 20px; font-weight: 700; }
   .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
   
-  .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; flex-wrap: wrap; }
+  /* নেভিগেশন ট্যাব */
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; flex-wrap: wrap; }
   .tab-btn {
-    background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 8px 18px;
-    border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all .2s;
+    background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 8px 16px;
+    border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 13.5px; transition: all .2s;
   }
   .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   
@@ -53,6 +57,7 @@
   .tab-content.active { display: block; }
   .data-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
   
+  /* ফর্ম এলিমেন্টস */
   .form-group { margin-bottom: 16px; }
   .form-group label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
   .form-control {
@@ -61,13 +66,46 @@
   }
 
   .btn {
-    border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px;
-    cursor: pointer; transition: transform .15s ease; display: inline-flex; align-items: center; justify-content: center;
+    border: none; padding: 9px 15px; border-radius: 8px; font-weight: 700; font-size: 13px;
+    cursor: pointer; transition: transform .15s ease; display: inline-flex; align-items: center; justify-content: center; gap: 4px;
   }
   .btn:active { transform: scale(0.95); }
   .btn-primary { background: var(--primary); color: #fff; }
   .btn-danger { background: var(--danger); color: #fff; }
+  .btn-success { background: var(--success); color: #fff; }
+  .btn-secondary { background: #332B24; color: var(--text); }
   
+  /* টেবিল স্টাইল */
+  .table-responsive { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th { background: rgba(255,106,26,0.12); color: var(--primary); padding: 12px 14px; font-weight: 700; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+  td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+  
+  /* চ্যাট অ্যান্ড সাপোর্ট মোড */
+  .support-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+  @media (max-width: 768px) { .support-grid { grid-template-columns: 1fr; } }
+  
+  .user-list-box { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 12px; max-height: 480px; overflow-y: auto; }
+  .user-item {
+    padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;
+    transition: background 0.2s; display: flex; justify-content: space-between; align-items: center;
+  }
+  .user-item:hover, .user-item.active { background: rgba(255,106,26,0.15); }
+  .user-item-name { font-weight: 700; font-size: 14px; color: var(--text); }
+  .user-item-sub { font-size: 12px; color: var(--muted); }
+
+  .chat-box-wrap { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; height: 480px; }
+  .chat-box-header { padding: 12px 16px; background: rgba(255,106,26,0.1); border-bottom: 1px solid var(--border); font-weight: 700; }
+  .chat-messages { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  
+  .msg-item { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13.5px; line-height: 1.4; }
+  .msg-item.user { align-self: flex-start; background: var(--card-hover); border: 1px solid var(--border); }
+  .msg-item.admin { align-self: flex-end; background: var(--primary); color: #fff; }
+  .msg-time { font-size: 10px; opacity: 0.7; margin-top: 4px; text-align: right; }
+
+  .chat-input-row { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+
+  /* টগল সুইচ */
   .switch-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
   .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
   .switch input { opacity: 0; width: 0; height: 0; }
@@ -76,67 +114,98 @@
   input:checked + .slider { background-color: var(--primary); }
   input:checked + .slider:before { transform: translateX(22px); }
 
-  .empty-state { text-align: center; padding: 30px; color: var(--muted); }
-  .chat-item {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 12px 16px;
-    border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
-  }
+  .badge { padding: 3px 8px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+  .badge-danger { background: rgba(255,71,87,0.15); color: var(--danger); }
+  .badge-success { background: rgba(46,213,115,0.15); color: var(--success); }
+  .empty-state { text-align: center; padding: 30px; color: var(--muted); font-size: 14px; }
 </style>
 </head>
 <body>
 
-<!-- সিকিউরিটি লগইন দ্বার -->
+<!-- সিকিউরিটি অথেন্টিকেশন মডাল -->
 <div id="adminAuthGate">
   <div class="auth-box">
-    <h2>এডমিন প্রবেশ</h2>
-    <p style="color:var(--muted); font-size:13px;">তথ্য পরিবর্তন করতে পাসকোড দিন</p>
+    <h2>এডমিন সাইন-ইন</h2>
+    <p style="color:var(--muted); font-size:13px;">প্যানেলে প্রবেশের জন্য পাসকোড দিন</p>
     <input type="password" id="adminPassInput" class="auth-input" placeholder="পাসকোড দিন">
     <button type="button" class="btn btn-primary" style="width:100%; padding:12px;" onclick="verifyAdminPass()">প্রবেশ করুন</button>
   </div>
 </div>
 
-<!-- হেডার -->
+<!-- নেভিগেশন বার -->
 <div class="navbar">
   <div class="logo-title">বউ ছাড়া কততম শুক্রবার — এডমিন প্যানেল</div>
   <button type="button" class="btn btn-danger" onclick="logoutAdmin()">লগআউট</button>
 </div>
 
 <div class="container">
-  <!-- ট্যাব নেভিগেশন -->
+  <!-- ট্যাব সিলেক্টর -->
   <div class="tabs">
-    <button type="button" class="tab-btn active" onclick="switchTab('dev', event)">📱 ডেভেলপমেন্ট ও সোশ্যাল মিডিয়া</button>
+    <button type="button" class="tab-btn active" onclick="switchTab('support', event)">🎧 সাপোর্ট চ্যাট রিপ্লাই</button>
+    <button type="button" class="tab-btn" onclick="switchTab('users', event)">👥 ইউজার অ্যাকাউন্টস</button>
     <button type="button" class="tab-btn" onclick="switchTab('quotes', event)">💬 উক্তি ম্যানেজার</button>
     <button type="button" class="tab-btn" onclick="switchTab('ai', event)">🤖 AI এজেন্ট সেটআপ</button>
+    <button type="button" class="tab-btn" onclick="switchTab('dev', event)">📱 সোশ্যাল ও ডেভেলপমেন্ট</button>
     <button type="button" class="tab-btn" onclick="switchTab('chat', event)">🗨️ চ্যাট মডারেশন</button>
   </div>
 
-  <!-- ১. ডেভেলপমেন্ট ও সোশ্যাল অ্যাকাউন্ট সেকশন -->
-  <div class="tab-content active" id="tab-dev">
+  <!-- ১. সাপোর্ট চ্যাট রিপ্লাই ট্যাব -->
+  <div class="tab-content active" id="tab-support">
     <div class="data-card">
-      <h3>ডেভেলপার ইনফরমেশন ও সোশ্যাল লিংক</h3>
-      <p style="color:var(--muted); font-size:13.5px; margin-bottom:20px;">এই তথ্যগুলো সেভ করলে ইউজার অ্যাপে সরাসরি আপডেট হয়ে যাবে।</p>
+      <h3>ইউজার সাপোর্ট চ্যাট সেন্টার</h3>
+      <p style="color:var(--muted); font-size:13.5px; margin-bottom:16px;">যেকোনো ইউজারের ওপর ক্লিক করে তার প্রশ্নের সরাসরি রিপ্লাই দিন।</p>
       
-      <div class="form-group">
-        <label>ডেভেলপার নাম</label>
-        <input type="text" id="devNameInput" class="form-control" value="MD FIROZ HOSSAIN">
+      <div class="support-grid">
+        <!-- ইউজার লিস্ট -->
+        <div>
+          <div style="font-weight:700; font-size:13px; color:var(--muted); margin-bottom:6px;">সাপোর্ট কন্টাক্টস</div>
+          <div class="user-list-box" id="supportUserList">
+            <div class="empty-state">ইউজার লোড হচ্ছে...</div>
+          </div>
+        </div>
+
+        <!-- চ্যাট কনভারসেশন বক্স -->
+        <div class="chat-box-wrap">
+          <div class="chat-box-header" id="selectedUserHeader">কোনো ইউজার নির্বাচিত হয়নি</div>
+          <div class="chat-messages" id="supportMessagesArea">
+            <div class="empty-state">বামে থাকা যেকোনো ইউজারের ওপর ক্লিক করুন।</div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="adminReplyInput" class="form-control" placeholder="রিপ্লাই লিখুন..." style="border-radius:8px;">
+            <button type="button" class="btn btn-primary" onclick="sendAdminSupportReply()">পাঠান</button>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>টেলিগ্রাম লিংক (Telegram)</label>
-        <input type="url" id="devTelegramInput" class="form-control" placeholder="https://t.me/yourusername">
-      </div>
-      <div class="form-group">
-        <label>ফেসবুক প্রোফাইল / পেজ লিংক (Facebook)</label>
-        <input type="url" id="devFbInput" class="form-control" placeholder="https://facebook.com/yourprofile">
-      </div>
-      <div class="form-group">
-        <label>হোয়াটসঅ্যাপ লিংক (WhatsApp)</label>
-        <input type="url" id="devWaInput" class="form-control" placeholder="https://wa.me/8801700000000">
-      </div>
-      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveDevSettings()">ডেভেলপার তথ্য সেভ করুন</button>
     </div>
   </div>
 
-  <!-- ২. উক্তি ম্যানেজার -->
+  <!-- ২. ইউজার অ্যাকাউন্ট ম্যানেজমেন্ট ট্যাব -->
+  <div class="tab-content" id="tab-users">
+    <div class="data-card">
+      <h3>নিবন্ধিত ইউজার ম্যানেজমেন্ট</h3>
+      <div style="margin: 12px 0;">
+        <input type="text" id="userSearchInput" class="form-control" placeholder="ইউজার খুঁজুন (নাম বা ফোন/ইমেইল)..." onkeyup="filterUserTable()">
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>নাম</th>
+              <th>জিমেইল / ফোন</th>
+              <th>জন্ম তারিখ</th>
+              <th>স্ট্যাটাস</th>
+              <th>অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
+            <tr><td colspan="5" class="empty-state">ইউজার তথ্য লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ৩. উক্তি ম্যানেজার ট্যাব -->
   <div class="tab-content" id="tab-quotes">
     <div class="data-card">
       <h3>নতুন উক্তি যোগ করুন</h3>
@@ -149,7 +218,7 @@
     </div>
   </div>
 
-  <!-- ৩. AI এজেন্ট সেটআপ -->
+  <!-- ৪. AI এজেন্ট সেটআপ ট্যাব -->
   <div class="tab-content" id="tab-ai">
     <div class="data-card">
       <h3>🤖 AI এজেন্ট কনফিগারেশন</h3>
@@ -157,7 +226,7 @@
       <div class="switch-row">
         <div>
           <strong style="font-size:15px;">AI চ্যাটবট সক্রিয় রাখুন</strong>
-          <div style="font-size:12.5px; color:var(--muted);">অন থাকলে চ্যাটে মেসেজ দিলে AI উত্তর পাঠাবে।</div>
+          <div style="font-size:12.5px; color:var(--muted);">অন থাকলে গ্লোবাল চ্যাটে মেসেজ দিলে AI উত্তর পাঠাবে।</div>
         </div>
         <label class="switch">
           <input type="checkbox" id="aiEnabledToggle">
@@ -166,7 +235,7 @@
       </div>
 
       <div class="form-group">
-        <label>API Endpoint URL (যেমন Groq / OpenRouter / Ollama)</label>
+        <label>API Endpoint URL (Groq / OpenRouter / Ollama)</label>
         <input type="text" id="aiEndpointInput" class="form-control" placeholder="https://api.groq.com/openai/v1/chat/completions">
       </div>
       <div class="form-group">
@@ -186,13 +255,42 @@
     </div>
   </div>
 
-  <!-- ৪. চ্যাট মডারেশন -->
-  <div class="tab-content" id="tab-chat">
+  <!-- ৫. ডেভেলপমেন্ট ও সোশ্যাল সেকশন -->
+  <div class="tab-content" id="tab-dev">
     <div class="data-card">
-      <h3>গ্লোবাল চ্যাট মেসেজ মডারেশন</h3>
-      <div id="chatListContainer" style="margin-top:15px;"></div>
+      <h3>ডেভেলপার ইনফরমেশন ও সোশ্যাল লিংক</h3>
+      <div class="form-group">
+        <label>ডেভেলপার নাম</label>
+        <input type="text" id="devNameInput" class="form-control" value="MD FIROZ HOSSAIN">
+      </div>
+      <div class="form-group">
+        <label>টেলিগ্রাম লিংক (Telegram)</label>
+        <input type="url" id="devTelegramInput" class="form-control" placeholder="https://t.me/yourusername">
+      </div>
+      <div class="form-group">
+        <label>ফেসবুক লিংক (Facebook)</label>
+        <input type="url" id="devFbInput" class="form-control" placeholder="https://facebook.com/yourprofile">
+      </div>
+      <div class="form-group">
+        <label>হোয়াটসঅ্যাপ লিংক (WhatsApp)</label>
+        <input type="url" id="devWaInput" class="form-control" placeholder="https://wa.me/8801700000000">
+      </div>
+      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveDevSettings()">ডেভেলপার তথ্য সেভ করুন</button>
     </div>
   </div>
+
+  <!-- ৬. চ্যাট মডারেশন ট্যাব -->
+  <div class="tab-content" id="tab-chat">
+    <div class="data-card">
+      <h3>গ্লোবাল ও কমিউনিটি চ্যাট মডারেশন</h3>
+      <div style="display:flex; gap:10px; margin-bottom:14px;">
+        <button type="button" class="btn btn-secondary" onclick="loadModChat('global')">গ্লোবাল চ্যাট</button>
+        <button type="button" class="btn btn-secondary" onclick="loadModChat('community')">পাবলিক কমিউনিটি চ্যাট</button>
+      </div>
+      <div id="chatListContainer"></div>
+    </div>
+  </div>
+
 </div>
 
 <!-- Firebase SDKs -->
@@ -202,6 +300,8 @@
 
 <script>
   const DEFAULT_ADMIN_PASS = "admin123";
+  let activeSelectedSupportUid = null;
+  let allUsersData = {};
 
   function verifyAdminPass() {
     const val = document.getElementById("adminPassInput").value;
@@ -233,20 +333,54 @@
 
   function loadAdminData() {
     if (typeof db === "undefined") {
-      alert("❌ ত্রুটি: firebase-config.js ফাইল লোড হয়নি বা ঠিকমত সেট করা হয়নি!");
+      alert("❌ ত্রুটি: firebase-config.js ফাইল ঠিকমতো সেট করা হয়নি!");
       return;
     }
 
-    // ১. ডেভেলপমেন্ট ও সোশ্যাল লিংক লোড
-    db.ref("settings/developer").on("value", snap => {
-      const d = snap.val() || {};
-      document.getElementById("devNameInput").value = d.name || "MD FIROZ HOSSAIN";
-      document.getElementById("devTelegramInput").value = d.telegram || "";
-      document.getElementById("devFbInput").value = d.facebook || "";
-      document.getElementById("devWaInput").value = d.whatsapp || "";
+    // ১. সাপোর্ট চ্যাট ইউজারস লোড
+    db.ref("chatRooms/support").on("value", snap => {
+      const supports = snap.val() || {};
+      const container = document.getElementById("supportUserList");
+      container.innerHTML = "";
+      const uids = Object.keys(supports);
+
+      if(uids.length === 0) {
+        container.innerHTML = `<div class="empty-state">কোনো সাপোর্ট চ্যাট নেই</div>`;
+        return;
+      }
+
+      uids.forEach(uid => {
+        const msgs = supports[uid].messages || {};
+        const lastMsgKey = Object.keys(msgs).pop();
+        const lastMsgText = lastMsgKey ? msgs[lastMsgKey].text : "চ্যাট শুরু হয়েছে";
+
+        // Fetch User Info
+        db.ref(`users/${uid}`).once("value", uSnap => {
+          const u = uSnap.val() || {};
+          const uName = u.name || uid.substring(0,8);
+
+          const div = document.createElement("div");
+          div.className = "user-item " + (activeSelectedSupportUid === uid ? "active" : "");
+          div.onclick = () => selectSupportUser(uid, uName);
+          div.innerHTML = `
+            <div>
+              <div class="user-item-name">${escapeHtml(uName)}</div>
+              <div class="user-item-sub">${escapeHtml(lastMsgText.substring(0,25))}...</div>
+            </div>
+            <span style="font-size:10px; color:var(--muted);">➔</span>
+          `;
+          container.appendChild(div);
+        });
+      });
     });
 
-    // ২. উক্তি লোড
+    // ২. ইউজার অ্যাকাউন্টস লোড
+    db.ref("users").on("value", snap => {
+      allUsersData = snap.val() || {};
+      renderUserTable(allUsersData);
+    });
+
+    // ৩. উক্তি লোড
     db.ref("quotes").on("value", snap => {
       const quotes = snap.val() || {};
       const container = document.getElementById("quoteAdminList");
@@ -258,101 +392,216 @@
       }
       keys.forEach(id => {
         const div = document.createElement("div");
-        div.className = "chat-item";
-        div.innerHTML = `<span>${quotes[id].text}</span> <button type="button" class="btn btn-danger" onclick="deleteQuote('${id}')">মুছুন</button>`;
+        div.style.cssText = "background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:10px 14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;";
+        div.innerHTML = `<span>${escapeHtml(quotes[id].text)}</span> <button type="button" class="btn btn-danger" onclick="deleteQuote('${id}')">মুছুন</button>`;
         container.appendChild(div);
       });
     });
 
-    // ৩. AI সেটিংস লোড
+    // ৪. AI সেটিংস লোড
     db.ref("settings/ai").on("value", snap => {
       const c = snap.val() || {};
       document.getElementById("aiEnabledToggle").checked = c.enabled || false;
       document.getElementById("aiEndpointInput").value = c.endpoint || "";
       document.getElementById("aiApiKeyInput").value = c.apiKey || "";
       document.getElementById("aiModelInput").value = c.model || "llama-3.1-8b-instant";
-      document.getElementById("aiSystemPromptInput").value = c.systemPrompt || "তুমি 'বউ ছাড়া কততম শুক্রবার' অ্যাপের একটি হাস্যরসাত্মক এআই বট। সংক্ষেপে রসিকে ও মজার উত্তর দাও।";
+      document.getElementById("aiSystemPromptInput").value = c.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের কৌতুকপ্রিয় এআই বট। সংক্ষেপে উত্তর দাও।";
     });
 
-    // ৪. চ্যাট মেসেজ লোড
-    db.ref("chatRooms/global/messages").limitToLast(30).on("value", snap => {
+    // ৫. ডেভেলপমেন্ট তথ্য লোড
+    db.ref("settings/developer").on("value", snap => {
+      const d = snap.val() || {};
+      document.getElementById("devNameInput").value = d.name || "MD FIROZ HOSSAIN";
+      document.getElementById("devTelegramInput").value = d.telegram || "";
+      document.getElementById("devFbInput").value = d.facebook || "";
+      document.getElementById("devWaInput").value = d.whatsapp || "";
+    });
+
+    loadModChat("global");
+  }
+
+  // --- সাপোর্ট চ্যাট রিপ্লাই ফাংশন ---
+  function selectSupportUser(uid, name) {
+    activeSelectedSupportUid = uid;
+    document.getElementById("selectedUserHeader").textContent = `সাপোর্ট চ্যাট: ${name} (${uid})`;
+
+    db.ref(`chatRooms/support/${uid}/messages`).on("value", snap => {
+      const msgsArea = document.getElementById("supportMessagesArea");
+      msgsArea.innerHTML = "";
       const msgs = snap.val() || {};
-      const container = document.getElementById("chatListContainer");
-      container.innerHTML = "";
       const keys = Object.keys(msgs);
-      if (keys.length === 0) {
-        container.innerHTML = `<div class="empty-state">কোন চ্যাট মেসেজ নেই</div>`;
+
+      if(keys.length === 0) {
+        msgsArea.innerHTML = `<div class="empty-state">কোনো মেসেজ নেই</div>`;
         return;
       }
+
+      keys.forEach(k => {
+        const m = msgs[k];
+        const isAdmin = m.isAdmin || false;
+        const div = document.createElement("div");
+        div.className = "msg-item " + (isAdmin ? "admin" : "user");
+        div.innerHTML = `
+          <div><strong>${escapeHtml(m.name || 'User')}</strong></div>
+          <div>${escapeHtml(m.text)}</div>
+        `;
+        msgsArea.appendChild(div);
+      });
+      msgsArea.scrollTop = msgsArea.scrollHeight;
+    });
+  }
+
+  function sendAdminSupportReply() {
+    if(!activeSelectedSupportUid) return alert("প্রথমে বাম পাশ থেকে যেকোনো একজন ইউজার সিলেক্ট করুন!");
+    const input = document.getElementById("adminReplyInput");
+    const text = input.value.trim();
+    if(!text) return;
+
+    db.ref(`chatRooms/support/${activeSelectedSupportUid}/messages`).push({
+      uid: "admin_official",
+      name: "এডমিন সাপোর্ট 🛡️",
+      text: text,
+      time: Date.now(),
+      isAdmin: true
+    }).then(() => {
+      input.value = "";
+    });
+  }
+
+  // --- ইউজার ম্যানেজমেন্ট ফাংশন ---
+  function renderUserTable(usersObj) {
+    const body = document.getElementById("userTableBody");
+    body.innerHTML = "";
+    const keys = Object.keys(usersObj);
+
+    if (keys.length === 0) {
+      body.innerHTML = `<tr><td colspan="5" class="empty-state">কোন রেজিস্টার্ড ইউজার পাওয়া যায়নি</td></tr>`;
+      return;
+    }
+
+    keys.forEach(uid => {
+      const u = usersObj[uid];
+      const isBanned = u.banned || false;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><strong>${escapeHtml(u.name || 'অতিথি')}</strong></td>
+        <td>${escapeHtml(u.contact || 'N/A')}</td>
+        <td>${escapeHtml(u.dob || 'N/A')}</td>
+        <td><span class="badge ${isBanned ? 'badge-danger' : 'badge-success'}">${isBanned ? 'ব্যানড 🔴' : 'অ্যাক্টিভ 🟢'}</span></td>
+        <td style="display:flex; gap:6px;">
+          <button type="button" class="btn ${isBanned ? 'btn-success' : 'btn-danger'}" onclick="toggleBanUser('${uid}', ${isBanned})">
+            ${isBanned ? 'আনব্যান' : 'ব্যান'}
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="openSupportForUid('${uid}', '${escapeHtml(u.name || 'User')}')">চ্যাট</button>
+          <button type="button" class="btn btn-danger" onclick="deleteUserAccount('${uid}')">ডিলিট</button>
+        </td>
+      `;
+      body.appendChild(tr);
+    });
+  }
+
+  function filterUserTable() {
+    const q = document.getElementById("userSearchInput").value.toLowerCase();
+    const filtered = {};
+    Object.keys(allUsersData).forEach(uid => {
+      const u = allUsersData[uid];
+      if((u.name && u.name.toLowerCase().includes(q)) || (u.contact && u.contact.toLowerCase().includes(q))) {
+        filtered[uid] = u;
+      }
+    });
+    renderUserTable(filtered);
+  }
+
+  function toggleBanUser(uid, isBanned) {
+    db.ref(`users/${uid}/banned`).set(!isBanned)
+      .then(() => alert(isBanned ? "ইউজার আনব্যান করা হয়েছে!" : "ইউজার ব্যান করা হয়েছে!"));
+  }
+
+  function deleteUserAccount(uid) {
+    if(confirm("এই ইউজার একাউন্টটি সম্পূর্ণ মুছে ফেলতে চান?")) {
+      db.ref(`users/${uid}`).remove();
+    }
+  }
+
+  function openSupportForUid(uid, name) {
+    switchTab('support');
+    selectSupportUser(uid, name);
+  }
+
+  // --- চ্যাট মডারেশন ---
+  function loadModChat(room) {
+    db.ref(`chatRooms/${room}/messages`).limitToLast(30).on("value", snap => {
+      const msgs = snap.val() || {};
+      const container = document.getElementById("chatListContainer");
+      container.innerHTML = `<h4 style="margin-bottom:10px; color:var(--primary);">${room === 'global' ? 'গ্লোবাল আড্ডা' : 'পাবলিক কমিউনিটি চ্যাট'}</h4>`;
+      const keys = Object.keys(msgs);
+
+      if (keys.length === 0) {
+        container.innerHTML += `<div class="empty-state">কোন মেসেজ নেই</div>`;
+        return;
+      }
+
       keys.reverse().forEach(id => {
         const m = msgs[id];
         const div = document.createElement("div");
-        div.className = "chat-item";
+        div.style.cssText = "background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:10px 14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;";
         div.innerHTML = `
           <div>
-            <strong>${m.name || 'User'}</strong>
-            <div style="font-size:13px;">${m.text}</div>
+            <strong>${escapeHtml(m.name || 'User')}</strong>
+            <div style="font-size:13px; color:var(--muted);">${escapeHtml(m.text)}</div>
           </div>
-          <button type="button" class="btn btn-danger" onclick="deleteChatMsg('${id}')">মুছুন</button>
+          <button type="button" class="btn btn-danger" onclick="deleteChatMsg('${room}', '${id}')">মুছুন</button>
         `;
         container.appendChild(div);
       });
     });
   }
 
-  // --- সেভ ফাংশনসমূহ ---
+  function deleteChatMsg(room, msgId) {
+    if (confirm("মেসেজটি ডিলিট করতে চান?")) {
+      db.ref(`chatRooms/${room}/messages/${msgId}`).remove();
+    }
+  }
 
+  // --- সেভ সেটিংস ফাংশনস ---
   function saveDevSettings() {
-    const data = {
+    db.ref("settings/developer").set({
       name: document.getElementById("devNameInput").value.trim() || "MD FIROZ HOSSAIN",
       telegram: document.getElementById("devTelegramInput").value.trim(),
       facebook: document.getElementById("devFbInput").value.trim(),
       whatsapp: document.getElementById("devWaInput").value.trim(),
       updatedAt: Date.now()
-    };
-
-    db.ref("settings/developer").set(data)
-      .then(() => alert("✅ ডেভেলপমেন্ট তথ্য সফলভাবে সেভ হয়েছে!"))
-      .catch(err => alert("❌ সেভ করা যায়নি! ভুল: " + err.message + "\n\nপরামর্শ: Firebase Realtime Database এর Security Rules চেক করুন (Read & Write: true থাকতে হবে)।"));
+    }).then(() => alert("✅ ডেভেলপমেন্ট তথ্য সফলভাবে সেভ হয়েছে!"));
   }
 
   function addQuote() {
     const text = document.getElementById("newQuoteInput").value.trim();
     if (!text) return alert("উক্তি লিখুন!");
-
-    db.ref("quotes").push({ text, createdAt: Date.now() })
-      .then(() => {
-        alert("✅ নতুন উক্তি সেভ হয়েছে!");
-        document.getElementById("newQuoteInput").value = "";
-      })
-      .catch(err => alert("❌ সেভ করা যায়নি: " + err.message));
+    db.ref("quotes").push({ text, createdAt: Date.now() }).then(() => {
+      alert("✅ নতুন উক্তি সেভ হয়েছে!");
+      document.getElementById("newQuoteInput").value = "";
+    });
   }
 
   function deleteQuote(id) {
-    if (confirm("উক্তিটি ডিলিট করতে চান?")) {
-      db.ref(`quotes/${id}`).remove();
-    }
+    if (confirm("উক্তিটি ডিলিট করতে চান?")) db.ref(`quotes/${id}`).remove();
   }
 
   function saveAiSettings() {
-    const data = {
+    db.ref("settings/ai").set({
       enabled: document.getElementById("aiEnabledToggle").checked,
       endpoint: document.getElementById("aiEndpointInput").value.trim(),
       apiKey: document.getElementById("aiApiKeyInput").value.trim(),
       model: document.getElementById("aiModelInput").value.trim(),
       systemPrompt: document.getElementById("aiSystemPromptInput").value.trim(),
       updatedAt: Date.now()
-    };
-
-    db.ref("settings/ai").set(data)
-      .then(() => alert("✅ AI সেটিংস সফলভাবে সেভ হয়েছে!"))
-      .catch(err => alert("❌ সেভ করা যায়নি: " + err.message));
+    }).then(() => alert("✅ AI সেটিংস সেভ হয়েছে!"));
   }
 
-  function deleteChatMsg(id) {
-    if (confirm("মেসেজটি ডিলিট করতে চান?")) {
-      db.ref(`chatRooms/global/messages/${id}`).remove();
-    }
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str || "";
+    return div.innerHTML;
   }
 </script>
 </body>
