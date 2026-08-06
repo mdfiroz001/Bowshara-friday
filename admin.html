@@ -124,7 +124,7 @@
 </div>
 
 <div class="navbar">
-  <div class="logo-title">বউ ছাড়া কততমশুক্রবার — এডমিন প্যানেল</div>
+  <div class="logo-title">বউ ছাড়া কততম শুক্রবার — এডমিন প্যানেল</div>
   <button type="button" class="btn btn-danger" onclick="logoutAdmin()">লগআউট</button>
 </div>
 
@@ -132,11 +132,11 @@
   <div class="tabs">
     <button type="button" class="tab-btn active" onclick="switchTab('support', event)">🎧 সাপোর্ট চ্যাট রিপ্লাই</button>
     <button type="button" class="tab-btn" onclick="switchTab('users', event)">👥 ইউজার অ্যাকাউন্টস</button>
+    <button type="button" class="tab-btn" onclick="switchTab('ads', event)">📢 এডস ও লোগো</button>
     <button type="button" class="tab-btn" onclick="switchTab('quotes', event)">💬 উক্তি ম্যানেজার</button>
     <button type="button" class="tab-btn" onclick="switchTab('apk', event)">📦 APK অ্যাপ লিংক</button>
     <button type="button" class="tab-btn" onclick="switchTab('ai', event)">🤖 AI এজেন্ট সেটআপ</button>
     <button type="button" class="tab-btn" onclick="switchTab('dev', event)">📱 সোশ্যাল ও ডেভেলপমেন্ট</button>
-    <button type="button" class="tab-btn" onclick="switchTab('chat', event)">🗨️ চ্যাট মডারেশন</button>
   </div>
 
   <!-- ১. সাপোর্ট চ্যাট রিপ্লাই -->
@@ -193,7 +193,26 @@
     </div>
   </div>
 
-  <!-- ৩. উক্তি ম্যানেজার -->
+  <!-- ৩. এডভারটাইজমেন্ট ও লোগো ম্যানেজমেন্ট -->
+  <div class="tab-content" id="tab-ads">
+    <div class="data-card">
+      <h3>📢 এডভারটাইজমেন্ট ও লোগো সেটআপ</h3>
+      
+      <div class="form-group">
+        <label>ফেভিকন লোগো ডিরেক্ট লিংক (Favicon Logo URL)</label>
+        <input type="url" id="faviconUrlInput" class="form-control" placeholder="https://example.com/logo.png">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="saveFaviconUrl()" style="margin-bottom:20px;">লোগো সেভ করুন</button>
+
+      <div class="form-group">
+        <label>এডভারটাইজমেন্ট কোড বা স্ক্রিপ্ট (Google AdSense/Adsterra/HTML Ad Script)</label>
+        <textarea id="adScriptInput" class="form-control" rows="5" placeholder="<script>...</script> বা এড কোড এখানে বসান..."></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAdScript()">এড স্ক্রিপ্ট সেভ করুন</button>
+    </div>
+  </div>
+
+  <!-- ৪. উক্তি ম্যানেজার -->
   <div class="tab-content" id="tab-quotes">
     <div class="data-card">
       <h3>নতুন উক্তি যোগ করুন</h3>
@@ -206,12 +225,10 @@
     </div>
   </div>
 
-  <!-- ৪. APK লিংক ম্যানেজার -->
+  <!-- ৫. APK লিংক ম্যানেজার -->
   <div class="tab-content" id="tab-apk">
     <div class="data-card">
       <h3>📦 অ্যান্ড্রয়েড অ্যাপ (APK) ডাউনলোড লিংক</h3>
-      <p style="color:var(--muted); font-size:13.5px;">এখানে আপনার APK ফাইলের ডিরেক্ট লিংক (যেমন Google Drive / MediaFire / Firebase Link) বসিয়ে সেভ করুন।</p>
-      
       <div class="form-group">
         <label>APK ফাইল ডাউনলোড লিংক</label>
         <input type="url" id="apkUrlInput" class="form-control" placeholder="https://drive.google.com/uc?export=download&id=...">
@@ -220,15 +237,14 @@
     </div>
   </div>
 
-  <!-- ৫. AI এজেন্ট সেটআপ -->
+  <!-- ৬. AI এজেন্ট সেটআপ -->
   <div class="tab-content" id="tab-ai">
     <div class="data-card">
       <h3>🤖 AI এজেন্ট কনফিগারেশন</h3>
-      
       <div class="switch-row">
         <div>
           <strong style="font-size:15px;">AI চ্যাটবট সক্রিয় রাখুন</strong>
-          <div style="font-size:12.5px; color:var(--muted);">অন থাকলে গ্লোবাল চ্যাটে মেসেজ দিলে AI উত্তর পাঠাবে।</div>
+          <div style="font-size:12.5px; color:var(--muted);">অন থাকলে AI উত্তর পাঠাবে।</div>
         </div>
         <label class="switch">
           <input type="checkbox" id="aiEnabledToggle">
@@ -237,7 +253,7 @@
       </div>
 
       <div class="form-group">
-        <label>API Endpoint URL (Groq / OpenRouter / Ollama)</label>
+        <label>API Endpoint URL</label>
         <input type="text" id="aiEndpointInput" class="form-control" placeholder="https://api.groq.com/openai/v1/chat/completions">
       </div>
       <div class="form-group">
@@ -257,7 +273,7 @@
     </div>
   </div>
 
-  <!-- ৬. ডেভেলপমেন্ট তথ্যাদি -->
+  <!-- ৭. ডেভেলপমেন্ট তথ্যাদি -->
   <div class="tab-content" id="tab-dev">
     <div class="data-card">
       <h3>ডেভেলপার ইনফরমেশন ও সোশ্যাল লিংক</h3>
@@ -278,18 +294,6 @@
         <input type="url" id="devWaInput" class="form-control" placeholder="https://wa.me/8801700000000">
       </div>
       <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveDevSettings()">ডেভেলপার তথ্য সেভ করুন</button>
-    </div>
-  </div>
-
-  <!-- ৭. চ্যাট মডারেশন -->
-  <div class="tab-content" id="tab-chat">
-    <div class="data-card">
-      <h3>গ্লোবাল ও কমিউনিটি চ্যাট মডারেশন</h3>
-      <div style="display:flex; gap:10px; margin-bottom:14px;">
-        <button type="button" class="btn btn-secondary" onclick="loadModChat('global')">গ্লোবাল চ্যাট</button>
-        <button type="button" class="btn btn-secondary" onclick="loadModChat('community')">পাবলিক কমিউনিটি চ্যাট</button>
-      </div>
-      <div id="chatListContainer"></div>
     </div>
   </div>
 
@@ -339,7 +343,7 @@
       return;
     }
 
-    // সাপোর্ট ইউজারস
+    // সাপোর্ট চ্যাট
     db.ref("chatRooms/support").on("value", snap => {
       const supports = snap.val() || {};
       const container = document.getElementById("supportUserList");
@@ -399,12 +403,20 @@
       });
     });
 
-    // APK URL
+    // Favicon & Ads
+    db.ref("settings/app/faviconUrl").on("value", snap => {
+      document.getElementById("faviconUrlInput").value = snap.val() || "";
+    });
+    db.ref("settings/app/adScript").on("value", snap => {
+      document.getElementById("adScriptInput").value = snap.val() || "";
+    });
+
+    // APK
     db.ref("settings/app/apkUrl").on("value", snap => {
       document.getElementById("apkUrlInput").value = snap.val() || "";
     });
 
-    // AI সেটিংস
+    // AI
     db.ref("settings/ai").on("value", snap => {
       const c = snap.val() || {};
       document.getElementById("aiEnabledToggle").checked = c.enabled || false;
@@ -422,8 +434,6 @@
       document.getElementById("devFbInput").value = d.facebook || "";
       document.getElementById("devWaInput").value = d.whatsapp || "";
     });
-
-    loadModChat("global");
   }
 
   function selectSupportUser(uid, name) {
@@ -529,6 +539,16 @@
     selectSupportUser(uid, name);
   }
 
+  function saveFaviconUrl() {
+    const url = document.getElementById("faviconUrlInput").value.trim();
+    db.ref("settings/app/faviconUrl").set(url).then(() => alert("✅ ফেভিকন লোগো লিংক সেভ হয়েছে!"));
+  }
+
+  function saveAdScript() {
+    const script = document.getElementById("adScriptInput").value.trim();
+    db.ref("settings/app/adScript").set(script).then(() => alert("✅ এডভারটাইজমেন্ট স্ক্রিপ্ট সেভ হয়েছে!"));
+  }
+
   function saveApkUrl() {
     const url = document.getElementById("apkUrlInput").value.trim();
     db.ref("settings/app/apkUrl").set(url).then(() => alert("✅ APK ডাউনলোড লিংক সেভ হয়েছে!"));
@@ -566,38 +586,6 @@
       systemPrompt: document.getElementById("aiSystemPromptInput").value.trim(),
       updatedAt: Date.now()
     }).then(() => alert("✅ AI সেটিংস সেভ হয়েছে!"));
-  }
-
-  function loadModChat(room) {
-    db.ref(`chatRooms/${room}/messages`).limitToLast(30).on("value", snap => {
-      const msgs = snap.val() || {};
-      const container = document.getElementById("chatListContainer");
-      container.innerHTML = `<h4 style="margin-bottom:10px; color:var(--primary);">${room === 'global' ? 'গ্লোবাল আড্ডা' : 'পাবলিক কমিউনিটি চ্যাট'}</h4>`;
-      const keys = Object.keys(msgs);
-
-      if (keys.length === 0) {
-        container.innerHTML += `<div class="empty-state">কোন মেসেজ নেই</div>`;
-        return;
-      }
-
-      keys.reverse().forEach(id => {
-        const m = msgs[id];
-        const div = document.createElement("div");
-        div.style.cssText = "background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:10px 14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;";
-        div.innerHTML = `
-          <div>
-            <strong>${escapeHtml(m.name || 'User')}</strong>
-            <div style="font-size:13px; color:var(--muted);">${escapeHtml(m.text)}</div>
-          </div>
-          <button type="button" class="btn btn-danger" onclick="deleteChatMsg('${room}', '${id}')">মুছুন</button>
-        `;
-        container.appendChild(div);
-      });
-    });
-  }
-
-  function deleteChatMsg(room, msgId) {
-    if (confirm("মেসেজটি ডিলিট করতে চান?")) db.ref(`chatRooms/${room}/messages/${msgId}`).remove();
   }
 
   function escapeHtml(str) {
