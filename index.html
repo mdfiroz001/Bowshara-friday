@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
 <meta name="theme-color" content="#FF6A1A">
 <meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি প্রিমিয়াম অ্যাপ।">
-<title>বউ ছাড়া কত তম শুক্রবার</title>
+<title>বউ ছাড়া কততম শুক্রবার</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -15,9 +15,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ==========================================================
-   DESIGN TOKENS & THEME VARIABLES
-   ========================================================== */
 :root{
   --orange-1:#FF9A4D; --orange-2:#FF7A29; --orange-3:#FF6A1A; --orange-deep:#E85A0C;
   --cream:#FFF6EC; --cream-2:#FFE9D6; --card:#FFFFFF; --card-2:#FFF1E2;
@@ -41,7 +38,7 @@ body{
 h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
 button, input, select{font-family:inherit;}
 
-/* PURE CSS ICONS (NO UNICODE/IMAGES) */
+/* PURE CSS ICONS */
 .css-ico-heart {
   display: inline-block; width: 10px; height: 10px; background: #FF4757;
   transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px;
@@ -165,7 +162,7 @@ button, input, select{font-family:inherit;}
   border-right: 2px solid currentColor; transform: rotate(45deg); vertical-align: middle;
 }
 
-/* MANDATORY REGISTRATION GATE */
+/* MANDATORY AUTH GATE OVERLAY */
 #authGateOverlay {
   position: fixed; inset: 0; z-index: 900;
   background: linear-gradient(160deg, #1D1814 0%, #12100E 100%);
@@ -178,17 +175,30 @@ button, input, select{font-family:inherit;}
   border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
 }
 .auth-gate-logo {
-  width: 60px; height: 64px; background: var(--card-2); border-radius: 18px; margin: 0 auto 12px;
+  width: 60px; height: 60px; background: var(--card-2); border-radius: 18px; margin: 0 auto 12px;
   display: flex; align-items: center; justify-content: center; border: 1px solid var(--line);
 }
 .auth-gate-title { font-size: 22px; font-weight: 800; color: var(--orange-3); margin-bottom: 4px; }
-.auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+
+/* AUTH GATE TABS (LOGIN / REGISTRATION / RESET) */
+.auth-tabs { display: flex; gap: 6px; margin-bottom: 16px; background: var(--cream-2); padding: 4px; border-radius: 99px; }
+.auth-tab-btn {
+  flex: 1; border: none; background: transparent; padding: 8px; border-radius: 99px;
+  font-size: 13px; font-weight: 700; color: var(--ink-soft); cursor: pointer; transition: all 0.2s;
+}
+.auth-tab-btn.active { background: var(--orange-3); color: #fff; }
 
 .form-field { margin-bottom: 10px; text-align: left; }
 .form-field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
 .form-field input {
   width: 100%; padding: 10px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
   background: var(--cream); color: var(--ink); font-size: 13.5px;
+}
+
+.auth-link-btn {
+  background: none; border: none; color: var(--orange-3); font-size: 12.5px; font-weight: 700;
+  cursor: pointer; margin-top: 10px; display: inline-block;
 }
 
 /* PRO SPLASH SCREEN */
@@ -348,7 +358,7 @@ button, input, select{font-family:inherit;}
 /* NAVIGATION BAR */
 .bottom-nav{
   position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto;
-  display:flex; padding:8px 10px calc(8px + var(--safe-bottom));
+  display:none; padding:8px 10px calc(8px + var(--safe-bottom));
   background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
   border-top:1px solid var(--line);
 }
@@ -391,48 +401,87 @@ button, input, select{font-family:inherit;}
     <circle cx="100" cy="145" r="6" fill="#2ED573"/>
     <circle cx="122" cy="145" r="6" fill="#FF6A1A"/>
   </svg>
-  <div class="splash-title">বউ ছাড়া কত তম শুক্রবার</div>
+  <div class="splash-title">বউ ছাড়া কততম শুক্রবার</div>
   <div class="splash-sub">ছুটির আনন্দময় মুহূর্তের প্রিমিয়াম ট্র্যাকার</div>
   <div class="splash-loader"><span></span></div>
 </div>
 
-<!-- MANDATORY REGISTRATION GATE (লক স্ক্রিন) -->
+<!-- MANDATORY AUTH GATE OVERLAY (LOGIN / REGISTRATION / PASSWORD RESET) -->
 <div id="authGateOverlay">
   <div class="auth-gate-card">
     <div class="auth-gate-logo"><span class="css-ico-lock"></span></div>
-    <div class="auth-gate-title">সাইন-ইন / রেজিস্ট্রেশন</div>
-    <div class="auth-gate-sub">অ্যাপটি ব্যবহার করতে প্রথমে অ্যাকাউন্ট তৈরি করুন</div>
-    
-    <div class="form-field">
-      <label>আপনার নাম *</label>
-      <input type="text" id="regNameInput" placeholder="যেমন: আব্দুর রহমান">
+    <div class="auth-gate-title" id="authGateTitle">সাইন-ইন করুন</div>
+    <div class="auth-gate-sub" id="authGateSub">অ্যাপটিতে প্রবেশ করতে একাউন্ট দিন</div>
+
+    <!-- Auth View Tabs -->
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab-btn active" id="btnAuthTabLogin" onclick="switchAuthView('login')">লগইন</button>
+      <button type="button" class="auth-tab-btn" id="btnAuthTabReg" onclick="switchAuthView('register')">রেজিস্ট্রেশন</button>
     </div>
 
-    <div class="form-field">
-      <label>ইমেইল এড্রেস *</label>
-      <input type="email" id="regEmailInput" placeholder="example@gmail.com">
+    <!-- 1. LOGIN VIEW -->
+    <div id="viewAuthLogin">
+      <div class="form-field">
+        <label>ইমেইল বা ফোন নম্বর *</label>
+        <input type="text" id="loginContactInput" placeholder="example@gmail.com বা 01700...">
+      </div>
+      <div class="form-field">
+        <label>পাসওয়ার্ড *</label>
+        <input type="password" id="loginPassInput" placeholder="••••••••">
+      </div>
+      <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitLogin()">লগইন করুন</button>
+      <br>
+      <button type="button" class="auth-link-btn" onclick="switchAuthView('reset')">পাসওয়ার্ড ভুলে গেছেন?</button>
     </div>
 
-    <div class="form-field">
-      <label>ফোন নম্বর *</label>
-      <input type="tel" id="regPhoneInput" placeholder="01700000000">
+    <!-- 2. REGISTRATION VIEW -->
+    <div id="viewAuthRegister" style="display:none;">
+      <div class="form-field">
+        <label>আপনার পূর্ণ নাম *</label>
+        <input type="text" id="regNameInput" placeholder="যেমন: আব্দুর রহমান">
+      </div>
+      <div class="form-field">
+        <label>ইমেইল এড্রেস *</label>
+        <input type="email" id="regEmailInput" placeholder="example@gmail.com">
+      </div>
+      <div class="form-field">
+        <label>ফোন নম্বর *</label>
+        <input type="tel" id="regPhoneInput" placeholder="01700000000">
+      </div>
+      <div class="form-field">
+        <label>জন্ম তারিখ নির্বাচন করুন *</label>
+        <input type="date" id="regDobInput">
+      </div>
+      <div class="form-field">
+        <label>পাসওয়ার্ড *</label>
+        <input type="password" id="regPassInput" placeholder="••••••••">
+      </div>
+      <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">রেজিস্ট্রেশন করুন</button>
     </div>
 
-    <div class="form-field">
-      <label>জন্ম তারিখ নির্বাচন করুন *</label>
-      <input type="date" id="regDobInput">
+    <!-- 3. RESET PASSWORD VIEW -->
+    <div id="viewAuthReset" style="display:none;">
+      <div class="form-field">
+        <label>ইমেইল বা ফোন নম্বর *</label>
+        <input type="text" id="resetContactInput" placeholder="নিবন্ধিত ইমেইল/ফোন">
+      </div>
+      <div class="form-field">
+        <label>জন্ম তারিখ (যাচাইকরণের জন্য) *</label>
+        <input type="date" id="resetDobInput">
+      </div>
+      <div class="form-field">
+        <label>নতুন পাসওয়ার্ড *</label>
+        <input type="password" id="resetNewPassInput" placeholder="নতুন পাসওয়ার্ড দিন">
+      </div>
+      <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitPasswordReset()">পাসওয়ার্ড রিসেট করুন</button>
+      <br>
+      <button type="button" class="auth-link-btn" onclick="switchAuthView('login')">লগইন পেজে ফিরে যান</button>
     </div>
 
-    <div class="form-field">
-      <label>পাসওয়ার্ড *</label>
-      <input type="password" id="regPassInput" placeholder="••••••••">
-    </div>
-
-    <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">প্রবেশ করুন / রেজিস্ট্রেশন করুন</button>
   </div>
 </div>
 
-<!-- MAIN APP (UNLOCKED AFTER REGISTRATION) -->
+<!-- MAIN APP (UNLOCKED AFTER LOGIN/REGISTRATION) -->
 <div id="app">
 
   <!-- ================= HOME PAGE ================= -->
@@ -547,7 +596,6 @@ button, input, select{font-family:inherit;}
 
         <div style="text-align:center; margin-bottom:16px;">
           <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">ব্যবহারকারী</h3>
-          <div id="profileContactDisplay" style="font-size:12.5px; color:var(--muted); margin-top:2px;">-</div>
           <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:6px;" onclick="editProfileNameOnly()"><span class="css-ico-pencil"></span> নাম পরিবর্তন করুন</button>
         </div>
 
@@ -680,14 +728,14 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-// Splash Hide Protection
+// Splash Hide
 function hideSplash() {
   const splash = document.getElementById("splash");
   if(splash) splash.classList.add("hide");
 }
 setTimeout(hideSplash, 800);
 
-// Mandatory Identity Check
+// Identity Check
 let myUid = localStorage.getItem("bcf_my_uid");
 if(!myUid) {
   myUid = "usr_" + Math.random().toString(36).substring(2, 9);
@@ -720,6 +768,85 @@ function checkAuthGate() {
   }
 }
 
+// Switch Auth Gate Views (Login / Register / Reset)
+function switchAuthView(viewName) {
+  document.getElementById("viewAuthLogin").style.display = (viewName === 'login') ? 'block' : 'none';
+  document.getElementById("viewAuthRegister").style.display = (viewName === 'register') ? 'block' : 'none';
+  document.getElementById("viewAuthReset").style.display = (viewName === 'reset') ? 'block' : 'none';
+
+  document.getElementById("btnAuthTabLogin").classList.toggle("active", viewName === 'login');
+  document.getElementById("btnAuthTabReg").classList.toggle("active", viewName === 'register');
+
+  const title = document.getElementById("authGateTitle");
+  const sub = document.getElementById("authGateSub");
+  
+  if(viewName === 'login') {
+    title.textContent = "সাইন-ইন করুন";
+    sub.textContent = "আপনার অ্যাকাউন্টে লগইন করুন";
+  } else if(viewName === 'register') {
+    title.textContent = "নতুন রেজিস্ট্রেশন";
+    sub.textContent = "সঠিক তথ্য দিয়ে একাউন্ট তৈরি করুন";
+  } else {
+    title.textContent = "পাসওয়ার্ড রিসেট";
+    sub.textContent = "তথ্য দিয়ে পাসওয়ার্ড পুনরুদ্ধার করুন";
+  }
+}
+
+// 1. SUBMIT LOGIN
+function submitLogin() {
+  const contact = document.getElementById("loginContactInput").value.trim();
+  const pass = document.getElementById("loginPassInput").value;
+
+  if(!contact) return showToast("ইমেইল বা ফোন নম্বর লিখুন!");
+  if(!pass) return showToast("পাসওয়ার্ড দিন!");
+
+  showToast("যাচাই করা হচ্ছে...");
+
+  if(typeof db !== "undefined" && db) {
+    db.ref("users").once("value", snap => {
+      const users = snap.val() || {};
+      let matchedUid = null;
+      let matchedUser = null;
+
+      Object.keys(users).forEach(uid => {
+        const u = users[uid];
+        if((u.email === contact || u.phone === contact || (u.contact && u.contact.includes(contact))) && u.pass === pass) {
+          matchedUid = uid;
+          matchedUser = u;
+        }
+      });
+
+      if(matchedUser && matchedUid) {
+        myUid = matchedUid;
+        userAccount = matchedUser;
+        myName = matchedUser.name;
+        localStorage.setItem("bcf_my_uid", myUid);
+        localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
+        localStorage.setItem("bcf_my_name", myName);
+
+        showToast("লগইন সফল হয়েছে!");
+        checkAuthGate();
+      } else {
+        showToast("ইমেইল/ফোন অথবা পাসওয়ার্ড সঠিক নয়!");
+      }
+    }).catch(err => {
+      showToast("লগইন সমস্যা: " + err.message);
+    });
+  } else {
+    // Local fallback check
+    const localUser = JSON.parse(localStorage.getItem("bcf_user_account") || "null");
+    if(localUser && (localUser.email === contact || localUser.phone === contact) && localUser.pass === pass) {
+      userAccount = localUser;
+      myName = localUser.name;
+      showToast("লগইন সফল হয়েছে!");
+      checkAuthGate();
+    } else {
+      showToast("লগইন তথ্য মেলেনি!");
+    }
+  }
+}
+
+// 2. SUBMIT REGISTRATION
 function submitRegistration() {
   const name = document.getElementById("regNameInput").value.trim();
   const email = document.getElementById("regEmailInput").value.trim();
@@ -752,12 +879,60 @@ function submitRegistration() {
     if(typeof db !== "undefined" && db) {
       db.ref(`users/${myUid}`).set(userAccount);
     }
-  } catch(err) {
-    console.log(err);
-  }
+  } catch(err) { console.log(err); }
 
   showToast("রেজিস্ট্রেশন সফল হয়েছে!");
   checkAuthGate();
+}
+
+// 3. SUBMIT PASSWORD RESET
+function submitPasswordReset() {
+  const contact = document.getElementById("resetContactInput").value.trim();
+  const dob = document.getElementById("resetDobInput").value;
+  const newPass = document.getElementById("resetNewPassInput").value;
+
+  if(!contact) return showToast("ইমেইল বা ফোন নম্বর দিন!");
+  if(!dob) return showToast("জন্ম তারিখ দিয়ে পরিচয় নিশ্চিত করুন!");
+  if(!newPass || newPass.length < 4) return showToast("নতুন পাসওয়ার্ড অন্তত ৪ অক্ষরের দিন!");
+
+  showToast("যাচাই করা হচ্ছে...");
+
+  if(typeof db !== "undefined" && db) {
+    db.ref("users").once("value", snap => {
+      const users = snap.val() || {};
+      let matchedUid = null;
+
+      Object.keys(users).forEach(uid => {
+        const u = users[uid];
+        if((u.email === contact || u.phone === contact || (u.contact && u.contact.includes(contact))) && u.dob === dob) {
+          matchedUid = uid;
+        }
+      });
+
+      if(matchedUid) {
+        db.ref(`users/${matchedUid}/pass`).set(newPass).then(() => {
+          showToast("পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে! এখন লগইন করুন।");
+          
+          if(userAccount && userAccount.uid === matchedUid) {
+            userAccount.pass = newPass;
+            localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
+          }
+          
+          document.getElementById("loginContactInput").value = contact;
+          document.getElementById("loginPassInput").value = "";
+          switchAuthView("login");
+        }).catch(err => {
+          showToast("রিসেট ত্রুটি: " + err.message);
+        });
+      } else {
+        showToast("তথ্য মিলেনি! সঠিক ইমেইল/ফোন ও জন্ম তারিখ দিন।");
+      }
+    }).catch(err => {
+      showToast("ডাটাবেস ত্রুটি: " + err.message);
+    });
+  } else {
+    showToast("ডাটাবেস কানেকশন প্রয়োজন!");
+  }
 }
 
 function editProfileNameOnly() {
