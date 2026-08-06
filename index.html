@@ -41,37 +41,154 @@ body{
 h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
 button, input, select{font-family:inherit;}
 
-/* PURE CSS LOVE HEART EMOJI */
-.css-emoji-heart {
+/* ==========================================================
+   PURE CSS ICONS & SHAPES (NO UNICODE / NO EMOJI IMAGES)
+   ========================================================== */
+
+/* 1. Pure CSS Heart (Love) */
+.css-ico-heart {
   display: inline-block; width: 10px; height: 10px; background: #FF4757;
   transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px;
   vertical-align: middle;
 }
-.css-emoji-heart::before, .css-emoji-heart::after {
+.css-ico-heart::before, .css-ico-heart::after {
   content: ""; width: 10px; height: 10px; background: #FF4757;
   border-radius: 50%; position: absolute;
 }
-.css-emoji-heart::before { top: -5px; left: 0; }
-.css-emoji-heart::after { left: 5px; top: 0; }
+.css-ico-heart::before { top: -5px; left: 0; }
+.css-ico-heart::after { left: 5px; top: 0; }
 
-.css-emoji-star {
-  width: 0; height: 0; margin: 2px 5px 0 2px; color: #FF9A4D;
+/* 2. Pure CSS Star (Bookmark/Save) */
+.css-ico-star {
+  width: 0; height: 0; margin: 2px 6px 0 2px; color: #FF9A4D;
   border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
   transform: rotate(35deg); display: inline-block; position: relative; vertical-align: middle;
 }
-.css-emoji-star::before {
+.css-ico-star::before {
   content: ""; border-bottom: 4px solid #FF9A4D; border-left: 2px solid transparent; border-right: 2px solid transparent;
   position: absolute; height: 0; width: 0; top: -2.5px; left: -3px; transform: rotate(-35deg);
 }
-.css-emoji-star::after {
+.css-ico-star::after {
   content: ""; position: absolute; color: #FF9A4D; top: 0.5px; left: -5px; width: 0; height: 0;
   border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
   transform: rotate(-70deg);
 }
 
-/* ==========================================================
-   MANDATORY REGISTRATION GATE (লক স্ক্রিন)
-   ========================================================== */
+/* 3. Pure CSS Sun (Theme) */
+.css-ico-sun {
+  display: inline-block; width: 14px; height: 14px; background: #FFD166; border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255,209,102,0.3); vertical-align: middle;
+}
+
+/* 4. Pure CSS Clock */
+.css-ico-clock {
+  display: inline-block; width: 14px; height: 14px; border: 2px solid var(--orange-3);
+  border-radius: 50%; position: relative; vertical-align: middle; margin-right: 6px;
+}
+.css-ico-clock::before {
+  content:""; position: absolute; top: 2px; left: 4px; width: 2px; height: 5px; background: var(--orange-3);
+}
+.css-ico-clock::after {
+  content:""; position: absolute; top: 5px; left: 4px; width: 4px; height: 2px; background: var(--orange-3);
+}
+
+/* 5. Pure CSS Lock */
+.css-ico-lock {
+  display: inline-block; width: 20px; height: 16px; background: var(--orange-3); border-radius: 4px;
+  position: relative; margin-bottom: 10px; vertical-align: middle;
+}
+.css-ico-lock::before {
+  content: ""; position: absolute; top: -9px; left: 3px; width: 10px; height: 9px;
+  border: 3px solid var(--orange-3); border-bottom: none; border-radius: 8px 8px 0 0;
+}
+
+/* 6. Pure CSS Download */
+.css-ico-download {
+  display: inline-block; width: 12px; height: 12px; border-bottom: 2px solid currentColor;
+  position: relative; margin-right: 8px; vertical-align: middle;
+}
+.css-ico-download::before {
+  content: ""; position: absolute; top: 0; left: 5px; width: 2px; height: 8px; background: currentColor;
+}
+.css-ico-download::after {
+  content: ""; position: absolute; top: 4px; left: 3px; width: 4px; height: 4px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg);
+}
+
+/* 7. Pure CSS Logout */
+.css-ico-logout {
+  display: inline-block; width: 12px; height: 12px; border: 2px solid currentColor; border-right: none;
+  position: relative; margin-right: 8px; vertical-align: middle;
+}
+.css-ico-logout::before {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 7px; height: 2px; background: currentColor;
+}
+.css-ico-logout::after {
+  content: ""; position: absolute; top: 2px; right: -4px; width: 4px; height: 4px;
+  border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg);
+}
+
+/* 8. Pure CSS Pencil (Edit) */
+.css-ico-pencil {
+  display: inline-block; width: 10px; height: 3px; background: currentColor;
+  transform: rotate(-45deg); position: relative; margin-right: 6px; vertical-align: middle;
+}
+.css-ico-pencil::before {
+  content: ""; position: absolute; left: -3px; top: 0; width: 0; height: 0;
+  border-right: 3px solid currentColor; border-top: 1.5px solid transparent; border-bottom: 1.5px solid transparent;
+}
+
+/* 9. Pure CSS Checkmark */
+.css-ico-check {
+  display: inline-block; width: 9px; height: 5px; border-left: 2px solid #2ED573;
+  border-bottom: 2px solid #2ED573; transform: rotate(-45deg); margin-left: 4px; vertical-align: middle;
+}
+
+/* 10. Pure CSS Flame (Fire) */
+.css-ico-fire {
+  display: inline-block; width: 10px; height: 12px; background: #FF4757;
+  border-radius: 50% 50% 20% 50% / 50% 50% 50% 50%; transform: rotate(-45deg);
+  box-shadow: inset -2px -2px 0 #FFD166; margin-left: 4px; vertical-align: middle;
+}
+
+/* 11. Pure CSS Speech Bubble (Chat) */
+.css-ico-chat {
+  display: inline-block; width: 12px; height: 10px; background: currentColor; border-radius: 3px;
+  position: relative; margin-right: 6px; vertical-align: middle;
+}
+.css-ico-chat::before {
+  content: ""; position: absolute; bottom: -3px; left: 3px; width: 0; height: 0;
+  border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 4px solid currentColor;
+}
+
+/* 12. Pure CSS Users */
+.css-ico-users {
+  display: inline-block; width: 7px; height: 7px; background: currentColor; border-radius: 50%;
+  position: relative; margin-right: 10px; vertical-align: middle;
+}
+.css-ico-users::before {
+  content: ""; position: absolute; top: 1px; left: 6px; width: 6px; height: 6px;
+  background: currentColor; border-radius: 50%; opacity: 0.7;
+}
+
+/* 13. Pure CSS Headset (Support) */
+.css-ico-headset {
+  display: inline-block; width: 12px; height: 9px; border: 2px solid currentColor;
+  border-bottom: none; border-radius: 8px 8px 0 0; position: relative; margin-right: 6px; vertical-align: middle;
+}
+.css-ico-headset::before, .css-ico-headset::after {
+  content: ""; position: absolute; bottom: -2px; width: 3px; height: 5px; background: currentColor; border-radius: 1px;
+}
+.css-ico-headset::before { left: -2px; }
+.css-ico-headset::after { right: -2px; }
+
+/* 14. Pure CSS Arrow Right */
+.css-ico-arrow-right {
+  display: inline-block; width: 6px; height: 6px; border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor; transform: rotate(45deg); vertical-align: middle;
+}
+
+/* MANDATORY REGISTRATION GATE (লক স্ক্রিন) */
 #authGateOverlay {
   position: fixed; inset: 0; z-index: 900;
   background: linear-gradient(160deg, #1D1814 0%, #12100E 100%);
@@ -80,22 +197,21 @@ button, input, select{font-family:inherit;}
 #authGateOverlay.hide { display: none; }
 
 .auth-gate-card {
-  background: var(--card); border-radius: var(--radius-lg); padding: 26px 20px; width: 100%; max-width: 380px;
+  background: var(--card); border-radius: var(--radius-lg); padding: 24px 20px; width: 100%; max-width: 380px;
   border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
 }
 .auth-gate-logo {
-  width: 64px; height: 64px; background: var(--orange-3); border-radius: 20px; margin: 0 auto 12px;
-  display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff;
-  box-shadow: 0 10px 20px rgba(255,106,26,0.3);
+  width: 60px; height: 64px; background: var(--card-2); border-radius: 18px; margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center; border: 1px solid var(--line);
 }
 .auth-gate-title { font-size: 22px; font-weight: 800; color: var(--orange-3); margin-bottom: 4px; }
-.auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
 
-.form-field { margin-bottom: 12px; text-align: left; }
-.form-field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+.form-field { margin-bottom: 10px; text-align: left; }
+.form-field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
 .form-field input {
-  width: 100%; padding: 11px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
-  background: var(--cream); color: var(--ink); font-size: 14px;
+  width: 100%; padding: 10px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
+  background: var(--cream); color: var(--ink); font-size: 13.5px;
 }
 
 /* PRO SPLASH SCREEN */
@@ -130,7 +246,7 @@ button, input, select{font-family:inherit;}
 }
 .header-row{display:flex; align-items:center; justify-content:space-between;}
 .header-date{font-size:14px; opacity:.92;}
-.theme-btn{width:36px;height:36px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); color:#fff; cursor:pointer;}
+.theme-btn{width:36px;height:36px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;}
 .header-time{font-family:'Baloo Da 2',sans-serif; font-size:42px; font-weight:800; text-align:center; margin:4px 0;}
 .app-name{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; text-align:center;}
 
@@ -152,35 +268,44 @@ button, input, select{font-family:inherit;}
 .stat-lbl{font-size:12px; color:var(--muted);}
 
 /* COUNTDOWN */
-.section-title{display:flex; align-items:center; justify-content:center; gap:8px; font-weight:700; font-size:15px; color:var(--ink);}
+.section-title{display:flex; align-items:center; justify-content:center; gap:6px; font-weight:700; font-size:15px; color:var(--ink);}
 .countdown-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px;}
 .cd-box{background:var(--card-2); border-radius:var(--radius-sm); text-align:center; padding:10px 4px;}
 .cd-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
 .cd-lbl{font-size:11px; color:var(--muted);}
 
-/* QUOTES CARD ITEM (একক কার্ড স্টাইল) */
-.quote-card-item {
-  background: var(--card); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 16px;
-  border: 1px solid var(--line); box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
+/* QUOTES CARD VIEW & TABS */
+.quote-sub-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.q-tab-btn {
+  flex: 1; padding: 8px 12px; border-radius: 99px; border: 1.5px solid var(--line);
+  background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 13px; cursor: pointer; text-align: center;
 }
-.quote-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.quote-badge { background: var(--card-2); color: var(--orange-3); font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); }
-.quote-text-body { font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 14px; min-height: 50px; }
+.q-tab-btn.active { background: var(--orange-3); color: #fff; border-color: var(--orange-3); }
 
-/* REACTION BAR - ONLY LOVE, SAVE, SHARE */
-.quote-action-bar { display: flex; gap: 8px; border-top: 1px solid var(--line); padding-top: 12px; }
+.quote-card-item {
+  background: var(--card); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: var(--shadow-soft);
+}
+.quote-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.quote-badge { background: var(--card-2); color: var(--orange-3); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); }
+.quote-text-body { font-size: 15.5px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 12px; min-height: 48px; }
+
+/* REACTION BAR - ONLY LOVE, SAVE, SHARE CARD */
+.quote-action-bar { display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px; }
 .qa-btn-love {
   flex: 1; background: #FFE8EC; color: #FF4757; border: 1px solid rgba(255,71,87,0.2); border-radius: 99px;
-  padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  padding: 7px 10px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
+.qa-btn-love.liked { background: #FF4757; color: #fff; }
+
 .qa-btn-fav {
   background: var(--card-2); color: var(--ink-soft); border: 1px solid var(--line); border-radius: 99px;
-  padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  padding: 7px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
 .qa-btn-fav.active { background: #FFF3E0; color: var(--orange-3); border-color: var(--orange-3); }
 .qa-btn-share {
   background: var(--orange-3); color: #fff; border: none; border-radius: 99px;
-  padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  padding: 7px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
 
 /* CHAT ROOMS */
@@ -209,12 +334,25 @@ button, input, select{font-family:inherit;}
   border: 1px solid var(--line); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 .chat-input-bar input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 16px; background: var(--cream); color: var(--ink); font-size: 14px; }
-.chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; font-size: 16px; flex-shrink: 0; }
+.chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
 /* PROFILE & SETTINGS */
 .profile-avatar-wrap { text-align: center; margin-bottom: 14px; }
 .avatar-img { width: 84px; height: 84px; border-radius: 50%; border: 3px solid var(--orange-2); box-shadow: var(--shadow-soft); object-fit: cover; }
-.badge-status { display: inline-block; background: var(--card-2); color: var(--orange-3); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--line); margin-top: 6px; }
+.badge-status { display: inline-flex; align-items: center; gap: 4px; background: var(--card-2); color: var(--orange-3); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--line); margin-top: 6px; }
+
+.btn-apk-download {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+  background: linear-gradient(135deg, #2ED573, #1eAC52); color: #fff; border: none;
+  padding: 12px; border-radius: var(--radius-md); font-weight: 700; font-size: 14px;
+  cursor: pointer; margin-top: 14px; box-shadow: 0 6px 16px rgba(46,213,115,0.25);
+}
+
+.btn-logout {
+  width: 100%; background: transparent; border: 1.5px solid var(--danger); color: var(--danger);
+  padding: 10px; border-radius: var(--radius-md); font-weight: 700; font-size: 13.5px;
+  cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
 
 .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .settings-row:last-child { border-bottom: none; }
@@ -284,7 +422,7 @@ button, input, select{font-family:inherit;}
 <!-- MANDATORY REGISTRATION GATE (লক স্ক্রিন) -->
 <div id="authGateOverlay">
   <div class="auth-gate-card">
-    <div class="auth-gate-logo">🔐</div>
+    <div class="auth-gate-logo"><span class="css-ico-lock"></span></div>
     <div class="auth-gate-title">সাইন-ইন / রেজিস্ট্রেশন</div>
     <div class="auth-gate-sub">অ্যাপটি ব্যবহার করতে প্রথমে অ্যাকাউন্ট তৈরি করুন</div>
     
@@ -294,8 +432,13 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="form-field">
-      <label>জিমেইল বা ফোন নম্বর *</label>
-      <input type="text" id="regContactInput" placeholder="you@gmail.com অথবা 01700...">
+      <label>ইমেইল এড্রেস *</label>
+      <input type="email" id="regEmailInput" placeholder="example@gmail.com">
+    </div>
+
+    <div class="form-field">
+      <label>ফোন নম্বর *</label>
+      <input type="tel" id="regPhoneInput" placeholder="01700000000">
     </div>
 
     <div class="form-field">
@@ -320,7 +463,7 @@ button, input, select{font-family:inherit;}
     <div class="top-header">
       <div class="header-row">
         <div class="header-date" id="liveDate">লোড হচ্ছে...</div>
-        <button type="button" class="theme-btn" id="quickThemeBtn">☀️</button>
+        <button type="button" class="theme-btn" id="quickThemeBtn"><span class="css-ico-sun"></span></button>
       </div>
       <div class="header-time" id="liveTime">--:--:--</div>
       <div class="app-name">বউ ছাড়া কততম শুক্রবার</div>
@@ -340,7 +483,7 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="card">
-      <div class="section-title">⏱️ পরবর্তী শুক্রবারের কাউন্টডাউন</div>
+      <div class="section-title"><span class="css-ico-clock"></span> পরবর্তী শুক্রবারের কাউন্টডাউন</div>
       <div class="countdown-grid">
         <div class="cd-box"><div class="cd-num" id="cdDays">০০</div><div class="cd-lbl">দিন</div></div>
         <div class="cd-box"><div class="cd-num" id="cdHours">০০</div><div class="cd-lbl">ঘণ্টা</div></div>
@@ -371,12 +514,21 @@ button, input, select{font-family:inherit;}
     </div>
   </section>
 
-  <!-- ================= QUOTES PAGE (একক কার্ড ভিউ) ================= -->
+  <!-- ================= QUOTES PAGE ================= -->
   <section class="page" id="page-quotes">
     <div class="top-header">
-      <div class="app-name" style="font-size:18px;">মজার উক্তি সংগ্রহ</div>
+      <div class="app-name" style="font-size:18px;">মজার উক্তি কার্ডস</div>
     </div>
-    <div style="padding:14px;" id="quoteFeed"></div>
+    
+    <div style="padding:14px;">
+      <!-- Quote Sub Filter Tabs -->
+      <div class="quote-sub-tabs">
+        <button type="button" class="q-tab-btn active" id="btnQuoteAll" onclick="switchQuoteTab('all')">সকল উক্তি</button>
+        <button type="button" class="q-tab-btn" id="btnQuoteSaved" onclick="switchQuoteTab('saved')"><span class="css-ico-star"></span> সেভ করা উক্তি</button>
+      </div>
+
+      <div id="quoteFeed"></div>
+    </div>
   </section>
 
   <!-- ================= CHAT ROOM PAGE ================= -->
@@ -387,9 +539,9 @@ button, input, select{font-family:inherit;}
 
     <!-- 3 Chat Mode Tabs -->
     <div class="chat-tabs">
-      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')">💬 গ্লোবাল আড্ডা (AI)</button>
-      <button type="button" class="chat-tab-btn" id="btnTabCommunityChat" onclick="switchChatRoom('community')">👥 পাবলিক গ্রুপ</button>
-      <button type="button" class="chat-tab-btn" id="btnTabSupportChat" onclick="switchChatRoom('support')">🎧 সাপোর্ট চ্যাট</button>
+      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')"><span class="css-ico-chat"></span> গ্লোবাল আড্ডা (AI)</button>
+      <button type="button" class="chat-tab-btn" id="btnTabCommunityChat" onclick="switchChatRoom('community')"><span class="css-ico-users"></span> পাবলিক গ্রুপ</button>
+      <button type="button" class="chat-tab-btn" id="btnTabSupportChat" onclick="switchChatRoom('support')"><span class="css-ico-headset"></span> সাপোর্ট চ্যাট</button>
     </div>
 
     <!-- Live Messages Box -->
@@ -398,7 +550,7 @@ button, input, select{font-family:inherit;}
     <!-- Send Bar -->
     <div class="chat-input-bar">
       <input type="text" id="chatInput" placeholder="মেসেজ লিখুন..." maxlength="400">
-      <button type="button" class="chat-send" onclick="sendChatMessage()">➔</button>
+      <button type="button" class="chat-send" onclick="sendChatMessage()"><span class="css-ico-arrow-right"></span></button>
     </div>
   </section>
 
@@ -413,29 +565,43 @@ button, input, select{font-family:inherit;}
         <div class="profile-avatar-wrap">
           <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Bachelor" id="userAvatarImg" class="avatar-img" alt="Avatar">
           <br>
-          <span class="badge-status" id="userBadgeStatus">প্রমাণিত সদস্য ✅</span>
+          <span class="badge-status" id="userBadgeStatus">প্রমাণিত সদস্য <span class="css-ico-check"></span></span>
         </div>
 
         <div style="text-align:center; margin-bottom:16px;">
-          <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">অতিথি ব্যবহারকারী</h3>
-          <div id="profileContactDisplay" style="font-size:13px; color:var(--muted); margin-top:2px;">-</div>
-          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:8px;" onclick="reEditProfile()">✏️ তথ্য সংশোধন / নতুন একাউন্ট</button>
+          <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">ব্যবহারকারী</h3>
+          <div id="profileContactDisplay" style="font-size:12.5px; color:var(--muted); margin-top:2px;">-</div>
+          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:6px;" onclick="editProfileNameOnly()"><span class="css-ico-pencil"></span> নাম পরিবর্তন করুন</button>
         </div>
 
         <div style="border-top:1px solid var(--line); padding-top:12px;">
-          <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
+          <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:13.5px;">
+            <span style="color:var(--muted);">ইমেইল:</span>
+            <strong id="profileEmailDisplay">-</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:13.5px;">
+            <span style="color:var(--muted);">ফোন নম্বর:</span>
+            <strong id="profilePhoneDisplay">-</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:13.5px;">
             <span style="color:var(--muted);">জন্ম তারিখ:</span>
             <strong id="profileDobDisplay">সেট করা হয়নি</strong>
           </div>
-          <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
+          <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:13.5px;">
             <span style="color:var(--muted);">শুরুর তারিখ:</span>
             <strong id="profileStartDate">সেট করা হয়নি</strong>
           </div>
-          <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
-            <span style="color:var(--muted);">মোট পার হওয়া শুক্রবার:</span>
-            <strong id="profileFridayCount">০টি</strong>
-          </div>
         </div>
+
+        <!-- APK App Download Button -->
+        <button type="button" class="btn-apk-download" id="btnDownloadApk" onclick="downloadAppApk()">
+          <span class="css-ico-download"></span> অ্যান্ড্রয়েড অ্যাপ (APK) ডাউনলোড করুন
+        </button>
+
+        <!-- Logout Button -->
+        <button type="button" class="btn-logout" onclick="logoutUser()">
+          <span class="css-ico-logout"></span> অ্যাকাউন্ট থেকে লগআউট করুন
+        </button>
       </div>
     </div>
   </section>
@@ -528,7 +694,7 @@ function pad2(n){ return n < 10 ? "0"+n : ""+n; }
 const bnWeekday = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 const bnMonth = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
-// Toast
+// Toast System
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById("toast");
@@ -548,7 +714,7 @@ let userAccount = JSON.parse(localStorage.getItem("bcf_user_account") || "null")
 let myName = userAccount ? userAccount.name : "";
 
 function checkAuthGate() {
-  if(userAccount && userAccount.name && userAccount.contact) {
+  if(userAccount && userAccount.name && (userAccount.email || userAccount.phone)) {
     document.getElementById("authGateOverlay").classList.add("hide");
     document.getElementById("app").style.display = "block";
     document.querySelector(".bottom-nav").style.display = "flex";
@@ -562,19 +728,23 @@ function checkAuthGate() {
 
 function submitRegistration() {
   const name = document.getElementById("regNameInput").value.trim();
-  const contact = document.getElementById("regContactInput").value.trim();
+  const email = document.getElementById("regEmailInput").value.trim();
+  const phone = document.getElementById("regPhoneInput").value.trim();
   const dob = document.getElementById("regDobInput").value;
   const pass = document.getElementById("regPassInput").value;
 
   if(!name) return showToast("আপনার নাম লিখুন!");
-  if(!contact) return showToast("জিমেইল বা ফোন নম্বর দিন!");
+  if(!email) return showToast("ইমেইল এড্রেস লিখুন!");
+  if(!phone) return showToast("ফোন নম্বর লিখুন!");
   if(!dob) return showToast("জন্ম তারিখ নির্বাচন করুন!");
   if(!pass || pass.length < 4) return showToast("পাসওয়ার্ড অন্তত ৪ অক্ষরের দিন!");
 
   userAccount = {
     uid: myUid,
     name: name,
-    contact: contact,
+    email: email,
+    phone: phone,
+    contact: `${email} | ${phone}`,
     dob: dob,
     pass: pass,
     updatedAt: Date.now()
@@ -588,24 +758,40 @@ function submitRegistration() {
     db.ref(`users/${myUid}`).set(userAccount);
   }
 
-  showToast("রেজিস্ট্রেশন সফল হয়েছে! 🎉");
+  showToast("রেজিস্ট্রেশন সফল হয়েছে!");
   checkAuthGate();
 }
 
-function reEditProfile() {
-  document.getElementById("authGateOverlay").classList.remove("hide");
-  if(userAccount) {
-    document.getElementById("regNameInput").value = userAccount.name || "";
-    document.getElementById("regContactInput").value = userAccount.contact || "";
-    document.getElementById("regDobInput").value = userAccount.dob || "";
-    document.getElementById("regPassInput").value = userAccount.pass || "";
+function editProfileNameOnly() {
+  const newName = prompt("আপনার নতুন নাম লিখুন:", myName);
+  if(newName && newName.trim()) {
+    myName = newName.trim();
+    userAccount.name = myName;
+    localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
+    localStorage.setItem("bcf_my_name", myName);
+    
+    if(typeof db !== "undefined") {
+      db.ref(`users/${myUid}/name`).set(myName);
+    }
+    updateProfileUI();
+    showToast("নাম পরিবর্তন করা হয়েছে!");
+  }
+}
+
+function logoutUser() {
+  if(confirm("আপনি কি অ্যাকাউন্ট থেকে লগআউট করতে চান?")) {
+    localStorage.removeItem("bcf_user_account");
+    userAccount = null;
+    myName = "";
+    checkAuthGate();
   }
 }
 
 function updateProfileUI() {
   if(!userAccount) return;
   document.getElementById("profileNameDisplay").textContent = userAccount.name || "ব্যবহারকারী";
-  document.getElementById("profileContactDisplay").textContent = userAccount.contact || "-";
+  document.getElementById("profileEmailDisplay").textContent = userAccount.email || "-";
+  document.getElementById("profilePhoneDisplay").textContent = userAccount.phone || "-";
   document.getElementById("profileDobDisplay").textContent = userAccount.dob ? toBnDate(userAccount.dob) : "সেট করা হয়নি";
   document.getElementById("userAvatarImg").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(userAccount.name)}`;
 }
@@ -666,8 +852,14 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000); updateCountdown();
 
 /* ==========================================================
-   QUOTES SINGLE CARD VIEW WITH ONLY LOVE REACTION & CARD SHARE
+   QUOTES CARD VIEW, SINGLE LIKE LIMIT, SAVED TAB, CARD SHARE
    ========================================================== */
+let allQuotesData = {};
+let activeQuoteFilter = "all";
+let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
+let likedQuotes = JSON.parse(localStorage.getItem("bcf_liked_quotes") || "[]");
+let apkDownloadUrl = "";
+
 if(typeof db !== "undefined") {
 
   db.ref("settings/developer").on("value", snap => {
@@ -682,78 +874,124 @@ if(typeof db !== "undefined") {
     document.getElementById("socialSettingsGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
 
-  let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
-
-  db.ref("quotes").on("value", snap => {
-    const data = snap.val() || {};
-    const container = document.getElementById("quoteFeed");
-    container.innerHTML = "";
-    const keys = Object.keys(data);
-
-    if(keys.length === 0) {
-      container.innerHTML = `<div style="text-align:center; padding:30px; color:gray;">কোন উক্তি যোগ করা হয়নি।</div>`;
-      return;
-    }
-
-    keys.reverse().forEach(key => {
-      const q = data[key];
-      const reactions = q.reactions || {};
-      const isFav = favQuotes.includes(key);
-
-      const div = document.createElement("div");
-      div.className = "quote-card-item";
-      div.innerHTML = `
-        <div class="quote-card-header">
-          <span class="quote-badge">বউ ছাড়া উক্তি 📜</span>
-        </div>
-        <div class="quote-text-body">"${escapeHtml(q.text)}"</div>
-        <div class="quote-action-bar">
-          <button type="button" class="qa-btn-love" onclick="addLoveReaction('${key}')">
-            <span class="css-emoji-heart"></span> লাভ (${toBn(reactions.love || 0)})
-          </button>
-          <button type="button" class="qa-btn-fav ${isFav ? 'active' : ''}" onclick="toggleFavorite('${key}')">
-            <span class="css-emoji-star"></span> ${isFav ? 'সেভড' : 'সেভ'}
-          </button>
-          <button type="button" class="qa-btn-share" onclick="shareQuoteCard('${escapeHtml(q.text)}')">
-            🔗 কার্ড সহ শেয়ার
-          </button>
-        </div>
-      `;
-      container.appendChild(div);
-    });
+  db.ref("settings/app/apkUrl").on("value", snap => {
+    apkDownloadUrl = snap.val() || "";
   });
 
-  window.addLoveReaction = function(quoteId) {
+  db.ref("quotes").on("value", snap => {
+    allQuotesData = snap.val() || {};
+    renderQuotesFeed();
+  });
+
+}
+
+window.switchQuoteTab = function(mode) {
+  activeQuoteFilter = mode;
+  document.getElementById("btnQuoteAll").classList.toggle("active", mode === "all");
+  document.getElementById("btnQuoteSaved").classList.toggle("active", mode === "saved");
+  renderQuotesFeed();
+};
+
+function renderQuotesFeed() {
+  const container = document.getElementById("quoteFeed");
+  container.innerHTML = "";
+  const keys = Object.keys(allQuotesData);
+
+  if(keys.length === 0) {
+    container.innerHTML = `<div style="text-align:center; padding:30px; color:gray;">কোন উক্তি যোগ করা হয়নি।</div>`;
+    return;
+  }
+
+  let visibleCount = 0;
+  keys.reverse().forEach(key => {
+    const q = allQuotesData[key];
+    const reactions = q.reactions || {};
+    const isFav = favQuotes.includes(key);
+    const isLiked = likedQuotes.includes(key);
+
+    if(activeQuoteFilter === "saved" && !isFav) return;
+
+    visibleCount++;
+    const div = document.createElement("div");
+    div.className = "quote-card-item";
+    div.innerHTML = `
+      <div class="quote-card-header">
+        <span class="quote-badge">বউ ছাড়া উক্তি</span>
+      </div>
+      <div class="quote-text-body">"${escapeHtml(q.text)}"</div>
+      <div class="quote-action-bar">
+        <button type="button" class="qa-btn-love ${isLiked ? 'liked' : ''}" onclick="addLoveReaction('${key}')">
+          <span class="css-ico-heart"></span> ${isLiked ? 'লাইক দেওয়া হয়েছে' : 'লাভ'} (${toBn(reactions.love || 0)})
+        </button>
+        <button type="button" class="qa-btn-fav ${isFav ? 'active' : ''}" onclick="toggleFavorite('${key}')">
+          <span class="css-ico-star"></span> ${isFav ? 'সেভড' : 'সেভ'}
+        </button>
+        <button type="button" class="qa-btn-share" onclick="shareQuoteCard('${escapeHtml(q.text)}')">
+          কার্ড সহ শেয়ার
+        </button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  if(visibleCount === 0 && activeQuoteFilter === "saved") {
+    container.innerHTML = `<div style="text-align:center; padding:30px; color:gray;">কোন উক্তি সেভ করা হয়নি!</div>`;
+  }
+}
+
+window.addLoveReaction = function(quoteId) {
+  if (likedQuotes.includes(quoteId)) {
+    return showToast("আপনি ইতিমধ্যে একটি লাইক দিয়েছেন!");
+  }
+  if(typeof db !== "undefined") {
     db.ref(`quotes/${quoteId}/reactions/love`).transaction(c => (c || 0) + 1);
-    showToast("❤️ লাভ রিয়্যাকশন দেওয়া হয়েছে!");
-  };
+  }
+  likedQuotes.push(quoteId);
+  localStorage.setItem("bcf_liked_quotes", JSON.stringify(likedQuotes));
+  renderQuotesFeed();
+  showToast("লাভ রিয়্যাকশন দেওয়া হয়েছে!");
+};
 
-  window.toggleFavorite = function(quoteId) {
-    if(favQuotes.includes(quoteId)) {
-      favQuotes = favQuotes.filter(id => id !== quoteId);
-      showToast("ফেভারিট থেকে সরানো হলো");
-    } else {
-      favQuotes.push(quoteId);
-      showToast("ফেভারিটে সেভ করা হলো!");
-    }
-    localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
-  };
+window.toggleFavorite = function(quoteId) {
+  if(favQuotes.includes(quoteId)) {
+    favQuotes = favQuotes.filter(id => id !== quoteId);
+    showToast("ফেভারিট থেকে সরানো হলো");
+  } else {
+    favQuotes.push(quoteId);
+    showToast("ফেভারিটে সেভ করা হলো!");
+  }
+  localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
+  renderQuotesFeed();
+};
 
-  window.shareQuoteCard = function(quoteText) {
-    const cardContent = `📜 *বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\n📌 শেয়ার করেছেন: ${myName}\n📲 অ্যাপটি দেখুন: ${window.location.href}`;
-    
-    if (navigator.share) {
-      navigator.share({
-        title: "বউ ছাড়া কততম শুক্রবার - উক্তি কার্ড",
-        text: cardContent
-      });
-    } else {
-      navigator.clipboard.writeText(cardContent);
-      showToast("উক্তি কার্ড মেসেজ কপি করা হয়েছে!");
-    }
-  };
+window.shareQuoteCard = function(quoteText) {
+  const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-fun.vercel.app`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: "বউ ছাড়া কততম শুক্রবার - উক্তি কার্ড",
+      text: cardContent,
+      url: "https://bouchara-fun.vercel.app"
+    });
+  } else {
+    navigator.clipboard.writeText(cardContent);
+    showToast("উক্তি কার্ড লিংক সহ কপি করা হয়েছে!");
+  }
+};
 
-  // Chat Rooms Engine
+window.downloadAppApk = function() {
+  if(apkDownloadUrl && apkDownloadUrl.trim()) {
+    window.open(apkDownloadUrl, "_blank");
+  } else {
+    showToast("APK ডাউনলোড লিংক এডমিন থেকে শীঘ্রই যোগ করা হবে!");
+  }
+};
+
+/* ==========================================================
+   3 CHAT ROOMS & PRIVATE SUPPORT CHAT
+   ========================================================== */
+if(typeof db !== "undefined") {
+
   let activeChatMode = "global";
 
   window.switchChatRoom = function(mode) {
@@ -784,7 +1022,7 @@ if(typeof db !== "undefined") {
         let emptyTxt = "মেসেজ পাঠাতে নিচে লিখুন!";
         if(activeChatMode === "global") emptyTxt = "গ্লোবাল আড্ডা ও AI চ্যাট শুরু করুন!";
         if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সবার সাথে চ্যাট করুন!";
-        if(activeChatMode === "support") emptyTxt = "সাপোর্টের জন্য এডমিনকে মেসেজ দিন।";
+        if(activeChatMode === "support") emptyTxt = "আপনার নিজস্ব সাপোর্ট মেসেজ পাঠান (এখানে শুধু আপনার মেসেজ ও এডমিন রিপ্লাই থাকবে)।";
 
         chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${emptyTxt}</div>`;
         return;
@@ -841,7 +1079,7 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
-      const devInstruction = "\n[বিশেষ তথ্য: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি ডেভেলপার বা অ্যাপের প্রতিষ্ঠাতা সম্পর্কে প্রশ্ন করে, বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
+      const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি অ্যাপটি কে তৈরি করেছে, ডেভেলপার কে বা প্রতিষ্ঠাতা কে প্রশ্ন করে, স্পষ্টভাবে বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
       const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
@@ -878,7 +1116,7 @@ if(typeof db !== "undefined") {
       if(reply && reply.trim()) {
         db.ref("chatRooms/global/messages").push({
           uid: "bot_ai",
-          name: "বউ ছাড়া AI 🤖",
+          name: "বউ ছাড়া AI (বট)",
           text: reply.trim(),
           isBot: true,
           time: Date.now()
