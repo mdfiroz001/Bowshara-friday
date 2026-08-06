@@ -42,9 +42,8 @@ h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
 button, input, select{font-family:inherit;}
 
 /* ==========================================================
-   PURE CSS REACTION EMOJIS & SHAPES (NO UNICODE/IMAGES)
+   PURE CSS REACTION EMOJIS (NO UNICODE/IMAGES)
    ========================================================== */
-/* Pure CSS Heart */
 .css-emoji-heart {
   display: inline-block; width: 10px; height: 10px; background: #FF4757;
   transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px;
@@ -57,28 +56,25 @@ button, input, select{font-family:inherit;}
 .css-emoji-heart::before { top: -5px; left: 0; }
 .css-emoji-heart::after { left: 5px; top: 0; }
 
-/* Pure CSS Laughing Emoji Face */
 .css-emoji-laugh {
   display: inline-block; width: 14px; height: 14px; background: #FFD166;
   border-radius: 50%; position: relative; vertical-align: middle; margin-right: 4px;
 }
 .css-emoji-laugh::before {
   content: ""; position: absolute; top: 3px; left: 3px; width: 8px; height: 2px;
-  background: #333; border-radius: 2px; box-shadow: 0 0 0 transparent;
+  background: #333; border-radius: 2px;
 }
 .css-emoji-laugh::after {
   content: ""; position: absolute; bottom: 2px; left: 3px; width: 8px; height: 4px;
   background: #333; border-radius: 0 0 6px 6px;
 }
 
-/* Pure CSS Thumbs Up / Like Icon */
 .css-emoji-like {
   display: inline-block; width: 8px; height: 8px; border: 2px solid #1877F2;
   border-top: none; border-left: none; transform: rotate(45deg); margin-right: 6px;
   vertical-align: middle; position: relative; top: -2px;
 }
 
-/* Pure CSS Star Icon for Bookmark */
 .css-emoji-star {
   width: 0; height: 0; margin: 2px 5px 0 2px; color: #FF9A4D;
   border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
@@ -116,7 +112,7 @@ button, input, select{font-family:inherit;}
 .splash-loader span{display:block; height:100%; width:40%; background:#fff; border-radius:6px; animation:load 1.2s ease-in-out infinite;}
 @keyframes load{0%{transform:translateX(-100%);}100%{transform:translateX(280%);}}
 
-/* MAIN CONTAINER */
+/* MAIN APP */
 #app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom));}
 
 .top-header{
@@ -154,7 +150,7 @@ button, input, select{font-family:inherit;}
 .cd-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
 .cd-lbl{font-size:11px; color:var(--muted);}
 
-/* QUOTES & REACTIONS */
+/* QUOTES */
 .quote-item {
   background: var(--card); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px;
   border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.02);
@@ -167,7 +163,7 @@ button, input, select{font-family:inherit;}
 }
 .react-btn.fav-active { background: #FFE0E3; color: #FF4757; }
 
-/* CHAT ROOM STYLING WITH 3 ROOMS */
+/* CHAT ROOMS */
 .chat-tabs { display: flex; gap: 6px; margin: 10px 14px 0; overflow-x: auto; padding-bottom: 2px; }
 .chat-tab-btn {
   flex: 1; padding: 9px 8px; border-radius: 99px; border: 1.5px solid var(--line);
@@ -196,7 +192,7 @@ button, input, select{font-family:inherit;}
 .chat-input-bar input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 16px; background: var(--cream); color: var(--ink); font-size: 14px; }
 .chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; font-size: 16px; flex-shrink: 0; }
 
-/* REGISTRATION MODAL */
+/* REGISTRATION MODAL WITH DATE OF BIRTH SELECTOR */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 500;
   display: none; align-items: center; justify-content: center; padding: 20px;
@@ -206,12 +202,16 @@ button, input, select{font-family:inherit;}
   background: var(--card); border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 380px;
   border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
-.modal-title { font-family: 'Baloo Da 2', sans-serif; font-size: 22px; font-weight: 800; text-align: center; color: var(--orange-3); margin-bottom: 14px; }
+.modal-title { font-family: 'Baloo Da 2', sans-serif; font-size: 22px; font-weight: 800; text-align: center; color: var(--orange-3); margin-bottom: 4px; }
 .form-field { margin-bottom: 12px; }
 .form-field label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
 .form-field input {
   width: 100%; padding: 11px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
   background: var(--cream); color: var(--ink); font-size: 14px;
+}
+/* Style Date Picker */
+.form-field input[type="date"] {
+  cursor: pointer; position: relative; font-family: inherit; color-scheme: light dark;
 }
 
 /* PROFILE & SETTINGS */
@@ -350,7 +350,7 @@ button, input, select{font-family:inherit;}
     <div style="padding:14px;" id="quoteFeed"></div>
   </section>
 
-  <!-- ================= CHAT ROOM PAGE (3 CHAT ROOMS) ================= -->
+  <!-- ================= CHAT ROOM PAGE (3 ROOMS) ================= -->
   <section class="page" id="page-chat">
     <div class="top-header" style="padding-bottom:16px;">
       <div class="app-name" style="font-size:18px;">লাইভ চ্যাট রুমস</div>
@@ -384,13 +384,13 @@ button, input, select{font-family:inherit;}
         <div class="profile-avatar-wrap">
           <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Bachelor" id="userAvatarImg" class="avatar-img" alt="Avatar">
           <br>
-          <span class="badge-status">স্বাধীন ব্যাচেলর 🔥</span>
+          <span class="badge-status" id="userBadgeStatus">স্বাধীন ব্যাচেলর 🔥</span>
         </div>
 
         <div style="text-align:center; margin-bottom:16px;">
           <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">অতিথি ব্যবহারকারী</h3>
           <div id="profileContactDisplay" style="font-size:13px; color:var(--muted); margin-top:2px;">রেজিস্ট্রেশন করা নেই</div>
-          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:8px;" onclick="openAuthModal()">✏️ প্রোফাইল ও রেজিস্ট্রেশন আপডেট</button>
+          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:8px;" onclick="openAuthModal()">✏️ একাউন্ট রেজিস্ট্রেশন / তথ্য পরিবর্তন</button>
         </div>
 
         <div style="border-top:1px solid var(--line); padding-top:12px;">
@@ -455,32 +455,33 @@ button, input, select{font-family:inherit;}
 
 </div>
 
-<!-- REGISTRATION MODAL -->
+<!-- REGISTRATION MODAL WITH DATE OF BIRTH SELECTOR -->
 <div class="modal-overlay" id="authModal">
   <div class="modal-card">
     <div class="modal-title">একাউন্ট রেজিস্ট্রেশন</div>
+    <div style="text-align:center; font-size:12.5px; color:var(--muted); margin-bottom:14px;">আপনার সঠিক তথ্য দিয়ে একাউন্ট তৈরি করুন</div>
     
     <div class="form-field">
-      <label>আপনার নাম</label>
-      <input type="text" id="regNameInput" placeholder="আপনার নাম লিখুন">
+      <label>আপনার নাম *</label>
+      <input type="text" id="regNameInput" placeholder="যেমন: আব্দুর রহমান">
     </div>
 
     <div class="form-field">
-      <label>জিমেইল বা ফোন নম্বর</label>
-      <input type="text" id="regContactInput" placeholder="you@gmail.com অথবা 01700...">
+      <label>জিমেইল বা ফোন নম্বর *</label>
+      <input type="text" id="regContactInput" placeholder="you@gmail.com অথবা 01700000000">
     </div>
 
     <div class="form-field">
-      <label>জন্ম তারিখ</label>
+      <label>জন্ম তারিখ নির্বাচন করুন *</label>
       <input type="date" id="regDobInput">
     </div>
 
     <div class="form-field">
-      <label>পাসওয়ার্ড</label>
+      <label>পাসওয়ার্ড *</label>
       <input type="password" id="regPassInput" placeholder="••••••••">
     </div>
 
-    <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">রেজিস্ট্রেশন করুন</button>
+    <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">রেজিস্ট্রেশন সম্পন্ন করুন</button>
     <button type="button" style="width:100%; background:none; border:none; color:var(--muted); font-size:13px; margin-top:10px; cursor:pointer;" onclick="closeAuthModal()">বন্ধ করুন</button>
   </div>
 </div>
@@ -529,7 +530,7 @@ function pad2(n){ return n < 10 ? "0"+n : ""+n; }
 const bnWeekday = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 const bnMonth = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
-// Toast System
+// Toast Helper
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById("toast");
@@ -538,7 +539,7 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-// User Profile & Account
+// User Identity & Account
 let myUid = localStorage.getItem("bcf_my_uid");
 if(!myUid) {
   myUid = "usr_" + Math.random().toString(36).substring(2, 9);
@@ -552,6 +553,13 @@ function updateProfileUI() {
   document.getElementById("profileNameDisplay").textContent = myName;
   document.getElementById("profileContactDisplay").textContent = userAccount.contact || "রেজিস্ট্রেশন করা নেই";
   document.getElementById("profileDobDisplay").textContent = userAccount.dob ? toBnDate(userAccount.dob) : "সেট করা হয়নি";
+  
+  if(userAccount.name) {
+    document.getElementById("userBadgeStatus").textContent = "প্রমাণিত সদস্য ✅";
+  } else {
+    document.getElementById("userBadgeStatus").textContent = "স্বাধীন ব্যাচেলর 🔥";
+  }
+
   document.getElementById("userAvatarImg").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(myName)}`;
 }
 
@@ -564,12 +572,13 @@ function toBnDate(dStr) {
 
 updateProfileUI();
 
-// Registration Modal Functions
+// Registration Modal Controls
 function openAuthModal() {
   if(userAccount.name) {
     document.getElementById("regNameInput").value = userAccount.name || "";
     document.getElementById("regContactInput").value = userAccount.contact || "";
     document.getElementById("regDobInput").value = userAccount.dob || "";
+    document.getElementById("regPassInput").value = userAccount.pass || "";
   }
   document.getElementById("authModal").classList.add("active");
 }
@@ -584,20 +593,34 @@ function submitRegistration() {
   const dob = document.getElementById("regDobInput").value;
   const pass = document.getElementById("regPassInput").value;
 
-  if(!name || !contact) return showToast("নাম ও যোগাযোগের তথ্য দিন!");
+  if(!name) return showToast("আপনার নাম লিখুন!");
+  if(!contact) return showToast("জিমেইল বা ফোন নম্বর দিন!");
+  if(!dob) return showToast("জন্ম তারিখ নির্বাচন করুন!");
+  if(!pass || pass.length < 4) return showToast("পাসওয়ার্ড অন্তত ৪ অক্ষরের দিন!");
 
-  userAccount = { name, contact, dob, pass, uid: myUid, updatedAt: Date.now() };
+  userAccount = {
+    uid: myUid,
+    name: name,
+    contact: contact,
+    dob: dob,
+    pass: pass,
+    updatedAt: Date.now()
+  };
+
   localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
   localStorage.setItem("bcf_my_name", name);
   myName = name;
 
   if(typeof db !== "undefined") {
-    db.ref(`users/${myUid}`).set(userAccount);
+    db.ref(`users/${myUid}`).set(userAccount)
+      .then(() => showToast("রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে! 🎉"))
+      .catch(err => showToast("সেভ করতে সমস্যা: " + err.message));
+  } else {
+    showToast("রেজিস্ট্রেশন সম্পন্ন হয়েছে (লোকালি সেভড)!");
   }
 
   updateProfileUI();
   closeAuthModal();
-  showToast("রেজিস্ট্রেশন সফল হয়েছে!");
 }
 
 // Navigation System
@@ -649,7 +672,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000); updateCountdown();
 
 /* ==========================================================
-   FIREBASE INTEGRATION & 3 CHAT ROOMS LOGIC
+   FIREBASE REALTIME DB & 3 CHAT ROOMS
    ========================================================== */
 if(typeof db !== "undefined") {
 
@@ -727,7 +750,7 @@ if(typeof db !== "undefined") {
     }
   };
 
-  // 3 CHAT ROOMS LOGIC: Global (AI), Community (Users), Support (Admin)
+  // 3 Chat Rooms Engine
   let activeChatMode = "global";
 
   window.switchChatRoom = function(mode) {
@@ -741,14 +764,14 @@ if(typeof db !== "undefined") {
   function getChatRefPath() {
     if(activeChatMode === "global") return "chatRooms/global/messages";
     if(activeChatMode === "community") return "chatRooms/community/messages";
-    return `chatRooms/support/${myUid}/messages`; // Support Chat
+    return `chatRooms/support/${myUid}/messages`;
   }
 
   function loadChatMessages() {
     const chatBox = document.getElementById("chatBox");
     chatBox.innerHTML = "<div style='text-align:center; padding:10px; font-size:12px; color:gray;'>মেসেজ লোড হচ্ছে...</div>";
 
-    db.ref(getChatRefPath()).off(); // Detach previous listener
+    db.ref(getChatRefPath()).off();
     db.ref(getChatRefPath()).limitToLast(50).on("value", snap => {
       chatBox.innerHTML = "";
       const msgs = snap.val() || {};
@@ -797,14 +820,13 @@ if(typeof db !== "undefined") {
     }).then(() => {
       input.value = "";
       
-      // Trigger AI Response ONLY in Global Chat
       if(activeChatMode === "global") {
         checkAndTriggerAi(text);
       }
     });
   };
 
-  // AI Response Trigger with Knowledge about MD FIROZ HOSSAIN
+  // AI Response Call (Includes Developer Knowledge MD FIROZ HOSSAIN)
   function checkAndTriggerAi(userMsg) {
     db.ref("settings/ai").once("value", snap => {
       const ai = snap.val();
@@ -817,8 +839,7 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
-      // Explicit Developer Knowledge Context
-      const devInstruction = "\n[বিশেষ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি ডেভেলপার, প্রতিষ্ঠাতা বা অ্যাপ প্রস্তুতকারক সম্পর্কে প্রশ্ন করে, বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
+      const devInstruction = "\n[গুরুত্বপূর্ণ তথ্য: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি অ্যাপ কে তৈরি করেছে বা ডেভেলপার কে জিজ্ঞেস করে, স্পষ্টভাবে বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
       const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
