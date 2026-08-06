@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
 <meta name="theme-color" content="#FF6A1A">
-<meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি প্রিমিয়াম অ্যাপ।">
+<meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি অ্যাপ।">
 <title>বউ ছাড়া কততম শুক্রবার</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
@@ -38,7 +38,7 @@ body{
 h1,h2,h3,.display{font-family:'Baloo Da 2', sans-serif;}
 button{font-family:inherit;}
 
-/* PRO SPLASH SCREEN WITH CUSTOM VECTOR ARTWORK */
+/* PRO SPLASH SCREEN */
 #splash{
   position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center;
   justify-content:center; padding:24px;
@@ -48,29 +48,29 @@ button{font-family:inherit;}
 #splash.hide{opacity:0; visibility:hidden;}
 
 .splash-art {
-  width: 180px; height: 180px; margin-bottom: 20px;
-  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.25));
+  width: 170px; height: 170px; margin-bottom: 18px;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.22));
   animation: floatArt 3.5s ease-in-out infinite;
 }
 @keyframes floatArt { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
 
-.splash-title{font-family:'Baloo Da 2',sans-serif; font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:0.5px;}
-.splash-sub{font-size:14px; opacity:0.92; font-weight:500; margin-bottom:24px;}
-.splash-loader{width:140px; height:6px; border-radius:6px; background:rgba(255,255,255,0.3); overflow:hidden;}
+.splash-title{font-family:'Baloo Da 2',sans-serif; font-size:28px; font-weight:800; margin-bottom:4px;}
+.splash-sub{font-size:14px; opacity:0.92; margin-bottom:20px;}
+.splash-loader{width:130px; height:5px; border-radius:6px; background:rgba(255,255,255,0.3); overflow:hidden;}
 .splash-loader span{display:block; height:100%; width:40%; background:#fff; border-radius:6px; animation:load 1.2s ease-in-out infinite;}
 @keyframes load{0%{transform:translateX(-100%);}100%{transform:translateX(280%);}}
 
-/* MAIN CONTAINER */
+/* MAIN APP */
 #app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom));}
 
 .top-header{
-  margin:14px 14px 0; padding:22px 20px 24px; border-radius:var(--radius-lg);
+  margin:14px 14px 0; padding:20px 20px 22px; border-radius:var(--radius-lg);
   background:linear-gradient(150deg, var(--orange-1), var(--orange-2) 55%, var(--orange-deep));
-  color:#fff; box-shadow:var(--shadow-soft); position:relative; overflow:hidden;
+  color:#fff; box-shadow:var(--shadow-soft);
 }
 .header-row{display:flex; align-items:center; justify-content:space-between;}
 .header-date{font-size:14px; opacity:.92;}
-.theme-btn{width:36px;height:36px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); display:flex;align-items:center;justify-content:center; cursor:pointer;}
+.theme-btn{width:36px;height:36px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); color:#fff; cursor:pointer;}
 .header-time{font-family:'Baloo Da 2',sans-serif; font-size:42px; font-weight:800; text-align:center; margin:4px 0;}
 .app-name{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; text-align:center;}
 
@@ -91,34 +91,32 @@ button{font-family:inherit;}
 .stat-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
 .stat-lbl{font-size:12px; color:var(--muted);}
 
-/* QUOTES CARD & REACTIONS */
+/* QUOTES */
 .quote-item {
-  background: var(--card); border-radius: var(--radius-md); padding: 18px; margin-bottom: 14px;
-  border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  background: var(--card); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px;
+  border: 1px solid var(--line);
 }
-.quote-body { font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 12px; }
-.reaction-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid var(--line); padding-top: 10px; }
+.quote-body { font-size: 15.5px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 10px; }
+.reaction-bar { display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 10px; }
 .react-btn {
   background: var(--card-2); border: none; border-radius: 99px; padding: 6px 12px;
   font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; display: flex; align-items: center; gap: 4px;
-  transition: transform 0.15s ease;
 }
-.react-btn:active { transform: scale(0.92); }
 .react-btn.fav-active { background: #FFE0E3; color: #FF4757; }
 
-/* SOCIAL BUTTONS & DEVELOPER BADGE */
+/* DEVELOPER BADGE */
 .dev-badge-container { text-align: center; margin-top: 20px; padding: 16px; background: var(--card-2); border-radius: var(--radius-md); }
 .dev-name { font-family: 'Baloo Da 2', sans-serif; font-weight: 800; font-size: 18px; color: var(--orange-3); }
-.social-grid { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
+.social-grid { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
 .social-btn {
   display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 99px;
-  font-size: 13px; font-weight: 700; text-decoration: none; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 13px; font-weight: 700; text-decoration: none; color: #fff;
 }
 .btn-telegram { background: #0088cc; }
 .btn-facebook { background: #1877f2; }
 .btn-whatsapp { background: #25D366; }
 
-/* NAVIGATION BAR */
+/* NAVIGATION */
 .bottom-nav{
   position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto;
   display:flex; padding:8px 10px calc(8px + var(--safe-bottom));
@@ -149,15 +147,12 @@ button{font-family:inherit;}
 </head>
 <body>
 
-<!-- PRO SPLASH SCREEN WITH CUSTOM VECTOR ARTWORK -->
+<!-- SPLASH SCREEN -->
 <div id="splash">
   <svg class="splash-art" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Circle Glow -->
     <circle cx="100" cy="100" r="90" fill="white" fill-opacity="0.15"/>
-    <!-- Floating Balloons -->
     <path d="M45 70C45 58.9543 53.9543 50 65 50C76.0457 50 85 58.9543 85 70C85 83 65 98 65 98C65 98 45 83 45 70Z" fill="#FFD166"/>
     <path d="M125 55C125 46.1634 132.163 39 141 39C149.837 39 157 46.1634 157 55C157 65.5 141 77.5 141 77.5C141 77.5 125 65.5 125 55Z" fill="#06D6A0"/>
-    <!-- Calendar Card in Center -->
     <rect x="55" y="80" width="90" height="80" rx="16" fill="white"/>
     <path d="M55 96C55 87.1634 62.1634 80 71 80H129C137.837 80 145 87.1634 145 96V105H55V96Z" fill="#E85A0C"/>
     <circle cx="78" cy="125" r="6" fill="#FF6A1A"/>
@@ -168,7 +163,7 @@ button{font-family:inherit;}
     <circle cx="122" cy="145" r="6" fill="#FF6A1A"/>
   </svg>
   <div class="splash-title">বউ ছাড়া কততম শুক্রবার</div>
-  <div class="splash-sub">আপনার ছুটির আনন্দময় মুহূর্তের ডিজিটাল ট্র্যাকার</div>
+  <div class="splash-sub">ছুটির আনন্দময় মুহূর্তের ডিজিটাল ট্র্যাকার</div>
   <div class="splash-loader"><span></span></div>
 </div>
 
@@ -179,7 +174,7 @@ button{font-family:inherit;}
     <div class="top-header">
       <div class="header-row">
         <div class="header-date" id="liveDate">লোড হচ্ছে...</div>
-        <button class="theme-btn" id="quickThemeBtn">☀️</button>
+        <button type="button" class="theme-btn" id="quickThemeBtn">☀️</button>
       </div>
       <div class="header-time" id="liveTime">--:--:--</div>
       <div class="app-name">বউ ছাড়া কততম শুক্রবার</div>
@@ -198,13 +193,10 @@ button{font-family:inherit;}
       <div class="stat-box"><div class="stat-num" id="statMonths">০</div><div class="stat-lbl">মাস</div></div>
     </div>
 
-    <!-- DEV BADGE IN HOME -->
     <div class="dev-badge-container">
       <div style="font-size:12px; color:var(--muted);">অ্যাপ ডেভেলপার</div>
       <div class="dev-name" id="devNameHome">MD FIROZ HOSSAIN</div>
-      <div class="social-grid" id="socialHomeGrid">
-        <!-- Dynamic Links -->
-      </div>
+      <div class="social-grid" id="socialHomeGrid"></div>
     </div>
   </section>
 
@@ -216,7 +208,7 @@ button{font-family:inherit;}
     <div style="padding:14px;">
       <label style="font-size:14px; font-weight:600;">শুরুর তারিখ নির্বাচন করুন:</label>
       <input type="date" id="startDateInput" style="width:100%; padding:12px; margin:10px 0; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--ink);">
-      <button class="btn-primary" id="btnCalcCounter">হিসাব আপডেট করুন</button>
+      <button type="button" class="btn-primary" id="btnCalcCounter">হিসাব আপডেট করুন</button>
     </div>
   </section>
 
@@ -225,9 +217,7 @@ button{font-family:inherit;}
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">মজার উক্তি ও রিয়্যাকশন</div>
     </div>
-    <div style="padding:14px;" id="quoteFeed">
-      <!-- Dynamic Quotes with Reactions -->
-    </div>
+    <div style="padding:14px;" id="quoteFeed"></div>
   </section>
 
   <!-- ================= PROFILE ================= -->
@@ -236,13 +226,11 @@ button{font-family:inherit;}
       <div class="app-name" style="font-size:18px;">প্রোফাইল ও যোগাযোগ</div>
     </div>
     <div class="card" style="text-align:center;">
-      <h3 style="margin:0;" id="profileName">ব্যবহারকারী</h3>
+      <h3 style="margin:0;">ব্যবহারকারী</h3>
       <div class="dev-badge-container" style="margin-top:16px;">
         <div style="font-size:12px; color:var(--muted);">ডেভেলপার ইনফরমেশন</div>
         <div class="dev-name" id="devNameProfile">MD FIROZ HOSSAIN</div>
-        <div class="social-grid" id="socialProfileGrid">
-          <!-- Dynamic Links -->
-        </div>
+        <div class="social-grid" id="socialProfileGrid"></div>
       </div>
     </div>
   </section>
@@ -253,32 +241,32 @@ button{font-family:inherit;}
       <div class="app-name" style="font-size:18px;">সেটিংস</div>
     </div>
     <div class="card">
-      <p style="color:var(--muted); font-size:14px;">অ্যাপটি বিনোদনের উদ্দেশ্যে তৈরি।</p>
-      <button class="btn-primary" id="btnResetCounter" style="background:var(--orange-deep);">ডাটা রিসেট করুন</button>
+      <p style="color:var(--muted); font-size:14px;">অ্যাপটি সম্পূর্ণ বিনোদনের উদ্দেশ্যে তৈরি।</p>
+      <button type="button" class="btn-primary" id="btnResetCounter" style="background:var(--orange-deep);">ডাটা রিসেট করুন</button>
     </div>
   </section>
 
 </div>
 
-<!-- BOTTOM NAVIGATION BAR -->
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
-  <button class="nav-btn active" data-page="page-home">
+  <button type="button" class="nav-btn active" data-page="page-home">
     <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     <span class="nav-label">ঘর</span>
   </button>
-  <button class="nav-btn" data-page="page-counter">
+  <button type="button" class="nav-btn" data-page="page-counter">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     <span class="nav-label">হিসাব</span>
   </button>
-  <button class="nav-btn" data-page="page-quotes">
+  <button type="button" class="nav-btn" data-page="page-quotes">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     <span class="nav-label">উক্তি</span>
   </button>
-  <button class="nav-btn" data-page="page-profile">
+  <button type="button" class="nav-btn" data-page="page-profile">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">প্রোফাইল</span>
   </button>
-  <button class="nav-btn" data-page="page-settings">
+  <button type="button" class="nav-btn" data-page="page-settings">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     <span class="nav-label">সেটিংস</span>
   </button>
@@ -304,14 +292,12 @@ function showToast(msg){
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-// Navigation Handler
 function goToPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
 
-// Clock
 function updateClock(){
   const now = new Date();
   document.getElementById("liveDate").textContent = `${bnWeekday[now.getDay()]}, ${toBn(now.getDate())} ${bnMonth[now.getMonth()]}`;
@@ -319,79 +305,85 @@ function updateClock(){
 }
 setInterval(updateClock, 1000); updateClock();
 
-const db = firebase.database();
+if (typeof db !== "undefined") {
+  // ডেভেলপমেন্ট ও সোশ্যাল লিংক লোড
+  db.ref("settings/developer").on("value", snap => {
+    const d = snap.val() || {};
+    const name = d.name || "MD FIROZ HOSSAIN";
+    document.getElementById("devNameHome").textContent = name;
+    document.getElementById("devNameProfile").textContent = name;
 
-// Fetch Dev & Social Info
-db.ref("settings/developer").on("value", snap => {
-  const d = snap.val() || {};
-  const name = d.name || "MD FIROZ HOSSAIN";
-  document.getElementById("devNameHome").textContent = name;
-  document.getElementById("devNameProfile").textContent = name;
+    let html = "";
+    if(d.telegram) html += `<a href="${d.telegram}" target="_blank" class="social-btn btn-telegram">Telegram</a>`;
+    if(d.facebook) html += `<a href="${d.facebook}" target="_blank" class="social-btn btn-facebook">Facebook</a>`;
+    if(d.whatsapp) html += `<a href="${d.whatsapp}" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>`;
 
-  let html = "";
-  if(d.telegram) html += `<a href="${d.telegram}" target="_blank" class="social-btn btn-telegram">Telegram</a>`;
-  if(d.facebook) html += `<a href="${d.facebook}" target="_blank" class="social-btn btn-facebook">Facebook</a>`;
-  if(d.whatsapp) html += `<a href="${d.whatsapp}" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>`;
-
-  document.getElementById("socialHomeGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক যুক্ত করা হয়নি</span>";
-  document.getElementById("socialProfileGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক যুক্ত করা হয়নি</span>";
-});
-
-// Quotes Feed & Reaction System
-let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
-
-db.ref("quotes").on("value", snap => {
-  const data = snap.val() || {};
-  const container = document.getElementById("quoteFeed");
-  container.innerHTML = "";
-
-  Object.keys(data).reverse().forEach(key => {
-    const q = data[key];
-    const reactions = q.reactions || {};
-    const isFav = favQuotes.includes(key);
-
-    const div = document.createElement("div");
-    div.className = "quote-item";
-    div.innerHTML = `
-      <div class="quote-body">${q.text}</div>
-      <div class="reaction-bar">
-        <button class="react-btn" onclick="addReaction('${key}', 'love')">❤️ ${toBn(reactions.love || 0)}</button>
-        <button class="react-btn" onclick="addReaction('${key}', 'laugh')">😂 ${toBn(reactions.laugh || 0)}</button>
-        <button class="react-btn" onclick="addReaction('${key}', 'like')">👍 ${toBn(reactions.like || 0)}</button>
-        <button class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')">${isFav ? '❤️ ফেভারিট' : '🤍 পছন্দ করুন'}</button>
-        <button class="react-btn" onclick="shareQuote('${q.text}')">🔗 শেয়ার</button>
-      </div>
-    `;
-    container.appendChild(div);
+    document.getElementById("socialHomeGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
+    document.getElementById("socialProfileGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
-});
 
-function addReaction(quoteId, type) {
-  db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(count => (count || 0) + 1);
-  showToast("রিয়্যাকশন যুক্ত করা হয়েছে!");
+  // উক্তি ও রিয়্যাকশন লোড
+  let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
+
+  db.ref("quotes").on("value", snap => {
+    const data = snap.val() || {};
+    const container = document.getElementById("quoteFeed");
+    container.innerHTML = "";
+
+    const keys = Object.keys(data);
+    if(keys.length === 0) {
+      container.innerHTML = `<div style="text-align:center; padding:20px; color:gray;">কোন উক্তি যোগ করা হয়নি।</div>`;
+      return;
+    }
+
+    keys.reverse().forEach(key => {
+      const q = data[key];
+      const reactions = q.reactions || {};
+      const isFav = favQuotes.includes(key);
+
+      const div = document.createElement("div");
+      div.className = "quote-item";
+      div.innerHTML = `
+        <div class="quote-body">${q.text}</div>
+        <div class="reaction-bar">
+          <button type="button" class="react-btn" onclick="addReaction('${key}', 'love')">❤️ ${toBn(reactions.love || 0)}</button>
+          <button type="button" class="react-btn" onclick="addReaction('${key}', 'laugh')">😂 ${toBn(reactions.laugh || 0)}</button>
+          <button type="button" class="react-btn" onclick="addReaction('${key}', 'like')">👍 ${toBn(reactions.like || 0)}</button>
+          <button type="button" class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')">${isFav ? '❤️ ফেভারিট' : '🤍 সেভ'}</button>
+          <button type="button" class="react-btn" onclick="shareQuote('${q.text}')">🔗 শেয়ার</button>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  });
+
+  window.addReaction = function(quoteId, type) {
+    db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(count => (count || 0) + 1);
+    showToast("রিয়্যাকশন যুক্ত করা হয়েছে!");
+  };
+
+  window.toggleFavorite = function(quoteId) {
+    if (favQuotes.includes(quoteId)) {
+      favQuotes = favQuotes.filter(id => id !== quoteId);
+      showToast("ফেভারিট থেকে সরানো হয়েছে");
+    } else {
+      favQuotes.push(quoteId);
+      showToast("ফেভারিটে সেভ করা হয়েছে!");
+    }
+    localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
+  };
+
+  window.shareQuote = function(text) {
+    if (navigator.share) {
+      navigator.share({ title: "মজার উক্তি", text });
+    } else {
+      navigator.clipboard.writeText(text);
+      showToast("উক্তি কপি করা হয়েছে!");
+    }
+  };
 }
 
-function toggleFavorite(quoteId) {
-  if (favQuotes.includes(quoteId)) {
-    favQuotes = favQuotes.filter(id => id !== quoteId);
-    showToast("ফেভারিট থেকে সরানো হয়েছে");
-  } else {
-    favQuotes.push(quoteId);
-    showToast("ফেভারিটে সেভ করা হয়েছে!");
-  }
-  localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
-}
-
-function shareQuote(text) {
-  if (navigator.share) {
-    navigator.share({ title: "মজার উক্তি", text });
-  } else {
-    navigator.clipboard.writeText(text);
-    showToast("উক্তি কপি করা হয়েছে!");
-  }
-}
-
-// Counter Calculation
+// কাউন্টার লজিক
 function countFridays(s, e) {
   let count = 0, cur = new Date(s);
   while (cur <= e) {
@@ -423,11 +415,15 @@ document.getElementById("btnCalcCounter").addEventListener("click", () => {
   }
 });
 
+document.getElementById("btnResetCounter").addEventListener("click", () => {
+  localStorage.removeItem("bcf_start_date");
+  location.reload();
+});
+
 const savedDate = localStorage.getItem("bcf_start_date") || new Date(Date.now() - 30*86400000).toISOString().split('T')[0];
 document.getElementById("startDateInput").value = savedDate;
 updateCounter(savedDate);
 
-// Splash Hide Animation
 window.addEventListener("load", () => {
   setTimeout(() => document.getElementById("splash").classList.add("hide"), 800);
 });
