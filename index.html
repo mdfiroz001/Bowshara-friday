@@ -41,9 +41,7 @@ body{
 h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
 button, input, select{font-family:inherit;}
 
-/* ==========================================================
-   PURE CSS REACTION EMOJIS (NO UNICODE/IMAGES)
-   ========================================================== */
+/* PURE CSS LOVE HEART EMOJI */
 .css-emoji-heart {
   display: inline-block; width: 10px; height: 10px; background: #FF4757;
   transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px;
@@ -55,25 +53,6 @@ button, input, select{font-family:inherit;}
 }
 .css-emoji-heart::before { top: -5px; left: 0; }
 .css-emoji-heart::after { left: 5px; top: 0; }
-
-.css-emoji-laugh {
-  display: inline-block; width: 14px; height: 14px; background: #FFD166;
-  border-radius: 50%; position: relative; vertical-align: middle; margin-right: 4px;
-}
-.css-emoji-laugh::before {
-  content: ""; position: absolute; top: 3px; left: 3px; width: 8px; height: 2px;
-  background: #333; border-radius: 2px;
-}
-.css-emoji-laugh::after {
-  content: ""; position: absolute; bottom: 2px; left: 3px; width: 8px; height: 4px;
-  background: #333; border-radius: 0 0 6px 6px;
-}
-
-.css-emoji-like {
-  display: inline-block; width: 8px; height: 8px; border: 2px solid #1877F2;
-  border-top: none; border-left: none; transform: rotate(45deg); margin-right: 6px;
-  vertical-align: middle; position: relative; top: -2px;
-}
 
 .css-emoji-star {
   width: 0; height: 0; margin: 2px 5px 0 2px; color: #FF9A4D;
@@ -90,6 +69,35 @@ button, input, select{font-family:inherit;}
   transform: rotate(-70deg);
 }
 
+/* ==========================================================
+   MANDATORY REGISTRATION GATE (লক স্ক্রিন)
+   ========================================================== */
+#authGateOverlay {
+  position: fixed; inset: 0; z-index: 900;
+  background: linear-gradient(160deg, #1D1814 0%, #12100E 100%);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+#authGateOverlay.hide { display: none; }
+
+.auth-gate-card {
+  background: var(--card); border-radius: var(--radius-lg); padding: 26px 20px; width: 100%; max-width: 380px;
+  border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
+}
+.auth-gate-logo {
+  width: 64px; height: 64px; background: var(--orange-3); border-radius: 20px; margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff;
+  box-shadow: 0 10px 20px rgba(255,106,26,0.3);
+}
+.auth-gate-title { font-size: 22px; font-weight: 800; color: var(--orange-3); margin-bottom: 4px; }
+.auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+
+.form-field { margin-bottom: 12px; text-align: left; }
+.form-field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+.form-field input {
+  width: 100%; padding: 11px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
+  background: var(--cream); color: var(--ink); font-size: 14px;
+}
+
 /* PRO SPLASH SCREEN */
 #splash{
   position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center;
@@ -100,7 +108,7 @@ button, input, select{font-family:inherit;}
 #splash.hide{opacity:0; visibility:hidden;}
 
 .splash-art {
-  width: 160px; height: 160px; margin-bottom: 18px;
+  width: 150px; height: 150px; margin-bottom: 18px;
   filter: drop-shadow(0 12px 24px rgba(0,0,0,0.22));
   animation: floatArt 3.5s ease-in-out infinite;
 }
@@ -112,8 +120,8 @@ button, input, select{font-family:inherit;}
 .splash-loader span{display:block; height:100%; width:40%; background:#fff; border-radius:6px; animation:load 1.2s ease-in-out infinite;}
 @keyframes load{0%{transform:translateX(-100%);}100%{transform:translateX(280%);}}
 
-/* MAIN APP */
-#app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom));}
+/* MAIN APP STRUCTURE */
+#app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom)); display:none;}
 
 .top-header{
   margin:14px 14px 0; padding:20px 20px 22px; border-radius:var(--radius-lg);
@@ -150,18 +158,30 @@ button, input, select{font-family:inherit;}
 .cd-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
 .cd-lbl{font-size:11px; color:var(--muted);}
 
-/* QUOTES */
-.quote-item {
-  background: var(--card); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px;
-  border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+/* QUOTES CARD ITEM (একক কার্ড স্টাইল) */
+.quote-card-item {
+  background: var(--card); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 16px;
+  border: 1px solid var(--line); box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
 }
-.quote-body { font-size: 15.5px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 10px; }
-.reaction-bar { display: flex; gap: 6px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 10px; }
-.react-btn {
-  background: var(--card-2); border: none; border-radius: 99px; padding: 6px 10px;
-  font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; display: flex; align-items: center;
+.quote-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.quote-badge { background: var(--card-2); color: var(--orange-3); font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); }
+.quote-text-body { font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 14px; min-height: 50px; }
+
+/* REACTION BAR - ONLY LOVE, SAVE, SHARE */
+.quote-action-bar { display: flex; gap: 8px; border-top: 1px solid var(--line); padding-top: 12px; }
+.qa-btn-love {
+  flex: 1; background: #FFE8EC; color: #FF4757; border: 1px solid rgba(255,71,87,0.2); border-radius: 99px;
+  padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
-.react-btn.fav-active { background: #FFE0E3; color: #FF4757; }
+.qa-btn-fav {
+  background: var(--card-2); color: var(--ink-soft); border: 1px solid var(--line); border-radius: 99px;
+  padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.qa-btn-fav.active { background: #FFF3E0; color: var(--orange-3); border-color: var(--orange-3); }
+.qa-btn-share {
+  background: var(--orange-3); color: #fff; border: none; border-radius: 99px;
+  padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
 
 /* CHAT ROOMS */
 .chat-tabs { display: flex; gap: 6px; margin: 10px 14px 0; overflow-x: auto; padding-bottom: 2px; }
@@ -180,7 +200,6 @@ button, input, select{font-family:inherit;}
 .msg.me { align-self: flex-end; background: linear-gradient(135deg,var(--orange-1),var(--orange-3)); color: #fff; border-bottom-right-radius: 4px; }
 .msg.them { align-self: flex-start; background: var(--card); color: var(--ink); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .msg.bot { align-self: flex-start; background: #FFF3E0; color: #E85A0C; border: 1px solid rgba(255,106,26,0.3); border-bottom-left-radius: 4px; }
-[data-theme="dark"] .msg.bot { background: #2D1D12; color: #FF9A4D; }
 
 .msg-header { font-size: 11px; font-weight: 700; opacity: 0.85; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
 .badge-bot { background: var(--orange-3); color: #fff; padding: 2px 6px; border-radius: 99px; font-size: 9px; }
@@ -191,28 +210,6 @@ button, input, select{font-family:inherit;}
 }
 .chat-input-bar input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 16px; background: var(--cream); color: var(--ink); font-size: 14px; }
 .chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; font-size: 16px; flex-shrink: 0; }
-
-/* REGISTRATION MODAL WITH DATE OF BIRTH SELECTOR */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 500;
-  display: none; align-items: center; justify-content: center; padding: 20px;
-}
-.modal-overlay.active { display: flex; }
-.modal-card {
-  background: var(--card); border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 380px;
-  border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-.modal-title { font-family: 'Baloo Da 2', sans-serif; font-size: 22px; font-weight: 800; text-align: center; color: var(--orange-3); margin-bottom: 4px; }
-.form-field { margin-bottom: 12px; }
-.form-field label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
-.form-field input {
-  width: 100%; padding: 11px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
-  background: var(--cream); color: var(--ink); font-size: 14px;
-}
-/* Style Date Picker */
-.form-field input[type="date"] {
-  cursor: pointer; position: relative; font-family: inherit; color-scheme: light dark;
-}
 
 /* PROFILE & SETTINGS */
 .profile-avatar-wrap { text-align: center; margin-bottom: 14px; }
@@ -236,7 +233,7 @@ button, input, select{font-family:inherit;}
 /* NAVIGATION BAR */
 .bottom-nav{
   position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto;
-  display:flex; padding:8px 10px calc(8px + var(--safe-bottom));
+  display:none; padding:8px 10px calc(8px + var(--safe-bottom));
   background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
   border-top:1px solid var(--line);
 }
@@ -284,6 +281,38 @@ button, input, select{font-family:inherit;}
   <div class="splash-loader"><span></span></div>
 </div>
 
+<!-- MANDATORY REGISTRATION GATE (লক স্ক্রিন) -->
+<div id="authGateOverlay">
+  <div class="auth-gate-card">
+    <div class="auth-gate-logo">🔐</div>
+    <div class="auth-gate-title">সাইন-ইন / রেজিস্ট্রেশন</div>
+    <div class="auth-gate-sub">অ্যাপটি ব্যবহার করতে প্রথমে অ্যাকাউন্ট তৈরি করুন</div>
+    
+    <div class="form-field">
+      <label>আপনার নাম *</label>
+      <input type="text" id="regNameInput" placeholder="যেমন: আব্দুর রহমান">
+    </div>
+
+    <div class="form-field">
+      <label>জিমেইল বা ফোন নম্বর *</label>
+      <input type="text" id="regContactInput" placeholder="you@gmail.com অথবা 01700...">
+    </div>
+
+    <div class="form-field">
+      <label>জন্ম তারিখ নির্বাচন করুন *</label>
+      <input type="date" id="regDobInput">
+    </div>
+
+    <div class="form-field">
+      <label>পাসওয়ার্ড *</label>
+      <input type="password" id="regPassInput" placeholder="••••••••">
+    </div>
+
+    <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">প্রবেশ করুন / রেজিস্ট্রেশন করুন</button>
+  </div>
+</div>
+
+<!-- MAIN APP (LOCKED UNTIL REGISTRATION) -->
 <div id="app">
 
   <!-- ================= HOME PAGE ================= -->
@@ -342,15 +371,15 @@ button, input, select{font-family:inherit;}
     </div>
   </section>
 
-  <!-- ================= QUOTES PAGE ================= -->
+  <!-- ================= QUOTES PAGE (একক কার্ড ভিউ) ================= -->
   <section class="page" id="page-quotes">
     <div class="top-header">
-      <div class="app-name" style="font-size:18px;">মজার উক্তি ও রিয়্যাকশন</div>
+      <div class="app-name" style="font-size:18px;">মজার উক্তি সংগ্রহ</div>
     </div>
     <div style="padding:14px;" id="quoteFeed"></div>
   </section>
 
-  <!-- ================= CHAT ROOM PAGE (3 ROOMS) ================= -->
+  <!-- ================= CHAT ROOM PAGE ================= -->
   <section class="page" id="page-chat">
     <div class="top-header" style="padding-bottom:16px;">
       <div class="app-name" style="font-size:18px;">লাইভ চ্যাট রুমস</div>
@@ -384,13 +413,13 @@ button, input, select{font-family:inherit;}
         <div class="profile-avatar-wrap">
           <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Bachelor" id="userAvatarImg" class="avatar-img" alt="Avatar">
           <br>
-          <span class="badge-status" id="userBadgeStatus">স্বাধীন ব্যাচেলর 🔥</span>
+          <span class="badge-status" id="userBadgeStatus">প্রমাণিত সদস্য ✅</span>
         </div>
 
         <div style="text-align:center; margin-bottom:16px;">
           <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">অতিথি ব্যবহারকারী</h3>
-          <div id="profileContactDisplay" style="font-size:13px; color:var(--muted); margin-top:2px;">রেজিস্ট্রেশন করা নেই</div>
-          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:8px;" onclick="openAuthModal()">✏️ একাউন্ট রেজিস্ট্রেশন / তথ্য পরিবর্তন</button>
+          <div id="profileContactDisplay" style="font-size:13px; color:var(--muted); margin-top:2px;">-</div>
+          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:8px;" onclick="reEditProfile()">✏️ তথ্য সংশোধন / নতুন একাউন্ট</button>
         </div>
 
         <div style="border-top:1px solid var(--line); padding-top:12px;">
@@ -411,7 +440,7 @@ button, input, select{font-family:inherit;}
     </div>
   </section>
 
-  <!-- ================= SETTINGS & DEVELOPER PAGE ================= -->
+  <!-- ================= SETTINGS PAGE ================= -->
   <section class="page" id="page-settings">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">সেটিংস ও অ্যাপ তথ্য</div>
@@ -453,37 +482,6 @@ button, input, select{font-family:inherit;}
     </div>
   </section>
 
-</div>
-
-<!-- REGISTRATION MODAL WITH DATE OF BIRTH SELECTOR -->
-<div class="modal-overlay" id="authModal">
-  <div class="modal-card">
-    <div class="modal-title">একাউন্ট রেজিস্ট্রেশন</div>
-    <div style="text-align:center; font-size:12.5px; color:var(--muted); margin-bottom:14px;">আপনার সঠিক তথ্য দিয়ে একাউন্ট তৈরি করুন</div>
-    
-    <div class="form-field">
-      <label>আপনার নাম *</label>
-      <input type="text" id="regNameInput" placeholder="যেমন: আব্দুর রহমান">
-    </div>
-
-    <div class="form-field">
-      <label>জিমেইল বা ফোন নম্বর *</label>
-      <input type="text" id="regContactInput" placeholder="you@gmail.com অথবা 01700000000">
-    </div>
-
-    <div class="form-field">
-      <label>জন্ম তারিখ নির্বাচন করুন *</label>
-      <input type="date" id="regDobInput">
-    </div>
-
-    <div class="form-field">
-      <label>পাসওয়ার্ড *</label>
-      <input type="password" id="regPassInput" placeholder="••••••••">
-    </div>
-
-    <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">রেজিস্ট্রেশন সম্পন্ন করুন</button>
-    <button type="button" style="width:100%; background:none; border:none; color:var(--muted); font-size:13px; margin-top:10px; cursor:pointer;" onclick="closeAuthModal()">বন্ধ করুন</button>
-  </div>
 </div>
 
 <!-- BOTTOM NAVIGATION BAR -->
@@ -530,7 +528,7 @@ function pad2(n){ return n < 10 ? "0"+n : ""+n; }
 const bnWeekday = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 const bnMonth = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
-// Toast Helper
+// Toast
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById("toast");
@@ -539,52 +537,27 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-// User Identity & Account
+// Mandatory Auth Check
 let myUid = localStorage.getItem("bcf_my_uid");
 if(!myUid) {
   myUid = "usr_" + Math.random().toString(36).substring(2, 9);
   localStorage.setItem("bcf_my_uid", myUid);
 }
 
-let userAccount = JSON.parse(localStorage.getItem("bcf_user_account") || "{}");
-let myName = userAccount.name || localStorage.getItem("bcf_my_name") || "ব্যাচেলর ব্যবহারকারী";
+let userAccount = JSON.parse(localStorage.getItem("bcf_user_account") || "null");
+let myName = userAccount ? userAccount.name : "";
 
-function updateProfileUI() {
-  document.getElementById("profileNameDisplay").textContent = myName;
-  document.getElementById("profileContactDisplay").textContent = userAccount.contact || "রেজিস্ট্রেশন করা নেই";
-  document.getElementById("profileDobDisplay").textContent = userAccount.dob ? toBnDate(userAccount.dob) : "সেট করা হয়নি";
-  
-  if(userAccount.name) {
-    document.getElementById("userBadgeStatus").textContent = "প্রমাণিত সদস্য ✅";
+function checkAuthGate() {
+  if(userAccount && userAccount.name && userAccount.contact) {
+    document.getElementById("authGateOverlay").classList.add("hide");
+    document.getElementById("app").style.display = "block";
+    document.querySelector(".bottom-nav").style.display = "flex";
+    updateProfileUI();
   } else {
-    document.getElementById("userBadgeStatus").textContent = "স্বাধীন ব্যাচেলর 🔥";
+    document.getElementById("authGateOverlay").classList.remove("hide");
+    document.getElementById("app").style.display = "none";
+    document.querySelector(".bottom-nav").style.display = "none";
   }
-
-  document.getElementById("userAvatarImg").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(myName)}`;
-}
-
-function toBnDate(dStr) {
-  if(!dStr) return "-";
-  const p = dStr.split("-");
-  if(p.length === 3) return `${toBn(p[2])}/${toBn(p[1])}/${toBn(p[0])}`;
-  return dStr;
-}
-
-updateProfileUI();
-
-// Registration Modal Controls
-function openAuthModal() {
-  if(userAccount.name) {
-    document.getElementById("regNameInput").value = userAccount.name || "";
-    document.getElementById("regContactInput").value = userAccount.contact || "";
-    document.getElementById("regDobInput").value = userAccount.dob || "";
-    document.getElementById("regPassInput").value = userAccount.pass || "";
-  }
-  document.getElementById("authModal").classList.add("active");
-}
-
-function closeAuthModal() {
-  document.getElementById("authModal").classList.remove("active");
 }
 
 function submitRegistration() {
@@ -612,15 +585,36 @@ function submitRegistration() {
   myName = name;
 
   if(typeof db !== "undefined") {
-    db.ref(`users/${myUid}`).set(userAccount)
-      .then(() => showToast("রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে! 🎉"))
-      .catch(err => showToast("সেভ করতে সমস্যা: " + err.message));
-  } else {
-    showToast("রেজিস্ট্রেশন সম্পন্ন হয়েছে (লোকালি সেভড)!");
+    db.ref(`users/${myUid}`).set(userAccount);
   }
 
-  updateProfileUI();
-  closeAuthModal();
+  showToast("রেজিস্ট্রেশন সফল হয়েছে! 🎉");
+  checkAuthGate();
+}
+
+function reEditProfile() {
+  document.getElementById("authGateOverlay").classList.remove("hide");
+  if(userAccount) {
+    document.getElementById("regNameInput").value = userAccount.name || "";
+    document.getElementById("regContactInput").value = userAccount.contact || "";
+    document.getElementById("regDobInput").value = userAccount.dob || "";
+    document.getElementById("regPassInput").value = userAccount.pass || "";
+  }
+}
+
+function updateProfileUI() {
+  if(!userAccount) return;
+  document.getElementById("profileNameDisplay").textContent = userAccount.name || "ব্যবহারকারী";
+  document.getElementById("profileContactDisplay").textContent = userAccount.contact || "-";
+  document.getElementById("profileDobDisplay").textContent = userAccount.dob ? toBnDate(userAccount.dob) : "সেট করা হয়নি";
+  document.getElementById("userAvatarImg").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(userAccount.name)}`;
+}
+
+function toBnDate(dStr) {
+  if(!dStr) return "-";
+  const p = dStr.split("-");
+  if(p.length === 3) return `${toBn(p[2])}/${toBn(p[1])}/${toBn(p[0])}`;
+  return dStr;
 }
 
 // Navigation System
@@ -631,7 +625,7 @@ function goToPage(id){
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
 
-// Theme Switcher (Light, Dark, Auto)
+// Theme Switcher
 function applyThemeChoice(choice) {
   let mode = choice;
   if(choice === "auto") {
@@ -655,7 +649,7 @@ function updateClock(){
 }
 setInterval(updateClock, 1000); updateClock();
 
-// Countdown to Next Friday
+// Countdown
 function updateCountdown() {
   const now = new Date();
   let nextFriday = new Date(now);
@@ -672,15 +666,13 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000); updateCountdown();
 
 /* ==========================================================
-   FIREBASE REALTIME DB & 3 CHAT ROOMS
+   QUOTES SINGLE CARD VIEW WITH ONLY LOVE REACTION & CARD SHARE
    ========================================================== */
 if(typeof db !== "undefined") {
 
-  // Developer Info
   db.ref("settings/developer").on("value", snap => {
     const d = snap.val() || {};
-    const devName = d.name || "MD FIROZ HOSSAIN";
-    document.getElementById("devNameSettings").textContent = devName;
+    document.getElementById("devNameSettings").textContent = d.name || "MD FIROZ HOSSAIN";
 
     let html = "";
     if(d.telegram) html += `<a href="${d.telegram}" target="_blank" class="social-btn btn-telegram">Telegram</a>`;
@@ -690,7 +682,6 @@ if(typeof db !== "undefined") {
     document.getElementById("socialSettingsGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
 
-  // Quotes Feed with Pure CSS Reactions
   let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
 
   db.ref("quotes").on("value", snap => {
@@ -710,24 +701,31 @@ if(typeof db !== "undefined") {
       const isFav = favQuotes.includes(key);
 
       const div = document.createElement("div");
-      div.className = "quote-item";
+      div.className = "quote-card-item";
       div.innerHTML = `
-        <div class="quote-body">${escapeHtml(q.text)}</div>
-        <div class="reaction-bar">
-          <button type="button" class="react-btn" onclick="addReaction('${key}', 'love')"><span class="css-emoji-heart"></span> ${toBn(reactions.love || 0)}</button>
-          <button type="button" class="react-btn" onclick="addReaction('${key}', 'laugh')"><span class="css-emoji-laugh"></span> ${toBn(reactions.laugh || 0)}</button>
-          <button type="button" class="react-btn" onclick="addReaction('${key}', 'like')"><span class="css-emoji-like"></span> ${toBn(reactions.like || 0)}</button>
-          <button type="button" class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')"><span class="css-emoji-star"></span> ${isFav ? 'সেভড' : 'সেভ'}</button>
-          <button type="button" class="react-btn" onclick="shareQuote('${q.text}')">🔗 শেয়ার</button>
+        <div class="quote-card-header">
+          <span class="quote-badge">বউ ছাড়া উক্তি 📜</span>
+        </div>
+        <div class="quote-text-body">"${escapeHtml(q.text)}"</div>
+        <div class="quote-action-bar">
+          <button type="button" class="qa-btn-love" onclick="addLoveReaction('${key}')">
+            <span class="css-emoji-heart"></span> লাভ (${toBn(reactions.love || 0)})
+          </button>
+          <button type="button" class="qa-btn-fav ${isFav ? 'active' : ''}" onclick="toggleFavorite('${key}')">
+            <span class="css-emoji-star"></span> ${isFav ? 'সেভড' : 'সেভ'}
+          </button>
+          <button type="button" class="qa-btn-share" onclick="shareQuoteCard('${escapeHtml(q.text)}')">
+            🔗 কার্ড সহ শেয়ার
+          </button>
         </div>
       `;
       container.appendChild(div);
     });
   });
 
-  window.addReaction = function(quoteId, type) {
-    db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(c => (c || 0) + 1);
-    showToast("রিয়্যাকশন দেওয়া হয়েছে!");
+  window.addLoveReaction = function(quoteId) {
+    db.ref(`quotes/${quoteId}/reactions/love`).transaction(c => (c || 0) + 1);
+    showToast("❤️ লাভ রিয়্যাকশন দেওয়া হয়েছে!");
   };
 
   window.toggleFavorite = function(quoteId) {
@@ -741,16 +739,21 @@ if(typeof db !== "undefined") {
     localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
   };
 
-  window.shareQuote = function(text) {
+  window.shareQuoteCard = function(quoteText) {
+    const cardContent = `📜 *বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\n📌 শেয়ার করেছেন: ${myName}\n📲 অ্যাপটি দেখুন: ${window.location.href}`;
+    
     if (navigator.share) {
-      navigator.share({ title: "বউ ছাড়া উক্তি", text });
+      navigator.share({
+        title: "বউ ছাড়া কততম শুক্রবার - উক্তি কার্ড",
+        text: cardContent
+      });
     } else {
-      navigator.clipboard.writeText(text);
-      showToast("উক্তি কপি করা হয়েছে!");
+      navigator.clipboard.writeText(cardContent);
+      showToast("উক্তি কার্ড মেসেজ কপি করা হয়েছে!");
     }
   };
 
-  // 3 Chat Rooms Engine
+  // Chat Rooms Engine
   let activeChatMode = "global";
 
   window.switchChatRoom = function(mode) {
@@ -826,7 +829,6 @@ if(typeof db !== "undefined") {
     });
   };
 
-  // AI Response Call (Includes Developer Knowledge MD FIROZ HOSSAIN)
   function checkAndTriggerAi(userMsg) {
     db.ref("settings/ai").once("value", snap => {
       const ai = snap.val();
@@ -839,7 +841,7 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
-      const devInstruction = "\n[গুরুত্বপূর্ণ তথ্য: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি অ্যাপ কে তৈরি করেছে বা ডেভেলপার কে জিজ্ঞেস করে, স্পষ্টভাবে বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
+      const devInstruction = "\n[বিশেষ তথ্য: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি ডেভেলপার বা অ্যাপের প্রতিষ্ঠাতা সম্পর্কে প্রশ্ন করে, বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
       const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
@@ -945,6 +947,7 @@ function escapeHtml(str) {
 }
 
 window.addEventListener("load", () => {
+  checkAuthGate();
   setTimeout(() => document.getElementById("splash").classList.add("hide"), 800);
 });
 </script>
