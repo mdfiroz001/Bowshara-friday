@@ -1035,9 +1035,9 @@ window.toggleFavorite = function(quoteId) {
 };
 
 window.shareQuoteCard = function(quoteText) {
-  const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-appdownload.vercel.app/`;
+  const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-appdownload.vercel.app`;
   if (navigator.share) {
-    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://bouchara-appdownload.vercel.app/" });
+    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://bouchara-appdownload.vercel.app" });
   } else {
     navigator.clipboard.writeText(cardContent);
     showToast("উক্তি লিংক সহ কপি করা হয়েছে!");
