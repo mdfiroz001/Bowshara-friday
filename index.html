@@ -199,13 +199,13 @@ button, input, select{font-family:inherit;}
 .btn-facebook { background: #1877f2; }
 .btn-whatsapp { background: #25D366; }
 
-/* ADVERTISMENT FRAME AT BOTTOM OF PAGES */
+/* ADVERTISMENT FRAME AT BOTTOM OF ALL PAGES */
 .ad-container-frame {
   margin: 16px 14px 0; padding: 8px; background: var(--card-2); border: 1px dashed var(--line);
   border-radius: var(--radius-md); text-align: center; min-height: 70px; display: flex;
   align-items: center; justify-content: center; overflow: hidden;
 }
-.ad-container-frame:empty { display: none; }
+.ad-container-frame:empty { display: none !important; }
 
 /* NAVIGATION BAR */
 .bottom-nav{ position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto; display:none; padding:8px 10px calc(8px + var(--safe-bottom)); background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-top:1px solid var(--line); }
@@ -332,7 +332,7 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="card">
-      <div class="card-label">তোমার জীবন থেকে বউ ছাড়া শুক্রবার চলে গেছে</div>
+      <div class="card-label">তোমার জীবন থেকে চলে যাওয়া শুক্রবার</div>
       <div class="friday-count" id="fridayNumber">০তম</div>
       <div class="friday-word">শুক্রবার</div>
       <div style="text-align:center; color:var(--muted); font-size:13px; margin-top:8px;" id="startDateLabel">তারিখ লোড হচ্ছে...</div>
@@ -595,7 +595,6 @@ function checkAuthGate() {
       if(nav) nav.style.display = "flex";
       updateProfileUI();
 
-      // জন্ম তারিখ দিয়ে কাউন্টার আপডেট
       if(userAccount.dob) {
         updateCounterData(userAccount.dob);
       }
@@ -793,11 +792,47 @@ function toBnDate(dStr) {
   return dStr;
 }
 
-// Navigation System
+/* ==========================================================
+   DYNAMIC AD RENDERER FOR ACTIVE VISIBLE PAGE
+   ========================================================== */
+let currentAdScript = "";
+
+function refreshActivePageAd() {
+  // ১. সকল এড ফ্রেম পরিষ্কার করা
+  document.querySelectorAll(".ad-container-frame").forEach(f => {
+    f.innerHTML = "";
+  });
+
+  if(!currentAdScript || !currentAdScript.trim()) return;
+
+  // ২. বর্তমানে দৃশ্যমান (Active) পেজ খুঁজে বের করা
+  const activePage = document.querySelector(".page.active");
+  if(!activePage) return;
+
+  const frame = activePage.querySelector(".ad-container-frame");
+  if(!frame) return;
+
+  // ৩. অ্যাক্টিভ পেজের ফ্রেমে স্ক্রিপ্ট এক্সিকিউট করা
+  setTimeout(() => {
+    try {
+      const range = document.createRange();
+      range.selectNode(frame);
+      const fragment = range.createContextualFragment(currentAdScript);
+      frame.appendChild(fragment);
+    } catch(e) {
+      console.error("Ad render error:", e);
+    }
+  }, 100);
+}
+
+// NAVIGATION SYSTEM
 function goToPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
   window.scrollTo({top:0, behavior:"smooth"});
+  
+  // পেজ পরিবর্তন হলে নতুন পেজে এড রিফ্রেশ করা
+  refreshActivePageAd();
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
 
@@ -857,19 +892,10 @@ if(typeof db !== "undefined") {
     }
   });
 
-  // Dynamic Ads render in frames
+  // Dynamic Ads Listener
   db.ref("settings/app/adScript").on("value", snap => {
-    const scriptHtml = snap.val() || "";
-    const adFrames = document.querySelectorAll(".ad-container-frame");
-    adFrames.forEach(frame => {
-      frame.innerHTML = "";
-      if(scriptHtml && scriptHtml.trim()) {
-        const range = document.createRange();
-        range.selectNode(frame);
-        const fragment = range.createContextualFragment(scriptHtml);
-        frame.appendChild(fragment);
-      }
-    });
+    currentAdScript = snap.val() || "";
+    refreshActivePageAd();
   });
 
   db.ref("settings/developer").on("value", snap => {
@@ -977,7 +1003,7 @@ window.toggleFavorite = function(quoteId) {
 window.shareQuoteCard = function(quoteText) {
   const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-fun.vercel.app`;
   if (navigator.share) {
-    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://tiny.link/aHR0cHM6" });
+    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://bouchara-fun.vercel.app" });
   } else {
     navigator.clipboard.writeText(cardContent);
     showToast("উক্তি লিংক সহ কপি করা হয়েছে!");
@@ -992,7 +1018,7 @@ window.downloadAppApk = function() {
   }
 };
 
-// CHAT ROOMS (AI ISOLATED PER USER, COMMUNITY PUBLIC)
+// CHAT ROOMS
 if(typeof db !== "undefined") {
   let activeChatMode = "global";
 
@@ -1005,7 +1031,6 @@ if(typeof db !== "undefined") {
   };
 
   function getChatRefPath() {
-    // এআই চ্যাট এখন ইউজারের নিজস্ব প্রাইভেট পাথে সংরক্ষণ হবে
     if(activeChatMode === "global") return `chatRooms/ai/${myUid}/messages`;
     if(activeChatMode === "community") return "chatRooms/community/messages";
     return `chatRooms/support/${myUid}/messages`;
@@ -1081,7 +1106,7 @@ if(typeof db !== "undefined") {
     try {
       let reply = "";
       const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN।]";
-      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
+      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততমশুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
         const res = await fetch(aiConfig.endpoint, {
@@ -1182,6 +1207,7 @@ function escapeHtml(str) {
 
 window.addEventListener("load", () => {
   checkAuthGate();
+  refreshActivePageAd();
 });
 </script>
 </body>
