@@ -8,11 +8,12 @@
 <style>
   :root {
     --primary: #FF6A1A;
+    --primary-dark: #E85A0C;
     --bg: #12100E;
     --card: #1D1814;
     --text: #F7EBE0;
     --muted: #A6907C;
-    --border: rgba(255,106,26,0.2);
+    --border: rgba(255,106,26,0.25);
     --danger: #FF4757;
     --success: #2ED573;
   }
@@ -27,11 +28,11 @@
   }
   .auth-box {
     background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 20px;
-    width: 100%; max-width: 380px; text-align: center;
+    width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
   .auth-input {
-    width: 100%; padding: 12px; margin: 12px 0; border-radius: 10px; border: 1px solid var(--border);
-    background: #12100E; color: #fff; font-size: 15px;
+    width: 100%; padding: 12px; margin: 14px 0; border-radius: 10px; border: 1px solid var(--border);
+    background: #12100E; color: #fff; font-size: 15px; text-align: center;
   }
   
   .navbar {
@@ -44,13 +45,13 @@
   .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; flex-wrap: wrap; }
   .tab-btn {
     background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 8px 18px;
-    border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 14px;
+    border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all .2s;
   }
   .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-  .data-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .data-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
   
   .form-group { margin-bottom: 16px; }
   .form-group label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
@@ -60,46 +61,67 @@
   }
 
   .btn {
-    border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px; cursor: pointer;
+    border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px;
+    cursor: pointer; transition: transform .15s ease; display: inline-flex; align-items: center; justify-content: center;
   }
+  .btn:active { transform: scale(0.95); }
   .btn-primary { background: var(--primary); color: #fff; }
   .btn-danger { background: var(--danger); color: #fff; }
+  
+  .switch-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
+  .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; cursor: pointer; inset: 0; background-color: #332b24; transition: .3s; border-radius: 34px; }
+  .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .3s; border-radius: 50%; }
+  input:checked + .slider { background-color: var(--primary); }
+  input:checked + .slider:before { transform: translateX(22px); }
+
+  .empty-state { text-align: center; padding: 30px; color: var(--muted); }
+  .chat-item {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 12px 16px;
+    border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+  }
 </style>
 </head>
 <body>
 
+<!-- সিকিউরিটি লগইন দ্বার -->
 <div id="adminAuthGate">
   <div class="auth-box">
     <h2>এডমিন প্রবেশ</h2>
-    <input type="password" id="adminPassInput" class="auth-input" placeholder="পাসকোড দিন" style="text-align:center;">
-    <button class="btn btn-primary" style="width:100%; padding:12px;" onclick="verifyAdminPass()">প্রবেশ করুন</button>
+    <p style="color:var(--muted); font-size:13px;">তথ্য পরিবর্তন করতে পাসকোড দিন</p>
+    <input type="password" id="adminPassInput" class="auth-input" placeholder="পাসকোড দিন">
+    <button type="button" class="btn btn-primary" style="width:100%; padding:12px;" onclick="verifyAdminPass()">প্রবেশ করুন</button>
   </div>
 </div>
 
+<!-- হেডার -->
 <div class="navbar">
-  <div class="logo-title">বউ ছাড়া কততম শুক্রবার — এডমিন কন্ট্রোল</div>
-  <button class="btn btn-danger" onclick="logoutAdmin()">লগআউট</button>
+  <div class="logo-title">বউ ছাড়া কততম শুক্রবার — এডমিন প্যানেল</div>
+  <button type="button" class="btn btn-danger" onclick="logoutAdmin()">লগআউট</button>
 </div>
 
 <div class="container">
+  <!-- ট্যাব নেভিগেশন -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('dev', event)">📱 ডেভেলপার ও সোশ্যাল মিডিয়া</button>
-    <button class="tab-btn" onclick="switchTab('quotes', event)">উক্তি ম্যানেজার</button>
-    <button class="tab-btn" onclick="switchTab('ai', event)">🤖 AI এজেন্ট সেটআপ</button>
+    <button type="button" class="tab-btn active" onclick="switchTab('dev', event)">📱 ডেভেলপমেন্ট ও সোশ্যাল মিডিয়া</button>
+    <button type="button" class="tab-btn" onclick="switchTab('quotes', event)">💬 উক্তি ম্যানেজার</button>
+    <button type="button" class="tab-btn" onclick="switchTab('ai', event)">🤖 AI এজেন্ট সেটআপ</button>
+    <button type="button" class="tab-btn" onclick="switchTab('chat', event)">🗨️ চ্যাট মডারেশন</button>
   </div>
 
-  <!-- ১. ডেভেলপার ও সোশ্যাল সেটিংস -->
+  <!-- ১. ডেভেলপমেন্ট ও সোশ্যাল অ্যাকাউন্ট সেকশন -->
   <div class="tab-content active" id="tab-dev">
     <div class="data-card">
-      <h3>ডেভেলপার ইনফরমেশন ও সোশ্যাল অ্যাকাউন্ট</h3>
-      <p style="color:var(--muted); font-size:14px;">এখান থেকে সেট করা নাম ও লিংকগুলো ইউজার প্যানেলে সরাসরি শো করবে।</p>
+      <h3>ডেভেলপার ইনফরমেশন ও সোশ্যাল লিংক</h3>
+      <p style="color:var(--muted); font-size:13.5px; margin-bottom:20px;">এই তথ্যগুলো সেভ করলে ইউজার অ্যাপে সরাসরি আপডেট হয়ে যাবে।</p>
       
       <div class="form-group">
         <label>ডেভেলপার নাম</label>
         <input type="text" id="devNameInput" class="form-control" value="MD FIROZ HOSSAIN">
       </div>
       <div class="form-group">
-        <label>টেলিগ্রাম অ্যাকাউন্ট / চ্যানেল লিংক (Telegram)</label>
+        <label>টেলিগ্রাম লিংক (Telegram)</label>
         <input type="url" id="devTelegramInput" class="form-control" placeholder="https://t.me/yourusername">
       </div>
       <div class="form-group">
@@ -107,42 +129,68 @@
         <input type="url" id="devFbInput" class="form-control" placeholder="https://facebook.com/yourprofile">
       </div>
       <div class="form-group">
-        <label>হোয়াটসঅ্যাপ নম্বর / গ্রুপ লিংক (WhatsApp)</label>
+        <label>হোয়াটসঅ্যাপ লিংক (WhatsApp)</label>
         <input type="url" id="devWaInput" class="form-control" placeholder="https://wa.me/8801700000000">
       </div>
-      <button class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveDevSettings()">সেটিংস সেভ করুন</button>
+      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveDevSettings()">ডেভেলপার তথ্য সেভ করুন</button>
     </div>
   </div>
 
   <!-- ২. উক্তি ম্যানেজার -->
   <div class="tab-content" id="tab-quotes">
     <div class="data-card">
-      <h3>নতুন মজার উক্তি যোগ করুন</h3>
+      <h3>নতুন উক্তি যোগ করুন</h3>
       <div style="display:flex; gap:10px; margin:15px 0;">
-        <input type="text" id="newQuoteInput" placeholder="এখানে উক্তি লিখুন..." class="form-control">
-        <button class="btn btn-primary" onclick="addQuote()">যোগ করুন</button>
+        <input type="text" id="newQuoteInput" placeholder="মজার বা কৌতুকপূর্ণ উক্তি লিখুন..." class="form-control">
+        <button type="button" class="btn btn-primary" style="white-space:nowrap;" onclick="addQuote()">যোগ করুন</button>
       </div>
-      <div id="quoteAdminList" style="display:flex; flex-direction:column; gap:8px;"></div>
+      <h3>বিদ্যমান উক্তি তালিকা</h3>
+      <div id="quoteAdminList"></div>
     </div>
   </div>
 
   <!-- ৩. AI এজেন্ট সেটআপ -->
   <div class="tab-content" id="tab-ai">
     <div class="data-card">
-      <h3>🤖 AI এজেন্ট সেটআপ (Ollama / Groq / OpenRouter)</h3>
+      <h3>🤖 AI এজেন্ট কনফিগারেশন</h3>
+      
+      <div class="switch-row">
+        <div>
+          <strong style="font-size:15px;">AI চ্যাটবট সক্রিয় রাখুন</strong>
+          <div style="font-size:12.5px; color:var(--muted);">অন থাকলে চ্যাটে মেসেজ দিলে AI উত্তর পাঠাবে।</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="aiEnabledToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
       <div class="form-group">
-        <label>API Endpoint URL</label>
-        <input type="text" id="aiEndpointInput" class="form-control" placeholder="http://localhost:11434/api/generate">
+        <label>API Endpoint URL (যেমন Groq / OpenRouter / Ollama)</label>
+        <input type="text" id="aiEndpointInput" class="form-control" placeholder="https://api.groq.com/openai/v1/chat/completions">
       </div>
       <div class="form-group">
-        <label>API Key (যদি থাকে)</label>
-        <input type="password" id="aiApiKeyInput" class="form-control" placeholder="gsk_...">
+        <label>API Key</label>
+        <input type="password" id="aiApiKeyInput" class="form-control" placeholder="gsk_... বা sk-or-v1-...">
       </div>
       <div class="form-group">
         <label>মডেল নেম (Model Name)</label>
-        <input type="text" id="aiModelInput" class="form-control" placeholder="llama3">
+        <input type="text" id="aiModelInput" class="form-control" placeholder="llama-3.1-8b-instant">
       </div>
-      <button class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAiSettings()">AI সেটিংস সংরক্ষণ করুন</button>
+      <div class="form-group">
+        <label>সিস্টেম প্রম্পট (AI নির্দেশিকা)</label>
+        <textarea id="aiSystemPromptInput" class="form-control" rows="3" placeholder="AI কিভাবে কথা বলবে নির্দেশ দিন..."></textarea>
+      </div>
+
+      <button type="button" class="btn btn-primary" style="width:100%; padding:14px;" onclick="saveAiSettings()">AI সেটিংস সেভ করুন</button>
+    </div>
+  </div>
+
+  <!-- ৪. চ্যাট মডারেশন -->
+  <div class="tab-content" id="tab-chat">
+    <div class="data-card">
+      <h3>গ্লোবাল চ্যাট মেসেজ মডারেশন</h3>
+      <div id="chatListContainer" style="margin-top:15px;"></div>
     </div>
   </div>
 </div>
@@ -156,11 +204,14 @@
   const DEFAULT_ADMIN_PASS = "admin123";
 
   function verifyAdminPass() {
-    if (document.getElementById("adminPassInput").value === DEFAULT_ADMIN_PASS) {
+    const val = document.getElementById("adminPassInput").value;
+    if (val === DEFAULT_ADMIN_PASS) {
       sessionStorage.setItem("admin_logged", "true");
       document.getElementById("adminAuthGate").style.display = "none";
       loadAdminData();
-    } else { alert("ভুল পাসওয়ার্ড!"); }
+    } else {
+      alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।");
+    }
   }
 
   if (sessionStorage.getItem("admin_logged") === "true") {
@@ -168,19 +219,25 @@
     window.addEventListener("DOMContentLoaded", loadAdminData);
   }
 
-  function logoutAdmin() { sessionStorage.removeItem("admin_logged"); location.reload(); }
+  function logoutAdmin() {
+    sessionStorage.removeItem("admin_logged");
+    location.reload();
+  }
 
   function switchTab(tabId, event) {
     document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
     document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    if(event) event.target.classList.add("active");
+    if(event && event.target) event.target.classList.add("active");
     document.getElementById("tab-" + tabId).classList.add("active");
   }
 
-  const db = firebase.database();
-
   function loadAdminData() {
-    // Dev Links
+    if (typeof db === "undefined") {
+      alert("❌ ত্রুটি: firebase-config.js ফাইল লোড হয়নি বা ঠিকমত সেট করা হয়নি!");
+      return;
+    }
+
+    // ১. ডেভেলপমেন্ট ও সোশ্যাল লিংক লোড
     db.ref("settings/developer").on("value", snap => {
       const d = snap.val() || {};
       document.getElementById("devNameInput").value = d.name || "MD FIROZ HOSSAIN";
@@ -189,43 +246,113 @@
       document.getElementById("devWaInput").value = d.whatsapp || "";
     });
 
-    // Quotes
+    // ২. উক্তি লোড
     db.ref("quotes").on("value", snap => {
       const quotes = snap.val() || {};
       const container = document.getElementById("quoteAdminList");
       container.innerHTML = "";
-      Object.keys(quotes).forEach(id => {
+      const keys = Object.keys(quotes);
+      if (keys.length === 0) {
+        container.innerHTML = `<div class="empty-state">কোন উক্তি নেই</div>`;
+        return;
+      }
+      keys.forEach(id => {
         const div = document.createElement("div");
-        div.style.cssText = "background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;";
-        div.innerHTML = `<span>${quotes[id].text}</span> <button class="btn btn-danger" onclick="deleteQuote('${id}')">মুছুন</button>`;
+        div.className = "chat-item";
+        div.innerHTML = `<span>${quotes[id].text}</span> <button type="button" class="btn btn-danger" onclick="deleteQuote('${id}')">মুছুন</button>`;
+        container.appendChild(div);
+      });
+    });
+
+    // ৩. AI সেটিংস লোড
+    db.ref("settings/ai").on("value", snap => {
+      const c = snap.val() || {};
+      document.getElementById("aiEnabledToggle").checked = c.enabled || false;
+      document.getElementById("aiEndpointInput").value = c.endpoint || "";
+      document.getElementById("aiApiKeyInput").value = c.apiKey || "";
+      document.getElementById("aiModelInput").value = c.model || "llama-3.1-8b-instant";
+      document.getElementById("aiSystemPromptInput").value = c.systemPrompt || "তুমি 'বউ ছাড়া কততম শুক্রবার' অ্যাপের একটি হাস্যরসাত্মক এআই বট। সংক্ষেপে রসিকে ও মজার উত্তর দাও।";
+    });
+
+    // ৪. চ্যাট মেসেজ লোড
+    db.ref("chatRooms/global/messages").limitToLast(30).on("value", snap => {
+      const msgs = snap.val() || {};
+      const container = document.getElementById("chatListContainer");
+      container.innerHTML = "";
+      const keys = Object.keys(msgs);
+      if (keys.length === 0) {
+        container.innerHTML = `<div class="empty-state">কোন চ্যাট মেসেজ নেই</div>`;
+        return;
+      }
+      keys.reverse().forEach(id => {
+        const m = msgs[id];
+        const div = document.createElement("div");
+        div.className = "chat-item";
+        div.innerHTML = `
+          <div>
+            <strong>${m.name || 'User'}</strong>
+            <div style="font-size:13px;">${m.text}</div>
+          </div>
+          <button type="button" class="btn btn-danger" onclick="deleteChatMsg('${id}')">মুছুন</button>
+        `;
         container.appendChild(div);
       });
     });
   }
 
+  // --- সেভ ফাংশনসমূহ ---
+
   function saveDevSettings() {
-    db.ref("settings/developer").set({
-      name: document.getElementById("devNameInput").value.trim(),
+    const data = {
+      name: document.getElementById("devNameInput").value.trim() || "MD FIROZ HOSSAIN",
       telegram: document.getElementById("devTelegramInput").value.trim(),
       facebook: document.getElementById("devFbInput").value.trim(),
-      whatsapp: document.getElementById("devWaInput").value.trim()
-    }).then(() => alert("ডেভেলপার ইনফো সফলভাবে সংরক্ষিত হয়েছে!"));
+      whatsapp: document.getElementById("devWaInput").value.trim(),
+      updatedAt: Date.now()
+    };
+
+    db.ref("settings/developer").set(data)
+      .then(() => alert("✅ ডেভেলপমেন্ট তথ্য সফলভাবে সেভ হয়েছে!"))
+      .catch(err => alert("❌ সেভ করা যায়নি! ভুল: " + err.message + "\n\nপরামর্শ: Firebase Realtime Database এর Security Rules চেক করুন (Read & Write: true থাকতে হবে)।"));
   }
 
   function addQuote() {
     const text = document.getElementById("newQuoteInput").value.trim();
-    if(text) db.ref("quotes").push({ text, createdAt: Date.now() });
-    document.getElementById("newQuoteInput").value = "";
+    if (!text) return alert("উক্তি লিখুন!");
+
+    db.ref("quotes").push({ text, createdAt: Date.now() })
+      .then(() => {
+        alert("✅ নতুন উক্তি সেভ হয়েছে!");
+        document.getElementById("newQuoteInput").value = "";
+      })
+      .catch(err => alert("❌ সেভ করা যায়নি: " + err.message));
   }
 
-  function deleteQuote(id) { db.ref(`quotes/${id}`).remove(); }
+  function deleteQuote(id) {
+    if (confirm("উক্তিটি ডিলিট করতে চান?")) {
+      db.ref(`quotes/${id}`).remove();
+    }
+  }
 
   function saveAiSettings() {
-    db.ref("settings/ai").set({
+    const data = {
+      enabled: document.getElementById("aiEnabledToggle").checked,
       endpoint: document.getElementById("aiEndpointInput").value.trim(),
       apiKey: document.getElementById("aiApiKeyInput").value.trim(),
-      model: document.getElementById("aiModelInput").value.trim()
-    }).then(() => alert("AI সেটিংস সংরক্ষিত হয়েছে!"));
+      model: document.getElementById("aiModelInput").value.trim(),
+      systemPrompt: document.getElementById("aiSystemPromptInput").value.trim(),
+      updatedAt: Date.now()
+    };
+
+    db.ref("settings/ai").set(data)
+      .then(() => alert("✅ AI সেটিংস সফলভাবে সেভ হয়েছে!"))
+      .catch(err => alert("❌ সেভ করা যায়নি: " + err.message));
+  }
+
+  function deleteChatMsg(id) {
+    if (confirm("মেসেজটি ডিলিট করতে চান?")) {
+      db.ref(`chatRooms/global/messages/${id}`).remove();
+    }
   }
 </script>
 </body>
