@@ -16,7 +16,7 @@
 
 <style>
 /* ==========================================================
-   DESIGN TOKENS & THEMES
+   DESIGN TOKENS & THEME VARIABLES
    ========================================================== */
 :root{
   --orange-1:#FF9A4D; --orange-2:#FF7A29; --orange-3:#FF6A1A; --orange-deep:#E85A0C;
@@ -41,7 +41,60 @@ body{
 h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
 button, input, select{font-family:inherit;}
 
-/* PRO SPLASH SCREEN WITH CUSTOM SVG VECTOR ARTWORK */
+/* ==========================================================
+   PURE CSS REACTION EMOJIS & SHAPES (NO UNICODE/IMAGES)
+   ========================================================== */
+/* Pure CSS Heart */
+.css-emoji-heart {
+  display: inline-block; width: 10px; height: 10px; background: #FF4757;
+  transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px;
+  vertical-align: middle;
+}
+.css-emoji-heart::before, .css-emoji-heart::after {
+  content: ""; width: 10px; height: 10px; background: #FF4757;
+  border-radius: 50%; position: absolute;
+}
+.css-emoji-heart::before { top: -5px; left: 0; }
+.css-emoji-heart::after { left: 5px; top: 0; }
+
+/* Pure CSS Laughing Emoji Face */
+.css-emoji-laugh {
+  display: inline-block; width: 14px; height: 14px; background: #FFD166;
+  border-radius: 50%; position: relative; vertical-align: middle; margin-right: 4px;
+}
+.css-emoji-laugh::before {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 8px; height: 2px;
+  background: #333; border-radius: 2px; box-shadow: 0 0 0 transparent;
+}
+.css-emoji-laugh::after {
+  content: ""; position: absolute; bottom: 2px; left: 3px; width: 8px; height: 4px;
+  background: #333; border-radius: 0 0 6px 6px;
+}
+
+/* Pure CSS Thumbs Up / Like Icon */
+.css-emoji-like {
+  display: inline-block; width: 8px; height: 8px; border: 2px solid #1877F2;
+  border-top: none; border-left: none; transform: rotate(45deg); margin-right: 6px;
+  vertical-align: middle; position: relative; top: -2px;
+}
+
+/* Pure CSS Star Icon for Bookmark */
+.css-emoji-star {
+  width: 0; height: 0; margin: 2px 5px 0 2px; color: #FF9A4D;
+  border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
+  transform: rotate(35deg); display: inline-block; position: relative; vertical-align: middle;
+}
+.css-emoji-star::before {
+  content: ""; border-bottom: 4px solid #FF9A4D; border-left: 2px solid transparent; border-right: 2px solid transparent;
+  position: absolute; height: 0; width: 0; top: -2.5px; left: -3px; transform: rotate(-35deg);
+}
+.css-emoji-star::after {
+  content: ""; position: absolute; color: #FF9A4D; top: 0.5px; left: -5px; width: 0; height: 0;
+  border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
+  transform: rotate(-70deg);
+}
+
+/* PRO SPLASH SCREEN */
 #splash{
   position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center;
   justify-content:center; padding:24px;
@@ -51,7 +104,7 @@ button, input, select{font-family:inherit;}
 #splash.hide{opacity:0; visibility:hidden;}
 
 .splash-art {
-  width: 170px; height: 170px; margin-bottom: 18px;
+  width: 160px; height: 160px; margin-bottom: 18px;
   filter: drop-shadow(0 12px 24px rgba(0,0,0,0.22));
   animation: floatArt 3.5s ease-in-out infinite;
 }
@@ -107,23 +160,23 @@ button, input, select{font-family:inherit;}
   border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 .quote-body { font-size: 15.5px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 10px; }
-.reaction-bar { display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 10px; }
+.reaction-bar { display: flex; gap: 6px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 10px; }
 .react-btn {
-  background: var(--card-2); border: none; border-radius: 99px; padding: 6px 12px;
-  font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; display: flex; align-items: center; gap: 4px;
+  background: var(--card-2); border: none; border-radius: 99px; padding: 6px 10px;
+  font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; display: flex; align-items: center;
 }
 .react-btn.fav-active { background: #FFE0E3; color: #FF4757; }
 
-/* CHAT ROOM STYLING */
-.chat-tabs { display: flex; gap: 8px; margin: 10px 14px 0; }
+/* CHAT ROOM STYLING WITH 3 ROOMS */
+.chat-tabs { display: flex; gap: 6px; margin: 10px 14px 0; overflow-x: auto; padding-bottom: 2px; }
 .chat-tab-btn {
-  flex: 1; padding: 10px; border-radius: 99px; border: 1.5px solid var(--line);
-  background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 13.5px; cursor: pointer; text-align: center;
+  flex: 1; padding: 9px 8px; border-radius: 99px; border: 1.5px solid var(--line);
+  background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 12.5px; cursor: pointer; text-align: center; white-space: nowrap;
 }
 .chat-tab-btn.active { background: var(--orange-3); color: #fff; border-color: var(--orange-3); }
 
 .chat-container {
-  margin: 12px 14px 0; height: 50vh; min-height: 320px; overflow-y: auto; background: var(--cream-2);
+  margin: 10px 14px 0; height: 48vh; min-height: 310px; overflow-y: auto; background: var(--cream-2);
   border: 1px solid var(--line); border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 14px;
   display: flex; flex-direction: column; gap: 10px;
 }
@@ -143,12 +196,29 @@ button, input, select{font-family:inherit;}
 .chat-input-bar input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 16px; background: var(--cream); color: var(--ink); font-size: 14px; }
 .chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; font-size: 16px; flex-shrink: 0; }
 
-/* PROFILE SECTION */
+/* REGISTRATION MODAL */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 500;
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-card {
+  background: var(--card); border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 380px;
+  border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.modal-title { font-family: 'Baloo Da 2', sans-serif; font-size: 22px; font-weight: 800; text-align: center; color: var(--orange-3); margin-bottom: 14px; }
+.form-field { margin-bottom: 12px; }
+.form-field label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+.form-field input {
+  width: 100%; padding: 11px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
+  background: var(--cream); color: var(--ink); font-size: 14px;
+}
+
+/* PROFILE & SETTINGS */
 .profile-avatar-wrap { text-align: center; margin-bottom: 14px; }
-.avatar-img { width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--orange-2); box-shadow: var(--shadow-soft); object-fit: cover; }
+.avatar-img { width: 84px; height: 84px; border-radius: 50%; border: 3px solid var(--orange-2); box-shadow: var(--shadow-soft); object-fit: cover; }
 .badge-status { display: inline-block; background: var(--card-2); color: var(--orange-3); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--line); margin-top: 6px; }
 
-/* SETTINGS & DEV SECTION */
 .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .settings-row:last-child { border-bottom: none; }
 .theme-pick { display: flex; gap: 6px; }
@@ -158,12 +228,12 @@ button, input, select{font-family:inherit;}
 .dev-card { background: var(--card-2); border-radius: var(--radius-md); padding: 16px; text-align: center; border: 1px solid var(--line); margin-top: 14px; }
 .dev-name { font-family: 'Baloo Da 2', sans-serif; font-weight: 800; font-size: 18px; color: var(--orange-3); }
 .social-grid { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.social-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 99px; font-size: 12.5px; font-weight: 700; text-decoration: none; color: #fff; }
+.social-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700; text-decoration: none; color: #fff; }
 .btn-telegram { background: #0088cc; }
 .btn-facebook { background: #1877f2; }
 .btn-whatsapp { background: #25D366; }
 
-/* NAVIGATION */
+/* NAVIGATION BAR */
 .bottom-nav{
   position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto;
   display:flex; padding:8px 10px calc(8px + var(--safe-bottom));
@@ -181,7 +251,7 @@ button, input, select{font-family:inherit;}
 .page{display:none;}
 .page.active{display:block;}
 .btn-primary{
-  border:none; width:100%; padding:14px; border-radius:var(--radius-md); font-weight:700; font-size:15.5px;
+  border:none; width:100%; padding:13px; border-radius:var(--radius-md); font-weight:700; font-size:15px;
   background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn); cursor:pointer;
 }
 .toast{
@@ -194,7 +264,7 @@ button, input, select{font-family:inherit;}
 </head>
 <body>
 
-<!-- PRO SPLASH SCREEN WITH CUSTOM SVG ARTWORK -->
+<!-- PRO SPLASH SCREEN -->
 <div id="splash">
   <svg class="splash-art" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="100" cy="100" r="90" fill="white" fill-opacity="0.15"/>
@@ -280,15 +350,16 @@ button, input, select{font-family:inherit;}
     <div style="padding:14px;" id="quoteFeed"></div>
   </section>
 
-  <!-- ================= CHAT ROOM PAGE ================= -->
+  <!-- ================= CHAT ROOM PAGE (3 CHAT ROOMS) ================= -->
   <section class="page" id="page-chat">
     <div class="top-header" style="padding-bottom:16px;">
-      <div class="app-name" style="font-size:18px;">লাইভ চ্যাট ও সাপোর্ট</div>
+      <div class="app-name" style="font-size:18px;">লাইভ চ্যাট রুমস</div>
     </div>
 
-    <!-- Chat Mode Selector -->
+    <!-- 3 Chat Mode Tabs -->
     <div class="chat-tabs">
-      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')">💬 গ্লোবাল আড্ডা</button>
+      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')">💬 গ্লোবাল আড্ডা (AI)</button>
+      <button type="button" class="chat-tab-btn" id="btnTabCommunityChat" onclick="switchChatRoom('community')">👥 পাবলিক গ্রুপ</button>
       <button type="button" class="chat-tab-btn" id="btnTabSupportChat" onclick="switchChatRoom('support')">🎧 সাপোর্ট চ্যাট</button>
     </div>
 
@@ -318,10 +389,15 @@ button, input, select{font-family:inherit;}
 
         <div style="text-align:center; margin-bottom:16px;">
           <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">অতিথি ব্যবহারকারী</h3>
-          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:4px;" onclick="editUserName()">✏️ নাম পরিবর্তন করুন</button>
+          <div id="profileContactDisplay" style="font-size:13px; color:var(--muted); margin-top:2px;">রেজিস্ট্রেশন করা নেই</div>
+          <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:8px;" onclick="openAuthModal()">✏️ প্রোফাইল ও রেজিস্ট্রেশন আপডেট</button>
         </div>
 
         <div style="border-top:1px solid var(--line); padding-top:12px;">
+          <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
+            <span style="color:var(--muted);">জন্ম তারিখ:</span>
+            <strong id="profileDobDisplay">সেট করা হয়নি</strong>
+          </div>
           <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px;">
             <span style="color:var(--muted);">শুরুর তারিখ:</span>
             <strong id="profileStartDate">সেট করা হয়নি</strong>
@@ -364,9 +440,9 @@ button, input, select{font-family:inherit;}
         </div>
       </div>
 
-      <!-- DEVELOPER INFO SECTION INSIDE SETTINGS -->
+      <!-- DEVELOPER INFO SECTION -->
       <div class="dev-card">
-        <div style="font-size:12px; color:var(--muted); font-weight:700;">ডেভেলপার ও যোগাযোগ</div>
+        <div style="font-size:12px; color:var(--muted); font-weight:700;">ডেভেলপার ও প্রতিষ্ঠাতা</div>
         <div class="dev-name" id="devNameSettings">MD FIROZ HOSSAIN</div>
         <div style="font-size:12.5px; color:var(--ink-soft); margin-top:2px;">সংস্করণ: v2.5 Pro (স্মার্ট AI সাপোর্ট সহ)</div>
 
@@ -377,6 +453,36 @@ button, input, select{font-family:inherit;}
     </div>
   </section>
 
+</div>
+
+<!-- REGISTRATION MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal-card">
+    <div class="modal-title">একাউন্ট রেজিস্ট্রেশন</div>
+    
+    <div class="form-field">
+      <label>আপনার নাম</label>
+      <input type="text" id="regNameInput" placeholder="আপনার নাম লিখুন">
+    </div>
+
+    <div class="form-field">
+      <label>জিমেইল বা ফোন নম্বর</label>
+      <input type="text" id="regContactInput" placeholder="you@gmail.com অথবা 01700...">
+    </div>
+
+    <div class="form-field">
+      <label>জন্ম তারিখ</label>
+      <input type="date" id="regDobInput">
+    </div>
+
+    <div class="form-field">
+      <label>পাসওয়ার্ড</label>
+      <input type="password" id="regPassInput" placeholder="••••••••">
+    </div>
+
+    <button type="button" class="btn-primary" style="margin-top:10px;" onclick="submitRegistration()">রেজিস্ট্রেশন করুন</button>
+    <button type="button" style="width:100%; background:none; border:none; color:var(--muted); font-size:13px; margin-top:10px; cursor:pointer;" onclick="closeAuthModal()">বন্ধ করুন</button>
+  </div>
 </div>
 
 <!-- BOTTOM NAVIGATION BAR -->
@@ -423,7 +529,7 @@ function pad2(n){ return n < 10 ? "0"+n : ""+n; }
 const bnWeekday = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 const bnMonth = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
-// Toast
+// Toast System
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById("toast");
@@ -432,28 +538,66 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-// User Profile Data Init
+// User Profile & Account
 let myUid = localStorage.getItem("bcf_my_uid");
 if(!myUid) {
   myUid = "usr_" + Math.random().toString(36).substring(2, 9);
   localStorage.setItem("bcf_my_uid", myUid);
 }
-let myName = localStorage.getItem("bcf_my_name") || "ব্যাচেলর ব্যবহারকারী";
 
-function updateProfileNameUI() {
+let userAccount = JSON.parse(localStorage.getItem("bcf_user_account") || "{}");
+let myName = userAccount.name || localStorage.getItem("bcf_my_name") || "ব্যাচেলর ব্যবহারকারী";
+
+function updateProfileUI() {
   document.getElementById("profileNameDisplay").textContent = myName;
+  document.getElementById("profileContactDisplay").textContent = userAccount.contact || "রেজিস্ট্রেশন করা নেই";
+  document.getElementById("profileDobDisplay").textContent = userAccount.dob ? toBnDate(userAccount.dob) : "সেট করা হয়নি";
   document.getElementById("userAvatarImg").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(myName)}`;
 }
-updateProfileNameUI();
 
-function editUserName() {
-  const newName = prompt("আপনার সুন্দর নাম লিখুন:", myName);
-  if(newName && newName.trim()) {
-    myName = newName.trim();
-    localStorage.setItem("bcf_my_name", myName);
-    updateProfileNameUI();
-    showToast("নাম পরিবর্তন করা হয়েছে!");
+function toBnDate(dStr) {
+  if(!dStr) return "-";
+  const p = dStr.split("-");
+  if(p.length === 3) return `${toBn(p[2])}/${toBn(p[1])}/${toBn(p[0])}`;
+  return dStr;
+}
+
+updateProfileUI();
+
+// Registration Modal Functions
+function openAuthModal() {
+  if(userAccount.name) {
+    document.getElementById("regNameInput").value = userAccount.name || "";
+    document.getElementById("regContactInput").value = userAccount.contact || "";
+    document.getElementById("regDobInput").value = userAccount.dob || "";
   }
+  document.getElementById("authModal").classList.add("active");
+}
+
+function closeAuthModal() {
+  document.getElementById("authModal").classList.remove("active");
+}
+
+function submitRegistration() {
+  const name = document.getElementById("regNameInput").value.trim();
+  const contact = document.getElementById("regContactInput").value.trim();
+  const dob = document.getElementById("regDobInput").value;
+  const pass = document.getElementById("regPassInput").value;
+
+  if(!name || !contact) return showToast("নাম ও যোগাযোগের তথ্য দিন!");
+
+  userAccount = { name, contact, dob, pass, uid: myUid, updatedAt: Date.now() };
+  localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
+  localStorage.setItem("bcf_my_name", name);
+  myName = name;
+
+  if(typeof db !== "undefined") {
+    db.ref(`users/${myUid}`).set(userAccount);
+  }
+
+  updateProfileUI();
+  closeAuthModal();
+  showToast("রেজিস্ট্রেশন সফল হয়েছে!");
 }
 
 // Navigation System
@@ -464,7 +608,7 @@ function goToPage(id){
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
 
-// Theme Switcher (Light, Dark, Auto System Mode)
+// Theme Switcher (Light, Dark, Auto)
 function applyThemeChoice(choice) {
   let mode = choice;
   if(choice === "auto") {
@@ -488,7 +632,7 @@ function updateClock(){
 }
 setInterval(updateClock, 1000); updateClock();
 
-// Next Friday Countdown
+// Countdown to Next Friday
 function updateCountdown() {
   const now = new Date();
   let nextFriday = new Date(now);
@@ -505,11 +649,11 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000); updateCountdown();
 
 /* ==========================================================
-   FIREBASE INTEGRATION: DEVELOPER, QUOTES, CHAT ROOMS
+   FIREBASE INTEGRATION & 3 CHAT ROOMS LOGIC
    ========================================================== */
 if(typeof db !== "undefined") {
 
-  // 1. Fetch Developer Info & Social Links
+  // Developer Info
   db.ref("settings/developer").on("value", snap => {
     const d = snap.val() || {};
     const devName = d.name || "MD FIROZ HOSSAIN";
@@ -523,7 +667,7 @@ if(typeof db !== "undefined") {
     document.getElementById("socialSettingsGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
 
-  // 2. Quotes Feed with Reaction & Favorites
+  // Quotes Feed with Pure CSS Reactions
   let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
 
   db.ref("quotes").on("value", snap => {
@@ -547,10 +691,10 @@ if(typeof db !== "undefined") {
       div.innerHTML = `
         <div class="quote-body">${escapeHtml(q.text)}</div>
         <div class="reaction-bar">
-          <button type="button" class="react-btn" onclick="addReaction('${key}', 'love')">❤️ ${toBn(reactions.love || 0)}</button>
-          <button type="button" class="react-btn" onclick="addReaction('${key}', 'laugh')">😂 ${toBn(reactions.laugh || 0)}</button>
-          <button type="button" class="react-btn" onclick="addReaction('${key}', 'like')">👍 ${toBn(reactions.like || 0)}</button>
-          <button type="button" class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')">${isFav ? '❤️ সেভড' : '🤍 সেভ'}</button>
+          <button type="button" class="react-btn" onclick="addReaction('${key}', 'love')"><span class="css-emoji-heart"></span> ${toBn(reactions.love || 0)}</button>
+          <button type="button" class="react-btn" onclick="addReaction('${key}', 'laugh')"><span class="css-emoji-laugh"></span> ${toBn(reactions.laugh || 0)}</button>
+          <button type="button" class="react-btn" onclick="addReaction('${key}', 'like')"><span class="css-emoji-like"></span> ${toBn(reactions.like || 0)}</button>
+          <button type="button" class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')"><span class="css-emoji-star"></span> ${isFav ? 'সেভড' : 'সেভ'}</button>
           <button type="button" class="react-btn" onclick="shareQuote('${q.text}')">🔗 শেয়ার</button>
         </div>
       `;
@@ -560,7 +704,7 @@ if(typeof db !== "undefined") {
 
   window.addReaction = function(quoteId, type) {
     db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(c => (c || 0) + 1);
-    showToast("রিয়্যাকশন দেয়া হয়েছে!");
+    showToast("রিয়্যাকশন দেওয়া হয়েছে!");
   };
 
   window.toggleFavorite = function(quoteId) {
@@ -569,7 +713,7 @@ if(typeof db !== "undefined") {
       showToast("ফেভারিট থেকে সরানো হলো");
     } else {
       favQuotes.push(quoteId);
-      showToast("ফেভারিটে বুকমার্ক করা হলো!");
+      showToast("ফেভারিটে সেভ করা হলো!");
     }
     localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
   };
@@ -583,18 +727,21 @@ if(typeof db !== "undefined") {
     }
   };
 
-  // 3. Chat Room Engine (Global & Support Chat)
+  // 3 CHAT ROOMS LOGIC: Global (AI), Community (Users), Support (Admin)
   let activeChatMode = "global";
 
   window.switchChatRoom = function(mode) {
     activeChatMode = mode;
     document.getElementById("btnTabGlobalChat").classList.toggle("active", mode === "global");
+    document.getElementById("btnTabCommunityChat").classList.toggle("active", mode === "community");
     document.getElementById("btnTabSupportChat").classList.toggle("active", mode === "support");
     loadChatMessages();
   };
 
   function getChatRefPath() {
-    return activeChatMode === "global" ? "chatRooms/global/messages" : `chatRooms/support/${myUid}/messages`;
+    if(activeChatMode === "global") return "chatRooms/global/messages";
+    if(activeChatMode === "community") return "chatRooms/community/messages";
+    return `chatRooms/support/${myUid}/messages`; // Support Chat
   }
 
   function loadChatMessages() {
@@ -608,7 +755,12 @@ if(typeof db !== "undefined") {
       const keys = Object.keys(msgs);
 
       if(keys.length === 0) {
-        chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${activeChatMode === 'global' ? 'আড্ডা শুরু করতে মেসেজ লিখুন!' : 'এডমিনকে সাপোর্ট মেসেজ পাঠান।'}</div>`;
+        let emptyTxt = "মেসেজ পাঠাতে নিচে লিখুন!";
+        if(activeChatMode === "global") emptyTxt = "গ্লোবাল আড্ডা ও AI চ্যাট শুরু করুন!";
+        if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সবার সাথে চ্যাট করুন!";
+        if(activeChatMode === "support") emptyTxt = "সাপোর্টের জন্য এডমিনকে মেসেজ দিন।";
+
+        chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${emptyTxt}</div>`;
         return;
       }
 
@@ -645,20 +797,19 @@ if(typeof db !== "undefined") {
     }).then(() => {
       input.value = "";
       
-      // Trigger AI Response in Global Chat if AI Enabled
+      // Trigger AI Response ONLY in Global Chat
       if(activeChatMode === "global") {
         checkAndTriggerAi(text);
       }
     });
   };
 
-  // AI Auto-Reply Call Logic
+  // AI Response Trigger with Knowledge about MD FIROZ HOSSAIN
   function checkAndTriggerAi(userMsg) {
     db.ref("settings/ai").once("value", snap => {
       const ai = snap.val();
       if(!ai || !ai.enabled || !ai.endpoint) return;
 
-      // Call AI Endpoint
       fetchAiReply(ai, userMsg);
     });
   }
@@ -666,13 +817,17 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
+      // Explicit Developer Knowledge Context
+      const devInstruction = "\n[বিশেষ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি ডেভেলপার, প্রতিষ্ঠাতা বা অ্যাপ প্রস্তুতকারক সম্পর্কে প্রশ্ন করে, বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
+      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
+
       if(aiConfig.provider === "ollama") {
         const res = await fetch(aiConfig.endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             model: aiConfig.model || "llama3",
-            prompt: `${aiConfig.systemPrompt || ''}\nইউজার: ${userMsg}\nউত্তর:`,
+            prompt: `${fullSystemPrompt}\nইউজার: ${userMsg}\nউত্তর:`,
             stream: false
           })
         });
@@ -688,7 +843,7 @@ if(typeof db !== "undefined") {
           body: JSON.stringify({
             model: aiConfig.model || "llama-3.1-8b-instant",
             messages: [
-              { role: "system", content: aiConfig.systemPrompt || "তুমি রসাত্মক কৌতুকপ্রিয় বট।" },
+              { role: "system", content: fullSystemPrompt },
               { role: "user", content: userMsg }
             ]
           })
@@ -707,13 +862,13 @@ if(typeof db !== "undefined") {
         });
       }
     } catch(err) {
-      console.log("AI Call Error:", err);
+      console.log("AI Error:", err);
     }
   }
 
 }
 
-// Counter Math Functions
+// Counter Math
 function countFridays(s, e) {
   let count = 0, cur = new Date(s);
   while (cur <= e) {
