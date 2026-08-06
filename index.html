@@ -332,7 +332,7 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="card">
-      <div class="card-label">তোমার জীবন থেকে চলে যাওয়া শুক্রবার</div>
+      <div class="card-label">আজ জন্ম তারিখ থেকে বউ ছাড়া</div>
       <div class="friday-count" id="fridayNumber">০তম</div>
       <div class="friday-word">শুক্রবার</div>
       <div style="text-align:center; color:var(--muted); font-size:13px; margin-top:8px;" id="startDateLabel">তারিখ লোড হচ্ছে...</div>
@@ -573,15 +573,23 @@ function hideSplash() {
 }
 setTimeout(hideSplash, 800);
 
-// PERSISTENT AUTH & USER DATA
-let myUid = localStorage.getItem("bcf_my_uid");
-if(!myUid) {
-  myUid = "usr_" + Math.random().toString(36).substring(2, 9);
-  localStorage.setItem("bcf_my_uid", myUid);
-}
-
+// PERSISTENT AUTH & ISOLATED DATA STATE
+let myUid = localStorage.getItem("bcf_my_uid") || "";
 let userAccount = JSON.parse(localStorage.getItem("bcf_user_account") || "null");
 let myName = userAccount ? userAccount.name : "";
+let favQuotes = [];
+let likedQuotes = [];
+
+function loadUserScopedData() {
+  if (!myUid) {
+    favQuotes = [];
+    likedQuotes = [];
+  } else {
+    favQuotes = JSON.parse(localStorage.getItem(`bcf_favs_${myUid}`) || "[]");
+    likedQuotes = JSON.parse(localStorage.getItem(`bcf_liked_quotes_${myUid}`) || "[]");
+  }
+}
+loadUserScopedData();
 
 function checkAuthGate() {
   try {
@@ -649,7 +657,10 @@ function submitLogin() {
 
       Object.keys(users).forEach(uid => {
         const u = users[uid];
-        if((u.email === contact || u.phone === contact || (u.contact && u.contact.includes(contact))) && u.pass === pass) {
+        const matchContact = (u.email && u.email.toLowerCase() === contact.toLowerCase()) || 
+                             (u.phone && u.phone === contact) || 
+                             (u.contact && u.contact.toLowerCase().includes(contact.toLowerCase()));
+        if(matchContact && u.pass === pass) {
           matchedUid = uid;
           matchedUser = u;
         }
@@ -659,12 +670,17 @@ function submitLogin() {
         myUid = matchedUid;
         userAccount = matchedUser;
         myName = matchedUser.name;
+
         localStorage.setItem("bcf_my_uid", myUid);
         localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
         localStorage.setItem("bcf_my_name", myName);
 
+        loadUserScopedData();
+
         showToast("লগইন সফল হয়েছে!");
         checkAuthGate();
+        renderQuotesFeed();
+        if(typeof loadChatMessages === "function") loadChatMessages();
       } else {
         showToast("ইমেইল/ফোন অথবা পাসওয়ার্ড সঠিক নয়!");
       }
@@ -672,19 +688,11 @@ function submitLogin() {
       showToast("লগইন সমস্যা: " + err.message);
     });
   } else {
-    const localUser = JSON.parse(localStorage.getItem("bcf_user_account") || "null");
-    if(localUser && (localUser.email === contact || localUser.phone === contact) && localUser.pass === pass) {
-      userAccount = localUser;
-      myName = localUser.name;
-      showToast("লগইন সফল হয়েছে!");
-      checkAuthGate();
-    } else {
-      showToast("লগইন তথ্য মেলেনি!");
-    }
+    showToast("ডাটাবেস কানেকশন প্রয়োজন!");
   }
 }
 
-// 2. SUBMIT REGISTRATION
+// 2. SUBMIT REGISTRATION (ALWAYS UNIQUE UID)
 function submitRegistration() {
   const name = document.getElementById("regNameInput").value.trim();
   const email = document.getElementById("regEmailInput").value.trim();
@@ -698,29 +706,39 @@ function submitRegistration() {
   if(!dob) return showToast("জন্ম তারিখ নির্বাচন করুন!");
   if(!pass || pass.length < 4) return showToast("পাসওয়ার্ড অন্তত ৪ অক্ষরের দিন!");
 
+  // নতুন অ্যাকাউন্টের জন্য সব সময় ইউনিক আইডি তৈরি করা হচ্ছে
+  const newUid = "usr_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
+
   userAccount = {
-    uid: myUid,
+    uid: newUid,
     name: name,
     email: email,
     phone: phone,
     contact: `${email} | ${phone}`,
     dob: dob,
     pass: pass,
-    updatedAt: Date.now()
+    createdAt: Date.now()
   };
 
+  myUid = newUid;
+  myName = name;
+
+  localStorage.setItem("bcf_my_uid", myUid);
   localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
   localStorage.setItem("bcf_my_name", name);
-  myName = name;
+
+  loadUserScopedData();
 
   try {
     if(typeof db !== "undefined" && db) {
-      db.ref(`users/${myUid}`).set(userAccount);
+      db.ref(`users/${newUid}`).set(userAccount);
     }
   } catch(err) { console.log(err); }
 
   showToast("রেজিস্ট্রেশন সফল হয়েছে!");
   checkAuthGate();
+  renderQuotesFeed();
+  if(typeof loadChatMessages === "function") loadChatMessages();
 }
 
 // 3. RESET PASSWORD
@@ -742,7 +760,10 @@ function submitPasswordReset() {
 
       Object.keys(users).forEach(uid => {
         const u = users[uid];
-        if((u.email === contact || u.phone === contact || (u.contact && u.contact.includes(contact))) && u.dob === dob) {
+        const matchContact = (u.email && u.email.toLowerCase() === contact.toLowerCase()) || 
+                             (u.phone && u.phone === contact) || 
+                             (u.contact && u.contact.toLowerCase().includes(contact.toLowerCase()));
+        if(matchContact && u.dob === dob) {
           matchedUid = uid;
         }
       });
@@ -750,10 +771,6 @@ function submitPasswordReset() {
       if(matchedUid) {
         db.ref(`users/${matchedUid}/pass`).set(newPass).then(() => {
           showToast("পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে! এখন লগইন করুন।");
-          if(userAccount && userAccount.uid === matchedUid) {
-            userAccount.pass = newPass;
-            localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
-          }
           document.getElementById("loginContactInput").value = contact;
           document.getElementById("loginPassInput").value = "";
           switchAuthView("login");
@@ -767,12 +784,30 @@ function submitPasswordReset() {
   }
 }
 
+// 4. LOGOUT USER (CLEARS MEMORY DATA PERFECTLY)
 function logoutUser() {
   if(confirm("আপনি কি অ্যাকাউন্ট থেকে লগআউট করতে চান?")) {
     localStorage.removeItem("bcf_user_account");
+    localStorage.removeItem("bcf_my_name");
+    localStorage.removeItem("bcf_my_uid");
+
     userAccount = null;
     myName = "";
+    myUid = "";
+    favQuotes = [];
+    likedQuotes = [];
+
+    document.getElementById("loginContactInput").value = "";
+    document.getElementById("loginPassInput").value = "";
+    document.getElementById("regNameInput").value = "";
+    document.getElementById("regEmailInput").value = "";
+    document.getElementById("regPhoneInput").value = "";
+    document.getElementById("regDobInput").value = "";
+    document.getElementById("regPassInput").value = "";
+
+    switchAuthView('login');
     checkAuthGate();
+    showToast("লগআউট করা হয়েছে!");
   }
 }
 
@@ -793,31 +828,32 @@ function toBnDate(dStr) {
 }
 
 /* ==========================================================
-   DYNAMIC AD RENDERER FOR ACTIVE VISIBLE PAGE
+   PAGE-SPECIFIC AD RENDERER FOR ACTIVE VISIBLE PAGE
    ========================================================== */
-let currentAdScript = "";
+let currentAdScripts = {};
 
 function refreshActivePageAd() {
-  // ১. সকল এড ফ্রেম পরিষ্কার করা
   document.querySelectorAll(".ad-container-frame").forEach(f => {
     f.innerHTML = "";
   });
 
-  if(!currentAdScript || !currentAdScript.trim()) return;
-
-  // ২. বর্তমানে দৃশ্যমান (Active) পেজ খুঁজে বের করা
   const activePage = document.querySelector(".page.active");
   if(!activePage) return;
+
+  // পেজের আইডি থেকে কী (Key) বের করা (যেমন: page-home -> home)
+  const pageKey = activePage.id.replace("page-", "");
+  const pageScript = currentAdScripts[pageKey] || "";
+
+  if(!pageScript || !pageScript.trim()) return;
 
   const frame = activePage.querySelector(".ad-container-frame");
   if(!frame) return;
 
-  // ৩. অ্যাক্টিভ পেজের ফ্রেমে স্ক্রিপ্ট এক্সিকিউট করা
   setTimeout(() => {
     try {
       const range = document.createRange();
       range.selectNode(frame);
-      const fragment = range.createContextualFragment(currentAdScript);
+      const fragment = range.createContextualFragment(pageScript);
       frame.appendChild(fragment);
     } catch(e) {
       console.error("Ad render error:", e);
@@ -831,7 +867,6 @@ function goToPage(id){
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
   window.scrollTo({top:0, behavior:"smooth"});
   
-  // পেজ পরিবর্তন হলে নতুন পেজে এড রিফ্রেশ করা
   refreshActivePageAd();
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
@@ -876,15 +911,12 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000); updateCountdown();
 
-// FIREBASE SETTINGS, FAVICON & AD SCRIPT LISTENERS
+// FIREBASE SETTINGS & LISTENERS
 let allQuotesData = {};
 let activeQuoteFilter = "all";
-let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
-let likedQuotes = JSON.parse(localStorage.getItem("bcf_liked_quotes") || "[]");
 let apkDownloadUrl = "";
 
 if(typeof db !== "undefined") {
-  // Favicon dynamic set
   db.ref("settings/app/faviconUrl").on("value", snap => {
     const url = snap.val();
     if(url && url.trim()) {
@@ -892,9 +924,9 @@ if(typeof db !== "undefined") {
     }
   });
 
-  // Dynamic Ads Listener
-  db.ref("settings/app/adScript").on("value", snap => {
-    currentAdScript = snap.val() || "";
+  // পেজ-ওয়াইজ এড স্ক্রিপ্ট লিসেনার
+  db.ref("settings/app/adScripts").on("value", snap => {
+    currentAdScripts = snap.val() || {};
     refreshActivePageAd();
   });
 
@@ -976,6 +1008,7 @@ function renderQuotesFeed() {
 }
 
 window.addLoveReaction = function(quoteId) {
+  if (!myUid) return showToast("লগইন করুন!");
   if (likedQuotes.includes(quoteId)) {
     return showToast("আপনি ইতিমধ্যে একটি লাইক দিয়েছেন!");
   }
@@ -983,12 +1016,13 @@ window.addLoveReaction = function(quoteId) {
     db.ref(`quotes/${quoteId}/reactions/love`).transaction(c => (c || 0) + 1);
   }
   likedQuotes.push(quoteId);
-  localStorage.setItem("bcf_liked_quotes", JSON.stringify(likedQuotes));
+  localStorage.setItem(`bcf_liked_quotes_${myUid}`, JSON.stringify(likedQuotes));
   renderQuotesFeed();
   showToast("লাভ রিয়্যাকশন দেওয়া হয়েছে!");
 };
 
 window.toggleFavorite = function(quoteId) {
+  if (!myUid) return showToast("লগইন করুন!");
   if(favQuotes.includes(quoteId)) {
     favQuotes = favQuotes.filter(id => id !== quoteId);
     showToast("ফেভারিট থেকে সরানো হলো");
@@ -996,7 +1030,7 @@ window.toggleFavorite = function(quoteId) {
     favQuotes.push(quoteId);
     showToast("ফেভারিটে সেভ করা হলো!");
   }
-  localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
+  localStorage.setItem(`bcf_favs_${myUid}`, JSON.stringify(favQuotes));
   renderQuotesFeed();
 };
 
@@ -1019,6 +1053,7 @@ window.downloadAppApk = function() {
 };
 
 // CHAT ROOMS
+let loadChatMessages;
 if(typeof db !== "undefined") {
   let activeChatMode = "global";
 
@@ -1036,8 +1071,9 @@ if(typeof db !== "undefined") {
     return `chatRooms/support/${myUid}/messages`;
   }
 
-  function loadChatMessages() {
+  loadChatMessages = function() {
     const chatBox = document.getElementById("chatBox");
+    if (!chatBox) return;
     chatBox.innerHTML = "<div style='text-align:center; padding:10px; font-size:12px; color:gray;'>মেসেজ লোড হচ্ছে...</div>";
 
     db.ref(getChatRefPath()).off();
@@ -1106,7 +1142,7 @@ if(typeof db !== "undefined") {
     try {
       let reply = "";
       const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN।]";
-      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততমশুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
+      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
         const res = await fetch(aiConfig.endpoint, {
