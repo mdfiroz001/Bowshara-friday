@@ -7,7 +7,7 @@
 <meta name="description" content="মজার ছলে হিসাব রাখুন বউ ছাড়া কততম শুক্রবার পার করলেন — বিনোদনের জন্য তৈরি প্রিমিয়াম অ্যাপ।">
 <title>বউ ছাড়া কততম শুক্রবার</title>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" id="dynamicFavicon" href="icon-192.png">
+<link id="appFavicon" rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* DESIGN TOKENS */
 :root{
   --orange-1:#FF9A4D; --orange-2:#FF7A29; --orange-3:#FF6A1A; --orange-deep:#E85A0C;
   --cream:#FFF6EC; --cream-2:#FFE9D6; --card:#FFFFFF; --card-2:#FFF1E2;
@@ -40,188 +39,72 @@ h1,h2,h3,h4,.display{font-family:'Baloo Da 2', sans-serif;}
 button, input, select{font-family:inherit;}
 
 /* PURE CSS ICONS */
-.css-ico-heart {
-  display: inline-block; width: 10px; height: 10px; background: #FF4757;
-  transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px;
-  vertical-align: middle;
-}
-.css-ico-heart::before, .css-ico-heart::after {
-  content: ""; width: 10px; height: 10px; background: #FF4757;
-  border-radius: 50%; position: absolute;
-}
+.css-ico-heart { display: inline-block; width: 10px; height: 10px; background: #FF4757; transform: rotate(-45deg); position: relative; margin-right: 6px; margin-left: 2px; vertical-align: middle; }
+.css-ico-heart::before, .css-ico-heart::after { content: ""; width: 10px; height: 10px; background: #FF4757; border-radius: 50%; position: absolute; }
 .css-ico-heart::before { top: -5px; left: 0; }
 .css-ico-heart::after { left: 5px; top: 0; }
 
-.css-ico-star {
-  width: 0; height: 0; margin: 2px 6px 0 2px; color: #FF9A4D;
-  border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
-  transform: rotate(35deg); display: inline-block; position: relative; vertical-align: middle;
-}
-.css-ico-star::before {
-  content: ""; border-bottom: 4px solid #FF9A4D; border-left: 2px solid transparent; border-right: 2px solid transparent;
-  position: absolute; height: 0; width: 0; top: -2.5px; left: -3px; transform: rotate(-35deg);
-}
-.css-ico-star::after {
-  content: ""; position: absolute; color: #FF9A4D; top: 0.5px; left: -5px; width: 0; height: 0;
-  border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent;
-  transform: rotate(-70deg);
-}
+.css-ico-star { width: 0; height: 0; margin: 2px 6px 0 2px; color: #FF9A4D; border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent; transform: rotate(35deg); display: inline-block; position: relative; vertical-align: middle; }
+.css-ico-star::before { content: ""; border-bottom: 4px solid #FF9A4D; border-left: 2px solid transparent; border-right: 2px solid transparent; position: absolute; height: 0; width: 0; top: -2.5px; left: -3px; transform: rotate(-35deg); }
+.css-ico-star::after { content: ""; position: absolute; color: #FF9A4D; top: 0.5px; left: -5px; width: 0; height: 0; border-right: 5px solid transparent; border-bottom: 4px solid #FF9A4D; border-left: 5px solid transparent; transform: rotate(-70deg); }
 
-.css-ico-sun {
-  display: inline-block; width: 14px; height: 14px; background: #FFD166; border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(255,209,102,0.3); vertical-align: middle;
-}
+.css-ico-sun { display: inline-block; width: 14px; height: 14px; background: #FFD166; border-radius: 50%; box-shadow: 0 0 0 3px rgba(255,209,102,0.3); vertical-align: middle; }
+.css-ico-clock { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--orange-3); border-radius: 50%; position: relative; vertical-align: middle; margin-right: 6px; }
+.css-ico-clock::before { content:""; position: absolute; top: 2px; left: 4px; width: 2px; height: 5px; background: var(--orange-3); }
+.css-ico-clock::after { content:""; position: absolute; top: 5px; left: 4px; width: 4px; height: 2px; background: var(--orange-3); }
 
-.css-ico-clock {
-  display: inline-block; width: 14px; height: 14px; border: 2px solid var(--orange-3);
-  border-radius: 50%; position: relative; vertical-align: middle; margin-right: 6px;
-}
-.css-ico-clock::before {
-  content:""; position: absolute; top: 2px; left: 4px; width: 2px; height: 5px; background: var(--orange-3);
-}
-.css-ico-clock::after {
-  content:""; position: absolute; top: 5px; left: 4px; width: 4px; height: 2px; background: var(--orange-3);
-}
+.css-ico-lock { display: inline-block; width: 20px; height: 16px; background: var(--orange-3); border-radius: 4px; position: relative; margin-bottom: 10px; vertical-align: middle; }
+.css-ico-lock::before { content: ""; position: absolute; top: -9px; left: 3px; width: 10px; height: 9px; border: 3px solid var(--orange-3); border-bottom: none; border-radius: 8px 8px 0 0; }
 
-.css-ico-lock {
-  display: inline-block; width: 20px; height: 16px; background: var(--orange-3); border-radius: 4px;
-  position: relative; margin-bottom: 10px; vertical-align: middle;
-}
-.css-ico-lock::before {
-  content: ""; position: absolute; top: -9px; left: 3px; width: 10px; height: 9px;
-  border: 3px solid var(--orange-3); border-bottom: none; border-radius: 8px 8px 0 0;
-}
+.css-ico-download { display: inline-block; width: 12px; height: 12px; border-bottom: 2px solid currentColor; position: relative; margin-right: 8px; vertical-align: middle; }
+.css-ico-download::before { content: ""; position: absolute; top: 0; left: 5px; width: 2px; height: 8px; background: currentColor; }
+.css-ico-download::after { content: ""; position: absolute; top: 4px; left: 3px; width: 4px; height: 4px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
 
-.css-ico-download {
-  display: inline-block; width: 12px; height: 12px; border-bottom: 2px solid currentColor;
-  position: relative; margin-right: 8px; vertical-align: middle;
-}
-.css-ico-download::before {
-  content: ""; position: absolute; top: 0; left: 5px; width: 2px; height: 8px; background: currentColor;
-}
-.css-ico-download::after {
-  content: ""; position: absolute; top: 4px; left: 3px; width: 4px; height: 4px;
-  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg);
-}
+.css-ico-logout { display: inline-block; width: 12px; height: 12px; border: 2px solid currentColor; border-right: none; position: relative; margin-right: 8px; vertical-align: middle; }
+.css-ico-logout::before { content: ""; position: absolute; top: 3px; left: 3px; width: 7px; height: 2px; background: currentColor; }
+.css-ico-logout::after { content: ""; position: absolute; top: 2px; right: -4px; width: 4px; height: 4px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
 
-.css-ico-logout {
-  display: inline-block; width: 12px; height: 12px; border: 2px solid currentColor; border-right: none;
-  position: relative; margin-right: 8px; vertical-align: middle;
-}
-.css-ico-logout::before {
-  content: ""; position: absolute; top: 3px; left: 3px; width: 7px; height: 2px; background: currentColor;
-}
-.css-ico-logout::after {
-  content: ""; position: absolute; top: 2px; right: -4px; width: 4px; height: 4px;
-  border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg);
-}
+.css-ico-pencil { display: inline-block; width: 10px; height: 3px; background: currentColor; transform: rotate(-45deg); position: relative; margin-right: 6px; vertical-align: middle; }
+.css-ico-pencil::before { content: ""; position: absolute; left: -3px; top: 0; width: 0; height: 0; border-right: 3px solid currentColor; border-top: 1.5px solid transparent; border-bottom: 1.5px solid transparent; }
 
-.css-ico-pencil {
-  display: inline-block; width: 10px; height: 3px; background: currentColor;
-  transform: rotate(-45deg); position: relative; margin-right: 6px; vertical-align: middle;
-}
-.css-ico-pencil::before {
-  content: ""; position: absolute; left: -3px; top: 0; width: 0; height: 0;
-  border-right: 3px solid currentColor; border-top: 1.5px solid transparent; border-bottom: 1.5px solid transparent;
-}
+.css-ico-check { display: inline-block; width: 9px; height: 5px; border-left: 2px solid #2ED573; border-bottom: 2px solid #2ED573; transform: rotate(-45deg); margin-left: 4px; vertical-align: middle; }
+.css-ico-chat { display: inline-block; width: 12px; height: 10px; background: currentColor; border-radius: 3px; position: relative; margin-right: 6px; vertical-align: middle; }
+.css-ico-chat::before { content: ""; position: absolute; bottom: -3px; left: 3px; width: 0; height: 0; border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 4px solid currentColor; }
 
-.css-ico-check {
-  display: inline-block; width: 9px; height: 5px; border-left: 2px solid #2ED573;
-  border-bottom: 2px solid #2ED573; transform: rotate(-45deg); margin-left: 4px; vertical-align: middle;
-}
+.css-ico-users { display: inline-block; width: 7px; height: 7px; background: currentColor; border-radius: 50%; position: relative; margin-right: 10px; vertical-align: middle; }
+.css-ico-users::before { content: ""; position: absolute; top: 1px; left: 6px; width: 6px; height: 6px; background: currentColor; border-radius: 50%; opacity: 0.7; }
 
-.css-ico-chat {
-  display: inline-block; width: 12px; height: 10px; background: currentColor; border-radius: 3px;
-  position: relative; margin-right: 6px; vertical-align: middle;
-}
-.css-ico-chat::before {
-  content: ""; position: absolute; bottom: -3px; left: 3px; width: 0; height: 0;
-  border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 4px solid currentColor;
-}
-
-.css-ico-users {
-  display: inline-block; width: 7px; height: 7px; background: currentColor; border-radius: 50%;
-  position: relative; margin-right: 10px; vertical-align: middle;
-}
-.css-ico-users::before {
-  content: ""; position: absolute; top: 1px; left: 6px; width: 6px; height: 6px;
-  background: currentColor; border-radius: 50%; opacity: 0.7;
-}
-
-.css-ico-headset {
-  display: inline-block; width: 12px; height: 9px; border: 2px solid currentColor;
-  border-bottom: none; border-radius: 8px 8px 0 0; position: relative; margin-right: 6px; vertical-align: middle;
-}
-.css-ico-headset::before, .css-ico-headset::after {
-  content: ""; position: absolute; bottom: -2px; width: 3px; height: 5px; background: currentColor; border-radius: 1px;
-}
+.css-ico-headset { display: inline-block; width: 12px; height: 9px; border: 2px solid currentColor; border-bottom: none; border-radius: 8px 8px 0 0; position: relative; margin-right: 6px; vertical-align: middle; }
+.css-ico-headset::before, .css-ico-headset::after { content: ""; position: absolute; bottom: -2px; width: 3px; height: 5px; background: currentColor; border-radius: 1px; }
 .css-ico-headset::before { left: -2px; }
 .css-ico-headset::after { right: -2px; }
 
-.css-ico-arrow-right {
-  display: inline-block; width: 6px; height: 6px; border-top: 2px solid currentColor;
-  border-right: 2px solid currentColor; transform: rotate(45deg); vertical-align: middle;
-}
-
-/* AD CONTAINER FRAME STYLING */
-.ad-frame-container {
-  margin: 16px 14px 0; padding: 10px; background: var(--card-2);
-  border: 1px dashed var(--line); border-radius: var(--radius-md); text-align: center;
-  min-height: 80px; display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
+.css-ico-arrow-right { display: inline-block; width: 6px; height: 6px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); vertical-align: middle; }
 
 /* AUTH GATE OVERLAY */
-#authGateOverlay {
-  position: fixed; inset: 0; z-index: 900;
-  background: linear-gradient(160deg, #1D1814 0%, #12100E 100%);
-  display: flex; align-items: center; justify-content: center; padding: 20px;
-}
+#authGateOverlay { position: fixed; inset: 0; z-index: 900; background: linear-gradient(160deg, #1D1814 0%, #12100E 100%); display: flex; align-items: center; justify-content: center; padding: 20px; }
 #authGateOverlay.hide { display: none !important; }
 
-.auth-gate-card {
-  background: var(--card); border-radius: var(--radius-lg); padding: 24px 20px; width: 100%; max-width: 380px;
-  border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
-}
-.auth-gate-logo {
-  width: 60px; height: 60px; background: var(--card-2); border-radius: 18px; margin: 0 auto 12px;
-  display: flex; align-items: center; justify-content: center; border: 1px solid var(--line);
-}
+.auth-gate-card { background: var(--card); border-radius: var(--radius-lg); padding: 24px 20px; width: 100%; max-width: 380px; border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center; }
+.auth-gate-logo { width: 60px; height: 60px; background: var(--card-2); border-radius: 18px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
 .auth-gate-title { font-size: 22px; font-weight: 800; color: var(--orange-3); margin-bottom: 4px; }
 .auth-gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
 
 .auth-tabs { display: flex; gap: 6px; margin-bottom: 16px; background: var(--cream-2); padding: 4px; border-radius: 99px; }
-.auth-tab-btn {
-  flex: 1; border: none; background: transparent; padding: 8px; border-radius: 99px;
-  font-size: 13px; font-weight: 700; color: var(--ink-soft); cursor: pointer; transition: all 0.2s;
-}
+.auth-tab-btn { flex: 1; border: none; background: transparent; padding: 8px; border-radius: 99px; font-size: 13px; font-weight: 700; color: var(--ink-soft); cursor: pointer; transition: all 0.2s; }
 .auth-tab-btn.active { background: var(--orange-3); color: #fff; }
 
 .form-field { margin-bottom: 10px; text-align: left; }
 .form-field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
-.form-field input {
-  width: 100%; padding: 10px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--line);
-  background: var(--cream); color: var(--ink); font-size: 13.5px;
-}
+.form-field input { width: 100%; padding: 10px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--line); background: var(--cream); color: var(--ink); font-size: 13.5px; }
 
-.auth-link-btn {
-  background: none; border: none; color: var(--orange-3); font-size: 12.5px; font-weight: 700;
-  cursor: pointer; margin-top: 10px; display: inline-block;
-}
+.auth-link-btn { background: none; border: none; color: var(--orange-3); font-size: 12.5px; font-weight: 700; cursor: pointer; margin-top: 10px; display: inline-block; }
 
 /* PRO SPLASH SCREEN */
-#splash{
-  position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; padding:24px;
-  background:linear-gradient(160deg, #FF8C38 0%, #FF6A1A 50%, #D84A00 100%);
-  color:#fff; transition:opacity .5s ease, visibility .5s ease; text-align:center;
-}
+#splash{ position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; background:linear-gradient(160deg, #FF8C38 0%, #FF6A1A 50%, #D84A00 100%); color:#fff; transition:opacity .5s ease, visibility .5s ease; text-align:center; }
 #splash.hide{opacity:0; visibility:hidden; pointer-events:none;}
 
-.splash-art {
-  width: 150px; height: 150px; margin-bottom: 18px;
-  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.22));
-  animation: floatArt 3.5s ease-in-out infinite;
-}
+.splash-art { width: 150px; height: 150px; margin-bottom: 18px; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.22)); animation: floatArt 3.5s ease-in-out infinite; }
 @keyframes floatArt { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
 
 .splash-title{font-family:'Baloo Da 2',sans-serif; font-size:28px; font-weight:800; margin-bottom:4px;}
@@ -233,27 +116,16 @@ button, input, select{font-family:inherit;}
 /* MAIN APP STRUCTURE */
 #app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom)); display:block;}
 
-.top-header{
-  margin:14px 14px 0; padding:20px 20px 22px; border-radius:var(--radius-lg);
-  background:linear-gradient(150deg, var(--orange-1), var(--orange-2) 55%, var(--orange-deep));
-  color:#fff; box-shadow:var(--shadow-soft); position:relative; overflow:hidden;
-}
+.top-header{ margin:14px 14px 0; padding:20px 20px 22px; border-radius:var(--radius-lg); background:linear-gradient(150deg, var(--orange-1), var(--orange-2) 55%, var(--orange-deep)); color:#fff; box-shadow:var(--shadow-soft); position:relative; overflow:hidden; }
 .header-row{display:flex; align-items:center; justify-content:space-between;}
 .header-date{font-size:14px; opacity:.92;}
 .theme-btn{width:36px;height:36px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;}
 .header-time{font-family:'Baloo Da 2',sans-serif; font-size:42px; font-weight:800; text-align:center; margin:4px 0;}
 .app-name{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; text-align:center;}
 
-.card{
-  background:var(--card); border-radius:var(--radius-lg); margin:16px 14px 0; padding:20px;
-  box-shadow:var(--shadow-soft); border:1px solid var(--line);
-}
+.card{ background:var(--card); border-radius:var(--radius-lg); margin:16px 14px 0; padding:20px; box-shadow:var(--shadow-soft); border:1px solid var(--line); }
 .card-label{text-align:center; color:var(--muted); font-size:14px; font-weight:600;}
-.friday-count{
-  font-family:'Baloo Da 2',sans-serif; font-size:60px; font-weight:800; text-align:center;
-  background:linear-gradient(150deg,var(--orange-1),var(--orange-deep));
-  -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.1;
-}
+.friday-count{ font-family:'Baloo Da 2',sans-serif; font-size:60px; font-weight:800; text-align:center; background:linear-gradient(150deg,var(--orange-1),var(--orange-deep)); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.1; }
 .friday-word{text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:24px; color:var(--ink);}
 
 .stats-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 14px 0;}
@@ -270,51 +142,29 @@ button, input, select{font-family:inherit;}
 
 /* QUOTES CARD VIEW & TABS */
 .quote-sub-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
-.q-tab-btn {
-  flex: 1; padding: 8px 12px; border-radius: 99px; border: 1.5px solid var(--line);
-  background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 13px; cursor: pointer; text-align: center;
-}
+.q-tab-btn { flex: 1; padding: 8px 12px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
 .q-tab-btn.active { background: var(--orange-3); color: #fff; border-color: var(--orange-3); }
 
-.quote-card-item {
-  background: var(--card); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 14px;
-  border: 1px solid var(--line); box-shadow: var(--shadow-soft);
-}
+.quote-card-item { background: var(--card); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
 .quote-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .quote-badge { background: var(--card-2); color: var(--orange-3); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); }
 .quote-text-body { font-size: 15.5px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 12px; min-height: 48px; }
 
 /* REACTION BAR */
 .quote-action-bar { display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px; }
-.qa-btn-love {
-  flex: 1; background: #FFE8EC; color: #FF4757; border: 1px solid rgba(255,71,87,0.2); border-radius: 99px;
-  padding: 7px 10px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
+.qa-btn-love { flex: 1; background: #FFE8EC; color: #FF4757; border: 1px solid rgba(255,71,87,0.2); border-radius: 99px; padding: 7px 10px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .qa-btn-love.liked { background: #FF4757; color: #fff; }
 
-.qa-btn-fav {
-  background: var(--card-2); color: var(--ink-soft); border: 1px solid var(--line); border-radius: 99px;
-  padding: 7px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
+.qa-btn-fav { background: var(--card-2); color: var(--ink-soft); border: 1px solid var(--line); border-radius: 99px; padding: 7px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .qa-btn-fav.active { background: #FFF3E0; color: var(--orange-3); border-color: var(--orange-3); }
-.qa-btn-share {
-  background: var(--orange-3); color: #fff; border: none; border-radius: 99px;
-  padding: 7px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
+.qa-btn-share { background: var(--orange-3); color: #fff; border: none; border-radius: 99px; padding: 7px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
 /* CHAT ROOMS */
 .chat-tabs { display: flex; gap: 6px; margin: 10px 14px 0; overflow-x: auto; padding-bottom: 2px; }
-.chat-tab-btn {
-  flex: 1; padding: 9px 8px; border-radius: 99px; border: 1.5px solid var(--line);
-  background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 12.5px; cursor: pointer; text-align: center; white-space: nowrap;
-}
+.chat-tab-btn { flex: 1; padding: 9px 8px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); font-weight: 700; font-size: 12.5px; cursor: pointer; text-align: center; white-space: nowrap; }
 .chat-tab-btn.active { background: var(--orange-3); color: #fff; border-color: var(--orange-3); }
 
-.chat-container {
-  margin: 10px 14px 0; height: 48vh; min-height: 310px; overflow-y: auto; background: var(--cream-2);
-  border: 1px solid var(--line); border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 14px;
-  display: flex; flex-direction: column; gap: 10px;
-}
+.chat-container { margin: 10px 14px 0; height: 48vh; min-height: 310px; overflow-y: auto; background: var(--cream-2); border: 1px solid var(--line); border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; position: relative; }
 .msg.me { align-self: flex-end; background: linear-gradient(135deg,var(--orange-1),var(--orange-3)); color: #fff; border-bottom-right-radius: 4px; }
 .msg.them { align-self: flex-start; background: var(--card); color: var(--ink); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
@@ -323,10 +173,7 @@ button, input, select{font-family:inherit;}
 .msg-header { font-size: 11px; font-weight: 700; opacity: 0.85; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
 .badge-bot { background: var(--orange-3); color: #fff; padding: 2px 6px; border-radius: 99px; font-size: 9px; }
 
-.chat-input-bar {
-  display: flex; gap: 8px; padding: 12px; margin: 0 14px; background: var(--card);
-  border: 1px solid var(--line); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md);
-}
+.chat-input-bar { display: flex; gap: 8px; padding: 12px; margin: 0 14px; background: var(--card); border: 1px solid var(--line); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md); }
 .chat-input-bar input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 16px; background: var(--cream); color: var(--ink); font-size: 14px; }
 .chat-send { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--orange-3); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
@@ -335,18 +182,8 @@ button, input, select{font-family:inherit;}
 .avatar-img { width: 84px; height: 84px; border-radius: 50%; border: 3px solid var(--orange-2); box-shadow: var(--shadow-soft); object-fit: cover; }
 .badge-status { display: inline-flex; align-items: center; gap: 4px; background: var(--card-2); color: var(--orange-3); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--line); margin-top: 6px; }
 
-.btn-apk-download {
-  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
-  background: linear-gradient(135deg, #2ED573, #1eAC52); color: #fff; border: none;
-  padding: 12px; border-radius: var(--radius-md); font-weight: 700; font-size: 14px;
-  cursor: pointer; margin-top: 14px; box-shadow: 0 6px 16px rgba(46,213,115,0.25);
-}
-
-.btn-logout {
-  width: 100%; background: transparent; border: 1.5px solid var(--danger, #FF4757); color: var(--danger, #FF4757);
-  padding: 10px; border-radius: var(--radius-md); font-weight: 700; font-size: 13.5px;
-  cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 6px;
-}
+.btn-apk-download { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: linear-gradient(135deg, #2ED573, #1eAC52); color: #fff; border: none; padding: 12px; border-radius: var(--radius-md); font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 14px; box-shadow: 0 6px 16px rgba(46,213,115,0.25); }
+.btn-logout { width: 100%; background: transparent; border: 1.5px solid #FF4757; color: #FF4757; padding: 10px; border-radius: var(--radius-md); font-weight: 700; font-size: 13.5px; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
 .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .settings-row:last-child { border-bottom: none; }
@@ -362,32 +199,25 @@ button, input, select{font-family:inherit;}
 .btn-facebook { background: #1877f2; }
 .btn-whatsapp { background: #25D366; }
 
+/* ADVERTISMENT FRAME AT BOTTOM OF PAGES */
+.ad-container-frame {
+  margin: 16px 14px 0; padding: 8px; background: var(--card-2); border: 1px dashed var(--line);
+  border-radius: var(--radius-md); text-align: center; min-height: 70px; display: flex;
+  align-items: center; justify-content: center; overflow: hidden;
+}
+.ad-container-frame:empty { display: none; }
+
 /* NAVIGATION BAR */
-.bottom-nav{
-  position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto;
-  display:none; padding:8px 10px calc(8px + var(--safe-bottom));
-  background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  border-top:1px solid var(--line);
-}
-.nav-btn{
-  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:3px; padding:6px 0; background:none; border:none; cursor:pointer; color:#A08068;
-}
+.bottom-nav{ position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto; display:none; padding:8px 10px calc(8px + var(--safe-bottom)); background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-top:1px solid var(--line); }
+.nav-btn{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; padding:6px 0; background:none; border:none; cursor:pointer; color:#A08068; }
 .nav-btn .nav-label{ font-size:12px; font-weight:600; }
 .nav-btn svg{ width:22px; height:22px; fill:currentColor; stroke:currentColor; }
 .nav-btn.active{ color:var(--orange-3); }
 
 .page{display:none;}
 .page.active{display:block;}
-.btn-primary{
-  border:none; width:100%; padding:13px; border-radius:var(--radius-md); font-weight:700; font-size:15px;
-  background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn); cursor:pointer;
-}
-.toast{
-  position:fixed; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px); z-index:300;
-  background:var(--ink); color:var(--cream); padding:10px 18px; border-radius:99px; font-size:13px; font-weight:600;
-  opacity:0; transition:all .3s ease; pointer-events:none; white-space:nowrap;
-}
+.btn-primary{ border:none; width:100%; padding:13px; border-radius:var(--radius-md); font-weight:700; font-size:15px; background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn); cursor:pointer; }
+.toast{ position:fixed; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px); z-index:300; background:var(--ink); color:var(--cream); padding:10px 18px; border-radius:99px; font-size:13px; font-weight:600; opacity:0; transition:all .3s ease; pointer-events:none; white-space:nowrap; }
 .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 </style>
 </head>
@@ -455,7 +285,7 @@ button, input, select{font-family:inherit;}
         <input type="tel" id="regPhoneInput" placeholder="01700000000">
       </div>
       <div class="form-field">
-        <label>জন্ম তারিখ (এই তারিখ থেকে শুক্রবার কাউন্ট হবে) *</label>
+        <label>জন্ম তারিখ নির্বাচন করুন *</label>
         <input type="date" id="regDobInput">
       </div>
       <div class="form-field">
@@ -487,10 +317,10 @@ button, input, select{font-family:inherit;}
   </div>
 </div>
 
-<!-- MAIN APP (UNLOCKED AFTER LOGIN/REGISTRATION) -->
+<!-- MAIN APP -->
 <div id="app">
 
-  <!-- ================= HOME PAGE ================= -->
+  <!-- HOME PAGE -->
   <section class="page active" id="page-home">
     <div class="top-header">
       <div class="header-row">
@@ -502,7 +332,7 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="card">
-      <div class="card-label">আজ বউ ছাড়া (জন্মদিন থেকে)</div>
+      <div class="card-label">আজ জন্ম তারিখ থেকে বউ ছাড়া</div>
       <div class="friday-count" id="fridayNumber">০তম</div>
       <div class="friday-word">শুক্রবার</div>
       <div style="text-align:center; color:var(--muted); font-size:13px; margin-top:8px;" id="startDateLabel">তারিখ লোড হচ্ছে...</div>
@@ -524,20 +354,17 @@ button, input, select{font-family:inherit;}
       </div>
     </div>
 
-    <!-- AD CONTAINER FRAME 1 -->
-    <div class="ad-frame-container" id="adFrameHome">
-      <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
-    </div>
+    <div class="ad-container-frame"></div>
   </section>
 
-  <!-- ================= COUNTER PAGE ================= -->
+  <!-- COUNTER PAGE -->
   <section class="page" id="page-counter">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">শুক্রবার কাস্টম হিসাব</div>
     </div>
     <div style="padding:14px;">
       <div class="card">
-        <label style="font-size:14px; font-weight:700; color:var(--ink-soft);">শুরুর তারিখ নির্বাচন করুন:</label>
+        <label style="font-size:14px; font-weight:700; color:var(--ink-soft);">কাস্টম শুরুর তারিখ নির্বাচন করুন:</label>
         <input type="date" id="startDateInput" style="width:100%; padding:12px; margin:12px 0; border-radius:12px; border:1.5px solid var(--line); background:var(--card); color:var(--ink);">
         <button type="button" class="btn-primary" id="btnCalcCounter">হিসাব করুন</button>
       </div>
@@ -548,15 +375,12 @@ button, input, select{font-family:inherit;}
         <div class="stat-box"><div class="stat-num" id="cStatMonths">০</div><div class="stat-lbl">মাস</div></div>
         <div class="stat-box"><div class="stat-num" id="cStatYears">০</div><div class="stat-lbl">বছর</div></div>
       </div>
-
-      <!-- AD CONTAINER FRAME 2 -->
-      <div class="ad-frame-container" id="adFrameCounter" style="margin-top:16px;">
-        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
-      </div>
     </div>
+
+    <div class="ad-container-frame"></div>
   </section>
 
-  <!-- ================= QUOTES PAGE ================= -->
+  <!-- QUOTES PAGE -->
   <section class="page" id="page-quotes">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">মজার উক্তি কার্ডস</div>
@@ -569,43 +393,34 @@ button, input, select{font-family:inherit;}
       </div>
 
       <div id="quoteFeed"></div>
-
-      <!-- AD CONTAINER FRAME 3 -->
-      <div class="ad-frame-container" id="adFrameQuotes">
-        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
-      </div>
     </div>
+
+    <div class="ad-container-frame"></div>
   </section>
 
-  <!-- ================= CHAT ROOM PAGE ================= -->
+  <!-- CHAT ROOM PAGE -->
   <section class="page" id="page-chat">
     <div class="top-header" style="padding-bottom:16px;">
       <div class="app-name" style="font-size:18px;">লাইভ চ্যাট রুমস</div>
     </div>
 
-    <!-- 3 Chat Mode Tabs -->
     <div class="chat-tabs">
-      <button type="button" class="chat-tab-btn active" id="btnTabAiChat" onclick="switchChatRoom('ai')"><span class="css-ico-chat"></span> AI চ্যাটবট (প্রাইভেট)</button>
+      <button type="button" class="chat-tab-btn active" id="btnTabGlobalChat" onclick="switchChatRoom('global')"><span class="css-ico-chat"></span> এআই চ্যাট (AI)</button>
       <button type="button" class="chat-tab-btn" id="btnTabCommunityChat" onclick="switchChatRoom('community')"><span class="css-ico-users"></span> পাবলিক গ্রুপ</button>
       <button type="button" class="chat-tab-btn" id="btnTabSupportChat" onclick="switchChatRoom('support')"><span class="css-ico-headset"></span> সাপোর্ট চ্যাট</button>
     </div>
 
-    <!-- Live Messages Box -->
     <div class="chat-container" id="chatBox"></div>
 
-    <!-- Send Bar -->
     <div class="chat-input-bar">
       <input type="text" id="chatInput" placeholder="মেসেজ লিখুন..." maxlength="400">
       <button type="button" class="chat-send" onclick="sendChatMessage()"><span class="css-ico-arrow-right"></span></button>
     </div>
 
-    <!-- AD CONTAINER FRAME 4 -->
-    <div class="ad-frame-container" id="adFrameChat">
-      <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
-    </div>
+    <div class="ad-container-frame"></div>
   </section>
 
-  <!-- ================= PROFILE PAGE ================= -->
+  <!-- PROFILE PAGE -->
   <section class="page" id="page-profile">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">ইউজার প্রোফাইল</div>
@@ -621,7 +436,6 @@ button, input, select{font-family:inherit;}
 
         <div style="text-align:center; margin-bottom:16px;">
           <h3 id="profileNameDisplay" style="margin:0; font-size:22px;">ব্যবহারকারী</h3>
-          <div id="profileContactDisplay" style="font-size:12.5px; color:var(--muted); margin-top:2px;">-</div>
           <button type="button" style="background:none; border:none; color:var(--orange-3); font-weight:700; font-size:13px; cursor:pointer; margin-top:6px;" onclick="editProfileNameOnly()"><span class="css-ico-pencil"></span> নাম পরিবর্তন করুন</button>
         </div>
 
@@ -639,30 +453,25 @@ button, input, select{font-family:inherit;}
             <strong id="profileDobDisplay">সেট করা হয়নি</strong>
           </div>
           <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:13.5px;">
-            <span style="color:var(--muted);">হিসাবের শুরুর তারিখ:</span>
-            <strong id="profileStartDate">সেট করা হয়নি</strong>
+            <span style="color:var(--muted);">মোট শুক্রবার পার:</span>
+            <strong id="profileFridayCount">০টি</strong>
           </div>
         </div>
 
-        <!-- APK App Download Button -->
         <button type="button" class="btn-apk-download" id="btnDownloadApk" onclick="downloadAppApk()">
           <span class="css-ico-download"></span> অ্যান্ড্রয়েড অ্যাপ (APK) ডাউনলোড করুন
         </button>
 
-        <!-- Logout Button -->
         <button type="button" class="btn-logout" onclick="logoutUser()">
           <span class="css-ico-logout"></span> অ্যাকাউন্ট থেকে লগআউট করুন
         </button>
       </div>
-
-      <!-- AD CONTAINER FRAME 5 -->
-      <div class="ad-frame-container" id="adFrameProfile">
-        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
-      </div>
     </div>
+
+    <div class="ad-container-frame"></div>
   </section>
 
-  <!-- ================= SETTINGS PAGE ================= -->
+  <!-- SETTINGS PAGE -->
   <section class="page" id="page-settings">
     <div class="top-header">
       <div class="app-name" style="font-size:18px;">সেটিংস ও অ্যাপ তথ্য</div>
@@ -685,28 +494,22 @@ button, input, select{font-family:inherit;}
         <div class="settings-row">
           <div>
             <div style="font-weight:700; font-size:15px;">কাউন্টার রিসেট</div>
-            <div style="font-size:12px; color:var(--muted);">শুরুর তারিখ নতুন করে সেট করতে ক্লিক করুন</div>
+            <div style="font-size:12px; color:var(--muted);">জন্মদিন অনুযায়ী কাউন্টার সেট করতে ক্লিক করুন</div>
           </div>
           <button type="button" id="btnResetCounter" style="background:var(--orange-deep); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:700; cursor:pointer;">রিসেট</button>
         </div>
       </div>
 
-      <!-- DEVELOPER INFO SECTION -->
       <div class="dev-card">
         <div style="font-size:12px; color:var(--muted); font-weight:700;">ডেভেলপার ও প্রতিষ্ঠাতা</div>
         <div class="dev-name" id="devNameSettings">MD FIROZ HOSSAIN</div>
         <div style="font-size:12.5px; color:var(--ink-soft); margin-top:2px;">সংস্করণ: v2.5 Pro (স্মার্ট AI সাপোর্ট সহ)</div>
 
-        <div class="social-grid" id="socialSettingsGrid">
-          <!-- Dynamic Links from Firebase -->
-        </div>
-      </div>
-
-      <!-- AD CONTAINER FRAME 6 -->
-      <div class="ad-frame-container" id="adFrameSettings">
-        <span style="font-size:11px; color:var(--muted);">বিজ্ঞাপন ফ্রেম</span>
+        <div class="social-grid" id="socialSettingsGrid"></div>
       </div>
     </div>
+
+    <div class="ad-container-frame"></div>
   </section>
 
 </div>
@@ -764,14 +567,13 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-// Splash Hide
 function hideSplash() {
   const splash = document.getElementById("splash");
   if(splash) splash.classList.add("hide");
 }
 setTimeout(hideSplash, 800);
 
-// PERSISTENT AUTH SESSION CHECK
+// PERSISTENT AUTH & USER DATA
 let myUid = localStorage.getItem("bcf_my_uid");
 if(!myUid) {
   myUid = "usr_" + Math.random().toString(36).substring(2, 9);
@@ -793,11 +595,9 @@ function checkAuthGate() {
       if(nav) nav.style.display = "flex";
       updateProfileUI();
 
-      // AUTO SET FRIDAY COUNTER START DATE FROM REGISTRATION DOB
+      // জন্ম তারিখ দিয়ে কাউন্টার আপডেট
       if(userAccount.dob) {
         updateCounterData(userAccount.dob);
-        const startDateInput = document.getElementById("startDateInput");
-        if(startDateInput) startDateInput.value = userAccount.dob;
       }
     } else {
       if(authGate) authGate.classList.remove("hide");
@@ -806,12 +606,9 @@ function checkAuthGate() {
     }
   } catch(e) {
     console.error(e);
-    document.getElementById("app").style.display = "block";
-    document.querySelector(".bottom-nav").style.display = "flex";
   }
 }
 
-// AUTH GATE VIEWS TOGGLE
 function switchAuthView(viewName) {
   document.getElementById("viewAuthLogin").style.display = (viewName === 'login') ? 'block' : 'none';
   document.getElementById("viewAuthRegister").style.display = (viewName === 'register') ? 'block' : 'none';
@@ -927,7 +724,7 @@ function submitRegistration() {
   checkAuthGate();
 }
 
-// 3. SUBMIT PASSWORD RESET
+// 3. RESET PASSWORD
 function submitPasswordReset() {
   const contact = document.getElementById("resetContactInput").value.trim();
   const dob = document.getElementById("resetDobInput").value;
@@ -967,30 +764,7 @@ function submitPasswordReset() {
       } else {
         showToast("তথ্য মিলেনি! সঠিক ইমেইল/ফোন ও জন্ম তারিখ দিন।");
       }
-    }).catch(err => {
-      showToast("ডাটাবেস ত্রুটি: " + err.message);
     });
-  } else {
-    showToast("ডাটাবেস কানেকশন প্রয়োজন!");
-  }
-}
-
-function editProfileNameOnly() {
-  const newName = prompt("আপনার নতুন নাম লিখুন:", myName);
-  if(newName && newName.trim()) {
-    myName = newName.trim();
-    if(userAccount) userAccount.name = myName;
-    localStorage.setItem("bcf_user_account", JSON.stringify(userAccount));
-    localStorage.setItem("bcf_my_name", myName);
-    
-    try {
-      if(typeof db !== "undefined" && db) {
-        db.ref(`users/${myUid}/name`).set(myName);
-      }
-    } catch(err) { console.log(err); }
-
-    updateProfileUI();
-    showToast("নাম পরিবর্তন করা হয়েছে!");
   }
 }
 
@@ -1067,9 +841,7 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000); updateCountdown();
 
-/* ==========================================================
-   QUOTES CARD VIEW, SINGLE LIKE LIMIT, SAVED TAB, CARD SHARE
-   ========================================================== */
+// FIREBASE SETTINGS, FAVICON & AD SCRIPT LISTENERS
 let allQuotesData = {};
 let activeQuoteFilter = "all";
 let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
@@ -1077,6 +849,28 @@ let likedQuotes = JSON.parse(localStorage.getItem("bcf_liked_quotes") || "[]");
 let apkDownloadUrl = "";
 
 if(typeof db !== "undefined") {
+  // Favicon dynamic set
+  db.ref("settings/app/faviconUrl").on("value", snap => {
+    const url = snap.val();
+    if(url && url.trim()) {
+      document.getElementById("appFavicon").href = url.trim();
+    }
+  });
+
+  // Dynamic Ads render in frames
+  db.ref("settings/app/adScript").on("value", snap => {
+    const scriptHtml = snap.val() || "";
+    const adFrames = document.querySelectorAll(".ad-container-frame");
+    adFrames.forEach(frame => {
+      frame.innerHTML = "";
+      if(scriptHtml && scriptHtml.trim()) {
+        const range = document.createRange();
+        range.selectNode(frame);
+        const fragment = range.createContextualFragment(scriptHtml);
+        frame.appendChild(fragment);
+      }
+    });
+  });
 
   db.ref("settings/developer").on("value", snap => {
     const d = snap.val() || {};
@@ -1090,20 +884,6 @@ if(typeof db !== "undefined") {
     document.getElementById("socialSettingsGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক নাই</span>";
   });
 
-  // Dynamic Favicon Loader
-  db.ref("settings/app/faviconUrl").on("value", snap => {
-    const faviconUrl = snap.val();
-    if(faviconUrl) {
-      document.getElementById("dynamicFavicon").href = faviconUrl;
-    }
-  });
-
-  // Dynamic Ad Script Injector
-  db.ref("settings/app/adScript").on("value", snap => {
-    const adScriptHtml = snap.val();
-    injectAdScriptToFrames(adScriptHtml);
-  });
-
   db.ref("settings/app/apkUrl").on("value", snap => {
     apkDownloadUrl = snap.val() || "";
   });
@@ -1112,30 +892,9 @@ if(typeof db !== "undefined") {
     allQuotesData = snap.val() || {};
     renderQuotesFeed();
   });
-
 }
 
-// Inject Ad Script into Frames
-function injectAdScriptToFrames(scriptHtml) {
-  const frames = document.querySelectorAll(".ad-frame-container");
-  if(!scriptHtml || !scriptHtml.trim()) {
-    frames.forEach(f => f.style.display = "none");
-    return;
-  }
-  frames.forEach(f => {
-    f.style.display = "flex";
-    f.innerHTML = scriptHtml;
-    // Execute inner scripts
-    const scripts = f.querySelectorAll("script");
-    scripts.forEach(s => {
-      const newScript = document.createElement("script");
-      if(s.src) newScript.src = s.src;
-      else newScript.textContent = s.innerHTML;
-      document.body.appendChild(newScript);
-    });
-  });
-}
-
+// QUOTES SYSTEM
 window.switchQuoteTab = function(mode) {
   activeQuoteFilter = mode;
   document.getElementById("btnQuoteAll").classList.toggle("active", mode === "all");
@@ -1217,16 +976,11 @@ window.toggleFavorite = function(quoteId) {
 
 window.shareQuoteCard = function(quoteText) {
   const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-fun.vercel.app`;
-  
   if (navigator.share) {
-    navigator.share({
-      title: "বউ ছাড়া কততম শুক্রবার - উক্তি কার্ড",
-      text: cardContent,
-      url: "https://bouchara-fun.vercel.app"
-    });
+    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://bouchara-fun.vercel.app" });
   } else {
     navigator.clipboard.writeText(cardContent);
-    showToast("উক্তি কার্ড লিংক সহ কপি করা হয়েছে!");
+    showToast("উক্তি লিংক সহ কপি করা হয়েছে!");
   }
 };
 
@@ -1238,25 +992,23 @@ window.downloadAppApk = function() {
   }
 };
 
-/* ==========================================================
-   3 CHAT ROOMS (AI CHAT IS PRIVATE TO EACH USER NOW)
-   ========================================================== */
+// CHAT ROOMS (AI ISOLATED PER USER, COMMUNITY PUBLIC)
 if(typeof db !== "undefined") {
-
-  let activeChatMode = "ai";
+  let activeChatMode = "global";
 
   window.switchChatRoom = function(mode) {
     activeChatMode = mode;
-    document.getElementById("btnTabAiChat").classList.toggle("active", mode === "ai");
+    document.getElementById("btnTabGlobalChat").classList.toggle("active", mode === "global");
     document.getElementById("btnTabCommunityChat").classList.toggle("active", mode === "community");
     document.getElementById("btnTabSupportChat").classList.toggle("active", mode === "support");
     loadChatMessages();
   };
 
   function getChatRefPath() {
-    if(activeChatMode === "ai") return `chatRooms/ai/${myUid}/messages`; // PRIVATE AI CHAT PER USER
-    if(activeChatMode === "community") return "chatRooms/community/messages"; // PUBLIC COMMUNITY
-    return `chatRooms/support/${myUid}/messages`; // PRIVATE SUPPORT
+    // এআই চ্যাট এখন ইউজারের নিজস্ব প্রাইভেট পাথে সংরক্ষণ হবে
+    if(activeChatMode === "global") return `chatRooms/ai/${myUid}/messages`;
+    if(activeChatMode === "community") return "chatRooms/community/messages";
+    return `chatRooms/support/${myUid}/messages`;
   }
 
   function loadChatMessages() {
@@ -1271,9 +1023,9 @@ if(typeof db !== "undefined") {
 
       if(keys.length === 0) {
         let emptyTxt = "মেসেজ পাঠাতে নিচে লিখুন!";
-        if(activeChatMode === "ai") emptyTxt = "আপনার নিজস্ব AI বটের সাথে প্রাইভেট চ্যাট শুরু করুন!";
-        if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সকল ব্যবহারকারীর সাথে চ্যাট করুন!";
-        if(activeChatMode === "support") emptyTxt = "সাপোর্টের জন্য এডমিনকে মেসেজ দিন (শুধু আপনার ও এডমিনের মেসেজ থাকবে)।";
+        if(activeChatMode === "global") emptyTxt = "আপনার নিজস্ব AI চ্যাটবটের সাথে মেসেজ শুরু করুন!";
+        if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সবার সাথে মেসেজ শেয়ার করুন!";
+        if(activeChatMode === "support") emptyTxt = "আপনার নিজস্ব সাপোর্ট মেসেজ পাঠান (এখানে শুধু এডমিন উত্তর দেবেন)।";
 
         chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${emptyTxt}</div>`;
         return;
@@ -1311,8 +1063,7 @@ if(typeof db !== "undefined") {
       time: Date.now()
     }).then(() => {
       input.value = "";
-      
-      if(activeChatMode === "ai") {
+      if(activeChatMode === "global") {
         checkAndTriggerAi(text);
       }
     });
@@ -1322,7 +1073,6 @@ if(typeof db !== "undefined") {
     db.ref("settings/ai").once("value", snap => {
       const ai = snap.val();
       if(!ai || !ai.enabled || !ai.endpoint) return;
-
       fetchAiReply(ai, userMsg);
     });
   }
@@ -1330,7 +1080,7 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
-      const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN। কেউ যদি অ্যাপটি কে তৈরি করেছে, ডেভেলপার কে বা প্রতিষ্ঠাতা কে প্রশ্ন করে, স্পষ্টভাবে বলবে MD FIROZ HOSSAIN এটি তৈরি করেছেন।]";
+      const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN।]";
       const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
@@ -1377,10 +1127,9 @@ if(typeof db !== "undefined") {
       console.log("AI Error:", err);
     }
   }
-
 }
 
-// Counter Math
+// Counter Math based on User DOB
 function countFridays(s, e) {
   let count = 0, cur = new Date(s);
   while (cur <= e) {
@@ -1406,24 +1155,30 @@ function updateCounterData(dateStr) {
   document.getElementById("cStatMonths").textContent = toBn(Math.floor(diffDays/30));
   document.getElementById("cStatYears").textContent = toBn(Math.floor(diffDays/365));
 
-  document.getElementById("startDateLabel").textContent = `শুরু: ${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
-  document.getElementById("profileStartDate").textContent = `${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
+  document.getElementById("startDateLabel").textContent = `জন্মদিন: ${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
   document.getElementById("profileFridayCount").textContent = `${toBn(fridays)}টি`;
 }
 
 document.getElementById("btnCalcCounter").addEventListener("click", () => {
   const dateVal = document.getElementById("startDateInput").value;
   if (dateVal) {
-    localStorage.setItem("bcf_start_date", dateVal);
     updateCounterData(dateVal);
     showToast("হিসাব আপডেট করা হয়েছে!");
   }
 });
 
 document.getElementById("btnResetCounter").addEventListener("click", () => {
-  localStorage.removeItem("bcf_start_date");
-  location.reload();
+  if(userAccount && userAccount.dob) {
+    updateCounterData(userAccount.dob);
+    showToast("জন্মদিন অনুযায়ী কাউন্টার রিসেট হয়েছে!");
+  }
 });
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str || "";
+  return div.innerHTML;
+}
 
 window.addEventListener("load", () => {
   checkAuthGate();
