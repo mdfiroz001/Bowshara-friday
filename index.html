@@ -15,9 +15,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ==========================================================
-   ডিজাইন টোকেন — লাইট / ডার্ক থিম
-   ========================================================== */
 :root{
   --orange-1:#FF9A4D; --orange-2:#FF7A29; --orange-3:#FF6A1A; --orange-deep:#E85A0C;
   --cream:#FFF6EC; --cream-2:#FFE9D6; --card:#FFFFFF; --card-2:#FFF1E2;
@@ -40,245 +37,138 @@ body{
 }
 h1,h2,h3,.display{font-family:'Baloo Da 2', sans-serif;}
 button{font-family:inherit;}
-::selection{background:var(--orange-1);color:#fff;}
 
-/* Pure CSS Balloon Emoji */
-.css-balloon{
-  display:inline-block; width:14px; height:18px; background:#FF4757; border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
-  position:relative; margin-left:4px; vertical-align:middle; box-shadow:inset -2px -2px 0 rgba(0,0,0,0.15);
-}
-.css-balloon::before{
-  content:""; position:absolute; bottom:-3px; left:50%; transform:translateX(-50%);
-  width:0; height:0; border-left:3px solid transparent; border-right:3px solid transparent; border-bottom:4px solid #FF4757;
-}
-.css-balloon::after{
-  content:""; position:absolute; bottom:-12px; left:50%; width:1px; height:10px; background:rgba(0,0,0,0.25);
-  transform:rotate(10deg);
-}
-
-/* CSS Icons */
-.ico-refresh{ width:14px; height:14px; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; display:inline-block; position:relative; vertical-align:middle; }
-.ico-refresh::after{ content:""; position:absolute; top:-2px; right:-3px; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-bottom:5px solid currentColor; transform:rotate(45deg); }
-.ico-star{ width:0; height:0; margin:4px; color:currentColor; border-right:6px solid transparent; border-bottom:4px solid currentColor; border-left:6px solid transparent; transform:rotate(35deg); display:inline-block; position:relative; vertical-align:middle; }
-.ico-star::before{ content:""; border-bottom:4px solid currentColor; border-left:2px solid transparent; border-right:2px solid transparent; position:absolute; height:0; width:0; top:-2.5px; left:-4px; transform:rotate(-35deg); }
-.ico-star::after{ content:""; position:absolute; color:currentColor; top:0.5px; left:-6px; width:0; height:0; border-right:6px solid transparent; border-bottom:4px solid currentColor; border-left:6px solid transparent; transform:rotate(-70deg); }
-.ico-copy{ width:10px; height:12px; border:1.5px solid currentColor; border-radius:2px; display:inline-block; position:relative; vertical-align:middle; margin-right:2px; }
-.ico-copy::before{ content:""; position:absolute; top:-4px; right:-4px; width:8px; height:10px; border-top:1.5px solid currentColor; border-right:1.5px solid currentColor; border-radius:1px; }
-.ico-share{ width:10px; height:10px; border-top:2px solid currentColor; border-right:2px solid currentColor; display:inline-block; position:relative; transform:rotate(-45deg); vertical-align:middle; }
-.ico-share::before{ content:""; position:absolute; width:12px; height:2px; background:currentColor; transform:rotate(45deg); transform-origin:right top; top:0; right:0; }
-
-/* UI LAYOUT & COMPONENTS */
-.bg-shapes{position:fixed; inset:0; overflow:hidden; z-index:0; pointer-events:none;}
-.bg-shapes span{
-  position:absolute; border-radius:50%; background:linear-gradient(135deg,var(--orange-1),var(--orange-3));
-  opacity:.12; filter:blur(2px); animation:float 14s ease-in-out infinite;
-}
-.bg-shapes span:nth-child(1){width:180px;height:180px; top:-60px; left:-50px; animation-delay:0s;}
-.bg-shapes span:nth-child(2){width:120px;height:120px; top:40%; right:-40px; animation-delay:3s;}
-.bg-shapes span:nth-child(3){width:90px;height:90px; bottom:120px; left:-30px; animation-delay:6s;}
-.bg-shapes span:nth-child(4){width:150px;height:150px; bottom:-60px; right:10%; animation-delay:2s;}
-@keyframes float{0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-24px) scale(1.06);}}
-
+/* PRO SPLASH SCREEN WITH CUSTOM VECTOR ARTWORK */
 #splash{
   position:fixed; inset:0; z-index:999; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:18px; background:linear-gradient(160deg,var(--orange-1),var(--orange-3) 55%, var(--orange-deep));
-  transition:opacity .6s ease, visibility .6s ease;
+  justify-content:center; padding:24px;
+  background:linear-gradient(160deg, #FF8C38 0%, #FF6A1A 50%, #D84A00 100%);
+  color:#fff; transition:opacity .6s ease, visibility .6s ease; text-align:center;
 }
 #splash.hide{opacity:0; visibility:hidden;}
-.splash-logo{
-  width:96px;height:96px; border-radius:28px; background:#fff; display:flex; align-items:center; justify-content:center;
-  box-shadow:0 20px 40px rgba(0,0,0,0.25); animation:pop .8s cubic-bezier(.17,.67,.44,1.34);
+
+.splash-art {
+  width: 180px; height: 180px; margin-bottom: 20px;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.25));
+  animation: floatArt 3.5s ease-in-out infinite;
 }
-@keyframes pop{from{transform:scale(.4) rotate(-8deg); opacity:0;} to{transform:scale(1) rotate(0); opacity:1;}}
-.logo-mark{width:52px;height:44px; position:relative;}
-.logo-mark::before{content:""; position:absolute; inset:0; border-radius:8px; background:var(--cream); border:3px solid var(--orange-3);}
-.logo-mark::after{content:""; position:absolute; top:9px; left:50%; transform:translateX(-50%); width:12px; height:12px; border-radius:50%; background:var(--orange-3);}
-.splash-title{color:#fff; font-family:'Baloo Da 2',sans-serif; font-size:22px; font-weight:700; text-align:center;}
-.splash-loader{width:120px; height:6px; border-radius:6px; background:rgba(255,255,255,0.3); overflow:hidden;}
-.splash-loader span{display:block; height:100%; width:40%; background:#fff; border-radius:6px; animation:load 1.1s ease-in-out infinite;}
+@keyframes floatArt { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+
+.splash-title{font-family:'Baloo Da 2',sans-serif; font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:0.5px;}
+.splash-sub{font-size:14px; opacity:0.92; font-weight:500; margin-bottom:24px;}
+.splash-loader{width:140px; height:6px; border-radius:6px; background:rgba(255,255,255,0.3); overflow:hidden;}
+.splash-loader span{display:block; height:100%; width:40%; background:#fff; border-radius:6px; animation:load 1.2s ease-in-out infinite;}
 @keyframes load{0%{transform:translateX(-100%);}100%{transform:translateX(280%);}}
 
+/* MAIN CONTAINER */
 #app{max-width:480px; margin:0 auto; position:relative; z-index:1; padding-bottom:calc(92px + var(--safe-bottom));}
+
 .top-header{
-  margin:14px 14px 0; padding:22px 20px 26px; border-radius:var(--radius-lg);
+  margin:14px 14px 0; padding:22px 20px 24px; border-radius:var(--radius-lg);
   background:linear-gradient(150deg, var(--orange-1), var(--orange-2) 55%, var(--orange-deep));
-  color:#fff; box-shadow:var(--shadow-soft); position:relative; overflow:hidden; animation:fadeDown .6s ease;
+  color:#fff; box-shadow:var(--shadow-soft); position:relative; overflow:hidden;
 }
-@keyframes fadeDown{from{opacity:0; transform:translateY(-14px);} to{opacity:1; transform:translateY(0);}}
-.top-header::after{content:""; position:absolute; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,0.08); top:-110px; right:-60px;}
-.header-row{display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;}
+.header-row{display:flex; align-items:center; justify-content:space-between;}
 .header-date{font-size:14px; opacity:.92;}
-.theme-btn{width:38px;height:38px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); display:flex;align-items:center;justify-content:center; cursor:pointer;}
-.icon-theme{width:16px;height:16px;border-radius:50%; background:#fff; box-shadow:6px -1px 0 -3px #fff inset;}
-.header-time{font-family:'Baloo Da 2',sans-serif; font-size:44px; font-weight:700; text-align:center; margin:6px 0 2px; letter-spacing:1px; position:relative; z-index:1;}
-.header-sub{text-align:center; font-size:15px; font-weight:600; opacity:.95; position:relative; z-index:1; display:flex; align-items:center; justify-content:center;}
-.logo-row{display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:6px; position:relative; z-index:1;}
-.logo-row .mini-logo{width:26px;height:22px; position:relative;}
-.logo-row .mini-logo::before{content:"";position:absolute;inset:0;border-radius:5px;background:#fff;}
-.logo-row .mini-logo::after{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:var(--orange-3);}
-.logo-row .app-name{font-family:'Baloo Da 2',sans-serif; font-weight:600; font-size:14px; letter-spacing:.3px;}
+.theme-btn{width:36px;height:36px;border-radius:50%; border:none; background:rgba(255,255,255,0.22); display:flex;align-items:center;justify-content:center; cursor:pointer;}
+.header-time{font-family:'Baloo Da 2',sans-serif; font-size:42px; font-weight:800; text-align:center; margin:4px 0;}
+.app-name{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; text-align:center;}
 
 .card{
-  background:var(--card); border-radius:var(--radius-lg); margin:16px 14px 0; padding:24px 20px;
-  box-shadow:var(--shadow-soft); border:1px solid var(--line); animation:fadeUp .5s ease both;
+  background:var(--card); border-radius:var(--radius-lg); margin:16px 14px 0; padding:20px;
+  box-shadow:var(--shadow-soft); border:1px solid var(--line);
 }
-@keyframes fadeUp{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);}}
-.card-label{text-align:center; color:var(--muted); font-size:15px; font-weight:600; margin-bottom:6px;}
+.card-label{text-align:center; color:var(--muted); font-size:14px; font-weight:600;}
 .friday-count{
-  font-family:'Baloo Da 2',sans-serif; font-size:64px; font-weight:800; text-align:center;
+  font-family:'Baloo Da 2',sans-serif; font-size:60px; font-weight:800; text-align:center;
   background:linear-gradient(150deg,var(--orange-1),var(--orange-deep));
-  -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.05;
+  -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.1;
 }
-.friday-word{text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:26px; color:var(--ink); margin-top:2px;}
-.friday-start{text-align:center; color:var(--muted); font-size:14px; margin-top:10px;}
+.friday-word{text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:24px; color:var(--ink);}
 
 .stats-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 14px 0;}
-.stat-box{background:var(--card-2); border-radius:var(--radius-md); padding:16px 8px; text-align:center; box-shadow:0 6px 16px rgba(255,122,41,0.08);}
-.stat-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:24px; color:var(--orange-3);}
-.stat-lbl{font-size:12.5px; color:var(--muted); margin-top:2px;}
+.stat-box{background:var(--card-2); border-radius:var(--radius-md); padding:14px 8px; text-align:center;}
+.stat-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px; color:var(--orange-3);}
+.stat-lbl{font-size:12px; color:var(--muted);}
 
-.section-title{display:flex; align-items:center; justify-content:center; gap:8px; font-weight:700; font-size:16px; color:var(--ink);}
-.clock-ico{width:15px;height:15px; border:2px solid var(--orange-3); border-radius:50%; position:relative;}
-.clock-ico::after{content:"";position:absolute; top:1px; left:5px; width:1.5px; height:5px; background:var(--orange-3);}
-.countdown-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px;}
-.cd-box{background:var(--card-2); border-radius:var(--radius-sm); text-align:center; padding:14px 4px;}
-.cd-num{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:26px; color:var(--orange-3);}
-.cd-lbl{font-size:11.5px; color:var(--muted); margin-top:2px;}
-
-.quote-card{background:linear-gradient(150deg,var(--card-2),var(--cream-2)); text-align:center;}
-.quote-ico{width:30px;height:30px; border-radius:50% 50% 50% 4px; background:var(--orange-3); margin:0 auto 12px; position:relative;}
-.quote-ico::after{content:""; position:absolute; width:4px;height:4px;border-radius:50%; background:#fff; top:11px; left:8px; box-shadow:6px 0 0 #fff, 12px 0 0 #fff;}
-.quote-text{font-size:17px; font-weight:600; line-height:1.6; color:var(--ink); min-height:52px;}
-.quote-meta{color:var(--muted); font-size:13px; margin-top:10px;}
-.quote-actions{display:flex; justify-content:center; gap:10px; margin-top:16px; flex-wrap:wrap;}
-.qa-btn{
-  border:none; background:var(--card); color:var(--orange-3); font-weight:600; font-size:13px;
-  padding:10px 16px; border-radius:999px; cursor:pointer; box-shadow:0 4px 12px rgba(255,122,41,0.15);
-  display:flex; align-items:center; gap:6px; transition:all .2s ease;
+/* QUOTES CARD & REACTIONS */
+.quote-item {
+  background: var(--card); border-radius: var(--radius-md); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
-.qa-btn:active{transform:scale(0.95);}
-
-.chat-entry{display:flex; align-items:center; gap:14px; cursor:pointer;}
-.chat-entry-ico{
-  width:46px;height:46px; border-radius:50% 50% 50% 6px; background:linear-gradient(150deg,var(--orange-1),var(--orange-3));
-  flex-shrink:0; position:relative;
+.quote-body { font-size: 16px; font-weight: 600; line-height: 1.6; color: var(--ink); margin-bottom: 12px; }
+.reaction-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid var(--line); padding-top: 10px; }
+.react-btn {
+  background: var(--card-2); border: none; border-radius: 99px; padding: 6px 12px;
+  font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; display: flex; align-items: center; gap: 4px;
+  transition: transform 0.15s ease;
 }
-.chat-entry-ico::after{content:""; position:absolute; width:5px;height:5px;border-radius:50%; background:#fff; top:19px; left:13px; box-shadow:8px 0 0 #fff, 16px 0 0 #fff;}
-.chat-entry-title{font-weight:700; font-size:15.5px;}
-.chat-entry-sub{color:var(--muted); font-size:13px; margin-top:2px;}
-.chat-entry-arrow{margin-left:auto; width:9px;height:9px; border-top:2.5px solid var(--orange-3); border-right:2.5px solid var(--orange-3); transform:rotate(45deg);}
+.react-btn:active { transform: scale(0.92); }
+.react-btn.fav-active { background: #FFE0E3; color: #FF4757; }
 
-.btn-primary{
-  border:none; width:100%; padding:15px; border-radius:var(--radius-md); font-weight:700; font-size:16px;
-  background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn);
-  cursor:pointer; transition:transform .2s ease;
+/* SOCIAL BUTTONS & DEVELOPER BADGE */
+.dev-badge-container { text-align: center; margin-top: 20px; padding: 16px; background: var(--card-2); border-radius: var(--radius-md); }
+.dev-name { font-family: 'Baloo Da 2', sans-serif; font-weight: 800; font-size: 18px; color: var(--orange-3); }
+.social-grid { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
+.social-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 99px;
+  font-size: 13px; font-weight: 700; text-decoration: none; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-.btn-primary:active{transform:scale(0.98);}
-.btn-secondary{
-  border:2px solid var(--orange-2); background:transparent; color:var(--orange-3); font-weight:700;
-  width:100%; padding:13px; border-radius:var(--radius-md); cursor:pointer;
-}
-.btn-ghost-danger{border:none; background:transparent; color:#D64545; font-weight:700; width:100%; padding:13px; cursor:pointer;}
+.btn-telegram { background: #0088cc; }
+.btn-facebook { background: #1877f2; }
+.btn-whatsapp { background: #25D366; }
 
-.page{display:none;}
-.page.active{display:block; animation:fadeUp .45s ease both;}
-.field{margin:16px 14px 0;}
-.field label{display:block; font-size:13.5px; font-weight:600; color:var(--ink-soft); margin-bottom:7px;}
-.field input, .field select, .field textarea{
-  width:100%; padding:13px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--line);
-  background:var(--card); color:var(--ink); font-family:inherit; font-size:15px;
-}
-.field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--orange-2); outline-offset:1px;}
-.btn-wrap{margin:20px 14px 0;}
-
-.profile-head{text-align:center; padding:8px 0 4px;}
-.avatar-wrap{width:104px;height:104px; margin:0 auto 12px; position:relative;}
-.avatar-wrap img{width:100%;height:100%;border-radius:50%; object-fit:cover; border:4px solid var(--card); box-shadow:var(--shadow-soft);}
-.avatar-edit{
-  position:absolute; bottom:0; right:0; width:34px;height:34px; border-radius:50%; background:var(--orange-3);
-  border:3px solid var(--cream); display:flex; align-items:center; justify-content:center; cursor:pointer;
-}
-.avatar-edit-ico{width:14px;height:14px; border:2px solid #fff; border-radius:3px; position:relative;}
-.avatar-edit-ico::after{content:"";position:absolute; top:-4px; left:3px; width:4px;height:4px; border:2px solid #fff; border-bottom:none; border-right:none; transform:rotate(45deg);}
-.profile-name{font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:22px;}
-.profile-email{color:var(--muted); font-size:14px; margin-top:2px;}
-.info-row{display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid var(--line);}
-.info-row:last-child{border-bottom:none;}
-.info-key{color:var(--muted); font-size:14px;}
-.info-val{font-weight:700; font-size:14.5px;}
-
-.settings-row{display:flex; align-items:center; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--line);}
-.settings-row:last-child{border-bottom:none;}
-.settings-label{font-weight:600; font-size:15px;}
-.settings-sub{color:var(--muted); font-size:12.5px; margin-top:2px;}
-.theme-pick{display:flex; gap:8px;}
-.theme-chip{
-  padding:8px 14px; border-radius:999px; border:1.5px solid var(--line); background:var(--card);
-  font-size:13px; font-weight:600; cursor:pointer; color:var(--ink-soft);
-}
-.theme-chip.active{background:var(--orange-3); color:#fff; border-color:var(--orange-3);}
-
-/* ==========================================================
-   UPDATED BOTTOM NAVIGATION BAR & SVG ICONS (MATCHING IMAGE)
-   ========================================================== */
+/* NAVIGATION BAR */
 .bottom-nav{
   position:fixed; left:0; right:0; bottom:0; z-index:100; max-width:480px; margin:0 auto;
   display:flex; padding:8px 10px calc(8px + var(--safe-bottom));
   background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  border-top:1px solid var(--line); box-shadow:0 -8px 24px rgba(255,106,26,0.08);
+  border-top:1px solid var(--line);
 }
 .nav-btn{
   flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:3px; padding:6px 0; background:none; border:none; cursor:pointer;
-  color:#A08068; transition:color 0.25s ease, transform 0.15s ease;
+  gap:3px; padding:6px 0; background:none; border:none; cursor:pointer; color:#A08068;
 }
-.nav-btn .nav-label{ font-size:12px; font-weight:600; font-family:'Hind Siliguri', sans-serif; }
-.nav-btn .nav-icon-wrap{ width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
-.nav-btn svg{ width:24px; height:24px; fill:currentColor; stroke:currentColor; transition:all 0.25s ease; }
-
-/* Active Icon styling matches the image (Orange Home fill, orange active tab) */
+.nav-btn .nav-label{ font-size:12px; font-weight:600; }
+.nav-btn svg{ width:22px; height:22px; fill:currentColor; stroke:currentColor; }
 .nav-btn.active{ color:var(--orange-3); }
-.nav-btn.active svg{ transform:scale(1.08); }
-.nav-btn:active{ transform:scale(0.92); }
 
-/* Chat Elements */
-.chat-header{display:flex; align-items:center; gap:12px; padding:14px 16px; margin:0 14px; background:var(--card); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--line); border-bottom:none;}
-.chat-back{width:32px;height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer;}
-.chat-back-ico{width:10px;height:10px; border-left:2.5px solid var(--orange-3); border-bottom:2.5px solid var(--orange-3); transform:rotate(45deg);}
-.chat-title{font-weight:700; font-size:16px;}
-.chat-online{font-size:11.5px; color:#4CAF50; display:flex; align-items:center; gap:5px;}
-.chat-online::before{content:""; width:7px;height:7px; border-radius:50%; background:#4CAF50;}
-.chat-box{
-  margin:0 14px; height:52vh; min-height:340px; overflow-y:auto; background:var(--cream-2);
-  border:1px solid var(--line); padding:14px; display:flex; flex-direction:column; gap:10px;
+.page{display:none;}
+.page.active{display:block;}
+.btn-primary{
+  border:none; width:100%; padding:14px; border-radius:var(--radius-md); font-weight:700; font-size:16px;
+  background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; box-shadow:var(--shadow-btn); cursor:pointer;
 }
-.msg{max-width:78%; padding:10px 13px; border-radius:16px; font-size:14.5px; line-height:1.5; position:relative;}
-.msg.me{align-self:flex-end; background:linear-gradient(135deg,var(--orange-1),var(--orange-3)); color:#fff; border-bottom-right-radius:4px;}
-.msg.them{align-self:flex-start; background:var(--card); color:var(--ink); border-bottom-left-radius:4px; box-shadow:0 3px 8px rgba(0,0,0,0.06);}
-.msg-name{font-size:11px; font-weight:700; opacity:.8; margin-bottom:2px;}
-.chat-input-bar{
-  display:flex; gap:8px; padding:12px; margin:0 14px; background:var(--card);
-  border:1px solid var(--line); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md);
-}
-.chat-input-bar input{flex:1; border:1.5px solid var(--line); border-radius:999px; padding:11px 16px; background:var(--cream); color:var(--ink); font-family:inherit; font-size:14px;}
-.chat-send{width:44px;height:44px; border-radius:50%; border:none; background:var(--orange-3); flex-shrink:0; cursor:pointer; position:relative;}
-.chat-send::after{content:""; position:absolute; top:50%; left:50%; width:9px;height:9px; border-top:2.5px solid #fff; border-right:2.5px solid #fff; transform:translate(-65%,-50%) rotate(45deg);}
-
 .toast{
-  position:fixed; left:50%; bottom:110px; transform:translateX(-50%) translateY(20px); z-index:300;
-  background:var(--ink); color:var(--cream); padding:12px 20px; border-radius:999px; font-size:13.5px; font-weight:600;
-  opacity:0; transition:all .3s ease; pointer-events:none; white-space:nowrap; box-shadow:0 10px 24px rgba(0,0,0,0.25);
+  position:fixed; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px); z-index:300;
+  background:var(--ink); color:var(--cream); padding:10px 18px; border-radius:99px; font-size:13px; font-weight:600;
+  opacity:0; transition:all .3s ease; pointer-events:none; white-space:nowrap;
 }
 .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 
-<div class="bg-shapes"><span></span><span></span><span></span><span></span></div>
-
+<!-- PRO SPLASH SCREEN WITH CUSTOM VECTOR ARTWORK -->
 <div id="splash">
-  <div class="splash-logo"><div class="logo-mark"></div></div>
+  <svg class="splash-art" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Circle Glow -->
+    <circle cx="100" cy="100" r="90" fill="white" fill-opacity="0.15"/>
+    <!-- Floating Balloons -->
+    <path d="M45 70C45 58.9543 53.9543 50 65 50C76.0457 50 85 58.9543 85 70C85 83 65 98 65 98C65 98 45 83 45 70Z" fill="#FFD166"/>
+    <path d="M125 55C125 46.1634 132.163 39 141 39C149.837 39 157 46.1634 157 55C157 65.5 141 77.5 141 77.5C141 77.5 125 65.5 125 55Z" fill="#06D6A0"/>
+    <!-- Calendar Card in Center -->
+    <rect x="55" y="80" width="90" height="80" rx="16" fill="white"/>
+    <path d="M55 96C55 87.1634 62.1634 80 71 80H129C137.837 80 145 87.1634 145 96V105H55V96Z" fill="#E85A0C"/>
+    <circle cx="78" cy="125" r="6" fill="#FF6A1A"/>
+    <circle cx="100" cy="125" r="6" fill="#FF6A1A"/>
+    <circle cx="122" cy="125" r="6" fill="#FF6A1A"/>
+    <circle cx="78" cy="145" r="6" fill="#FF6A1A"/>
+    <circle cx="100" cy="145" r="6" fill="#2ED573"/>
+    <circle cx="122" cy="145" r="6" fill="#FF6A1A"/>
+  </svg>
   <div class="splash-title">বউ ছাড়া কততম শুক্রবার</div>
+  <div class="splash-sub">আপনার ছুটির আনন্দময় মুহূর্তের ডিজিটাল ট্র্যাকার</div>
   <div class="splash-loader"><span></span></div>
 </div>
 
@@ -289,18 +179,17 @@ button{font-family:inherit;}
     <div class="top-header">
       <div class="header-row">
         <div class="header-date" id="liveDate">লোড হচ্ছে...</div>
-        <button class="theme-btn" id="quickThemeBtn" aria-label="থিম পরিবর্তন"><span class="icon-theme"></span></button>
+        <button class="theme-btn" id="quickThemeBtn">☀️</button>
       </div>
       <div class="header-time" id="liveTime">--:--:--</div>
-      <div class="logo-row"><span class="mini-logo"></span><span class="app-name">বউ ছাড়া কততম শুক্রবার</span></div>
-      <div class="header-sub">বেলুনের মত ফোলা আনন্দ, বউ ছাড়া প্রতিটা দিন <span class="css-balloon"></span></div>
+      <div class="app-name">বউ ছাড়া কততম শুক্রবার</div>
     </div>
 
     <div class="card">
       <div class="card-label">আজ বউ ছাড়া</div>
       <div class="friday-count" id="fridayNumber">০তম</div>
       <div class="friday-word">শুক্রবার</div>
-      <div class="friday-start" id="startDateLabel">শুরু তারিখ সেট করা হয়নি</div>
+      <div style="text-align:center; color:var(--muted); font-size:13px; margin-top:8px;" id="startDateLabel">তারিখ লোড হচ্ছে...</div>
     </div>
 
     <div class="stats-grid">
@@ -309,183 +198,88 @@ button{font-family:inherit;}
       <div class="stat-box"><div class="stat-num" id="statMonths">০</div><div class="stat-lbl">মাস</div></div>
     </div>
 
-    <div class="card">
-      <div class="section-title"><span class="clock-ico"></span> পরবর্তী শুক্রবার</div>
-      <div class="countdown-grid">
-        <div class="cd-box"><div class="cd-num" id="cdDays">০০</div><div class="cd-lbl">দিন</div></div>
-        <div class="cd-box"><div class="cd-num" id="cdHours">০০</div><div class="cd-lbl">ঘণ্টা</div></div>
-        <div class="cd-box"><div class="cd-num" id="cdMins">০০</div><div class="cd-lbl">মিনিট</div></div>
-        <div class="cd-box"><div class="cd-num" id="cdSecs">০০</div><div class="cd-lbl">সেকেন্ড</div></div>
+    <!-- DEV BADGE IN HOME -->
+    <div class="dev-badge-container">
+      <div style="font-size:12px; color:var(--muted);">অ্যাপ ডেভেলপার</div>
+      <div class="dev-name" id="devNameHome">MD FIROZ HOSSAIN</div>
+      <div class="social-grid" id="socialHomeGrid">
+        <!-- Dynamic Links -->
       </div>
-    </div>
-
-    <div class="card quote-card">
-      <div class="quote-ico"></div>
-      <div class="quote-text" id="homeQuoteText">লোড হচ্ছে...</div>
-      <div class="quote-meta" id="homeQuoteMeta">উক্তি ১ / ১</div>
-      <div class="quote-actions">
-        <button class="qa-btn" id="btnRefreshQuote"><span class="ico-refresh"></span> নতুন উক্তি</button>
-        <button class="qa-btn" id="btnFavQuote"><span class="ico-star"></span> পছন্দ</button>
-        <button class="qa-btn" id="btnCopyQuote"><span class="ico-copy"></span> কপি</button>
-        <button class="qa-btn" id="btnShareQuote"><span class="ico-share"></span> শেয়ার</button>
-      </div>
-    </div>
-
-    <div class="card chat-entry" id="openChatFromHome">
-      <div class="chat-entry-ico"></div>
-      <div>
-        <div class="chat-entry-title">গ্লোবাল চ্যাট</div>
-        <div class="chat-entry-sub" id="homeOnlineCount">সবার সাথে মজার আড্ডা দিন</div>
-      </div>
-      <div class="chat-entry-arrow"></div>
     </div>
   </section>
 
-  <!-- ================= COUNTER (হিসাব পেজ) ================= -->
+  <!-- ================= COUNTER ================= -->
   <section class="page" id="page-counter">
-    <div class="top-header" style="padding-bottom:20px;">
-      <div class="logo-row"><span class="app-name" style="font-size:17px;">শুক্রবার হিসাব</span></div>
-      <div class="header-sub">আপনার শুরুর তারিখ থেকে হিসাব করুন</div>
+    <div class="top-header">
+      <div class="app-name" style="font-size:18px;">শুক্রবার কাস্টম হিসাব</div>
     </div>
-
-    <div class="field">
-      <label for="startDateInput">শুরুর তারিখ নির্বাচন করুন</label>
-      <input type="date" id="startDateInput">
-    </div>
-    <div class="btn-wrap">
-      <button class="btn-primary" id="btnCalcCounter">হিসাব করুন</button>
-    </div>
-
-    <div class="card">
-      <div class="card-label">মোট শুক্রবার</div>
-      <div class="friday-count" id="counterFridayNumber">০তম</div>
-    </div>
-
-    <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);">
-      <div class="stat-box"><div class="stat-num" id="cStatDays">০</div><div class="stat-lbl">দিন</div></div>
-      <div class="stat-box"><div class="stat-num" id="cStatWeeks">০</div><div class="stat-lbl">সপ্তাহ</div></div>
-      <div class="stat-box"><div class="stat-num" id="cStatMonths">০</div><div class="stat-lbl">মাস</div></div>
-      <div class="stat-box"><div class="stat-num" id="cStatYears">০</div><div class="stat-lbl">বছর</div></div>
+    <div style="padding:14px;">
+      <label style="font-size:14px; font-weight:600;">শুরুর তারিখ নির্বাচন করুন:</label>
+      <input type="date" id="startDateInput" style="width:100%; padding:12px; margin:10px 0; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--ink);">
+      <button class="btn-primary" id="btnCalcCounter">হিসাব আপডেট করুন</button>
     </div>
   </section>
 
   <!-- ================= QUOTES ================= -->
   <section class="page" id="page-quotes">
-    <div class="top-header" style="padding-bottom:20px;">
-      <div class="logo-row"><span class="app-name" style="font-size:17px;">মজার উক্তি</span></div>
-      <div class="header-sub">হাসির খোরাক প্রতিদিন</div>
+    <div class="top-header">
+      <div class="app-name" style="font-size:18px;">মজার উক্তি ও রিয়্যাকশন</div>
     </div>
-    <div id="quoteList" style="padding:0 14px;"></div>
-  </section>
-
-  <!-- ================= CHAT ================= -->
-  <section class="page" id="page-chat">
-    <div class="chat-header" style="margin-top:14px;">
-      <div class="chat-back" id="chatBackBtn"><span class="chat-back-ico"></span></div>
-      <div>
-        <div class="chat-title">গ্লোবাল চ্যাট</div>
-        <div class="chat-online" id="chatOnlineLabel">অনলাইন লোড হচ্ছে...</div>
-      </div>
-    </div>
-    <div class="chat-box" id="chatBox"></div>
-    <div class="chat-input-bar">
-      <input type="text" id="chatInput" placeholder="মেসেজ লিখুন..." maxlength="500">
-      <button class="chat-send" id="chatSendBtn" aria-label="পাঠান"></button>
+    <div style="padding:14px;" id="quoteFeed">
+      <!-- Dynamic Quotes with Reactions -->
     </div>
   </section>
 
   <!-- ================= PROFILE ================= -->
   <section class="page" id="page-profile">
-    <div class="top-header" style="padding-bottom:34px;">
-      <div class="logo-row"><span class="app-name" style="font-size:17px;">প্রোফাইল</span></div>
+    <div class="top-header">
+      <div class="app-name" style="font-size:18px;">প্রোফাইল ও যোগাযোগ</div>
     </div>
-    <div class="card" style="margin-top:-24px;">
-      <div class="profile-head">
-        <div class="profile-name" id="profileName">অতিথি ব্যবহারকারী</div>
-        <div class="profile-email" id="profileEmail">লগইন করা নেই</div>
+    <div class="card" style="text-align:center;">
+      <h3 style="margin:0;" id="profileName">ব্যবহারকারী</h3>
+      <div class="dev-badge-container" style="margin-top:16px;">
+        <div style="font-size:12px; color:var(--muted);">ডেভেলপার ইনফরমেশন</div>
+        <div class="dev-name" id="devNameProfile">MD FIROZ HOSSAIN</div>
+        <div class="social-grid" id="socialProfileGrid">
+          <!-- Dynamic Links -->
+        </div>
       </div>
-      <div class="info-row"><div class="info-key">শুরুর তারিখ</div><div class="info-val" id="profileStartDate">সেট করা হয়নি</div></div>
-      <div class="info-row"><div class="info-key">মোট শুক্রবার</div><div class="info-val" id="profileFridayCount">০</div></div>
     </div>
   </section>
 
   <!-- ================= SETTINGS ================= -->
   <section class="page" id="page-settings">
-    <div class="top-header" style="padding-bottom:20px;">
-      <div class="logo-row"><span class="app-name" style="font-size:17px;">সেটিংস</span></div>
+    <div class="top-header">
+      <div class="app-name" style="font-size:18px;">সেটিংস</div>
     </div>
     <div class="card">
-      <div class="settings-row">
-        <div><div class="settings-label">থিম</div><div class="settings-sub">লাইট বা ডার্ক থিম বেছে নিন</div></div>
-        <div class="theme-pick">
-          <div class="theme-chip" data-theme-choice="light">লাইট</div>
-          <div class="theme-chip" data-theme-choice="dark">ডার্ক</div>
-        </div>
-      </div>
-      <div class="settings-row">
-        <div><div class="settings-label">শুক্রবার কাউন্টার রিসেট</div><div class="settings-sub">নতুন তারিখ রিসেট করতে পারবেন</div></div>
-      </div>
-      <div class="btn-wrap" style="margin:8px 0 0;"><button class="btn-secondary" id="btnResetCounter">রিসেট করুন</button></div>
+      <p style="color:var(--muted); font-size:14px;">অ্যাপটি বিনোদনের উদ্দেশ্যে তৈরি।</p>
+      <button class="btn-primary" id="btnResetCounter" style="background:var(--orange-deep);">ডাটা রিসেট করুন</button>
     </div>
   </section>
 
 </div>
 
-<!-- ==========================================================
-     EXACT MATCHING NAV BAR WITH BEAUTIFUL SVG ICONS
-     ========================================================== -->
+<!-- BOTTOM NAVIGATION BAR -->
 <nav class="bottom-nav">
   <button class="nav-btn active" data-page="page-home">
-    <div class="nav-icon-wrap">
-      <svg viewBox="0 0 24 24" stroke-width="0"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </div>
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     <span class="nav-label">ঘর</span>
   </button>
-
   <button class="nav-btn" data-page="page-counter">
-    <div class="nav-icon-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="3"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-        <circle cx="8" cy="14" r="1" fill="currentColor"/>
-        <circle cx="12" cy="14" r="1" fill="currentColor"/>
-        <circle cx="16" cy="14" r="1" fill="currentColor"/>
-        <circle cx="8" cy="18" r="1" fill="currentColor"/>
-        <circle cx="12" cy="18" r="1" fill="currentColor"/>
-        <circle cx="16" cy="18" r="1" fill="currentColor"/>
-      </svg>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     <span class="nav-label">হিসাব</span>
   </button>
-
   <button class="nav-btn" data-page="page-quotes">
-    <div class="nav-icon-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     <span class="nav-label">উক্তি</span>
   </button>
-
   <button class="nav-btn" data-page="page-profile">
-    <div class="nav-icon-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">প্রোফাইল</span>
   </button>
-
   <button class="nav-btn" data-page="page-settings">
-    <div class="nav-icon-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     <span class="nav-label">সেটিংস</span>
   </button>
 </nav>
@@ -494,188 +288,148 @@ button{font-family:inherit;}
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="firebase-config.js"></script>
 
 <script>
-"use strict";
 const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
 function toBn(num){ return String(num).replace(/[0-9]/g, d => bnDigits[d]); }
 function pad2(n){ return n < 10 ? "0"+n : ""+n; }
 const bnWeekday = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 const bnMonth = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
-let toastTimer;
 function showToast(msg){
   const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-function applyTheme(mode){
-  let actual = mode === "auto" ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : mode;
-  document.documentElement.setAttribute("data-theme", actual);
-  document.querySelectorAll(".theme-chip").forEach(c => c.classList.toggle("active", c.dataset.themeChoice === mode));
-  localStorage.setItem("bcf_theme", mode);
-}
-document.querySelectorAll(".theme-chip").forEach(chip => chip.addEventListener("click", () => applyTheme(chip.dataset.themeChoice)));
-document.getElementById("quickThemeBtn").addEventListener("click", () => {
-  const cur = localStorage.getItem("bcf_theme") || "light";
-  applyTheme(cur === "light" ? "dark" : "light");
-});
-applyTheme(localStorage.getItem("bcf_theme") || "light");
-
+// Navigation Handler
 function goToPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
-  window.scrollTo({top:0, behavior:"smooth"});
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
-document.getElementById("openChatFromHome").addEventListener("click", () => goToPage("page-chat"));
-document.getElementById("chatBackBtn").addEventListener("click", () => goToPage("page-home"));
 
+// Clock
 function updateClock(){
   const now = new Date();
-  document.getElementById("liveDate").textContent = `${bnWeekday[now.getDay()]}, ${toBn(now.getDate())} ${bnMonth[now.getMonth()]} ${toBn(now.getFullYear())}`;
+  document.getElementById("liveDate").textContent = `${bnWeekday[now.getDay()]}, ${toBn(now.getDate())} ${bnMonth[now.getMonth()]}`;
   document.getElementById("liveTime").textContent = `${toBn(pad2(now.getHours()))}:${toBn(pad2(now.getMinutes()))}:${toBn(pad2(now.getSeconds()))}`;
 }
 setInterval(updateClock, 1000); updateClock();
 
-/* ==========================================================
-   HISAAB (CALCULATOR PAGE) LOGIC FIXED HERE
-   ========================================================== */
-const DEFAULT_START_KEY = "bcf_start_date";
+const db = firebase.database();
 
-function startOfDay(d){ const x = new Date(d); x.setHours(0,0,0,0); return x; }
+// Fetch Dev & Social Info
+db.ref("settings/developer").on("value", snap => {
+  const d = snap.val() || {};
+  const name = d.name || "MD FIROZ HOSSAIN";
+  document.getElementById("devNameHome").textContent = name;
+  document.getElementById("devNameProfile").textContent = name;
 
-function countFridaysInclusive(start, end){
-  const s = startOfDay(start), e = startOfDay(end);
-  if(s > e) return 0;
-  let d = new Date(s);
-  while(d.getDay() !== 5){ d.setDate(d.getDate()+1); }
-  if(d > e) return 0;
-  return Math.floor(Math.round((e - d) / 86400000)/7) + 1;
+  let html = "";
+  if(d.telegram) html += `<a href="${d.telegram}" target="_blank" class="social-btn btn-telegram">Telegram</a>`;
+  if(d.facebook) html += `<a href="${d.facebook}" target="_blank" class="social-btn btn-facebook">Facebook</a>`;
+  if(d.whatsapp) html += `<a href="${d.whatsapp}" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>`;
+
+  document.getElementById("socialHomeGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক যুক্ত করা হয়নি</span>";
+  document.getElementById("socialProfileGrid").innerHTML = html || "<span style='font-size:12px;color:gray;'>সোশ্যাল লিংক যুক্ত করা হয়নি</span>";
+});
+
+// Quotes Feed & Reaction System
+let favQuotes = JSON.parse(localStorage.getItem("bcf_favs") || "[]");
+
+db.ref("quotes").on("value", snap => {
+  const data = snap.val() || {};
+  const container = document.getElementById("quoteFeed");
+  container.innerHTML = "";
+
+  Object.keys(data).reverse().forEach(key => {
+    const q = data[key];
+    const reactions = q.reactions || {};
+    const isFav = favQuotes.includes(key);
+
+    const div = document.createElement("div");
+    div.className = "quote-item";
+    div.innerHTML = `
+      <div class="quote-body">${q.text}</div>
+      <div class="reaction-bar">
+        <button class="react-btn" onclick="addReaction('${key}', 'love')">❤️ ${toBn(reactions.love || 0)}</button>
+        <button class="react-btn" onclick="addReaction('${key}', 'laugh')">😂 ${toBn(reactions.laugh || 0)}</button>
+        <button class="react-btn" onclick="addReaction('${key}', 'like')">👍 ${toBn(reactions.like || 0)}</button>
+        <button class="react-btn ${isFav ? 'fav-active' : ''}" onclick="toggleFavorite('${key}')">${isFav ? '❤️ ফেভারিট' : '🤍 পছন্দ করুন'}</button>
+        <button class="react-btn" onclick="shareQuote('${q.text}')">🔗 শেয়ার</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+});
+
+function addReaction(quoteId, type) {
+  db.ref(`quotes/${quoteId}/reactions/${type}`).transaction(count => (count || 0) + 1);
+  showToast("রিয়্যাকশন যুক্ত করা হয়েছে!");
 }
 
-function calcStats(startDate){
-  const s = startOfDay(startDate), t = startOfDay(new Date());
-  const days = Math.max(0, Math.round((t - s) / 86400000));
-  const months = Math.max(0, (t.getFullYear()-s.getFullYear())*12 + (t.getMonth()-s.getMonth()));
-  return { 
-    days, 
-    weeks: Math.floor(days/7), 
-    months, 
-    years: Math.floor(months/12), 
-    fridayCount: countFridaysInclusive(s, t) 
-  };
+function toggleFavorite(quoteId) {
+  if (favQuotes.includes(quoteId)) {
+    favQuotes = favQuotes.filter(id => id !== quoteId);
+    showToast("ফেভারিট থেকে সরানো হয়েছে");
+  } else {
+    favQuotes.push(quoteId);
+    showToast("ফেভারিটে সেভ করা হয়েছে!");
+  }
+  localStorage.setItem("bcf_favs", JSON.stringify(favQuotes));
 }
 
-// Function to update Counter / Hisaab Page
-function updateCounterData(dateString) {
-  if(!dateString) return;
-  const start = new Date(dateString);
-  const st = calcStats(start);
-  
-  // Update Hisaab Page fields
-  document.getElementById("counterFridayNumber").textContent = toBn(st.fridayCount) + "তম";
-  document.getElementById("cStatDays").textContent = toBn(st.days);
-  document.getElementById("cStatWeeks").textContent = toBn(st.weeks);
-  document.getElementById("cStatMonths").textContent = toBn(st.months);
-  document.getElementById("cStatYears").textContent = toBn(st.years);
-
-  // Update Home Page fields as well
-  document.getElementById("fridayNumber").textContent = toBn(st.fridayCount) + "তম";
-  document.getElementById("statDays").textContent = toBn(st.days);
-  document.getElementById("statWeeks").textContent = toBn(st.weeks);
-  document.getElementById("statMonths").textContent = toBn(st.months);
-  document.getElementById("startDateLabel").textContent = `শুরু: ${bnWeekday[start.getDay()]}, ${toBn(start.getDate())} ${bnMonth[start.getMonth()]}`;
-  
-  // Profile Update
-  document.getElementById("profileStartDate").textContent = `${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
-  document.getElementById("profileFridayCount").textContent = toBn(st.fridayCount);
-
-  // Save to LocalStorage
-  localStorage.setItem(DEFAULT_START_KEY, dateString);
+function shareQuote(text) {
+  if (navigator.share) {
+    navigator.share({ title: "মজার উক্তি", text });
+  } else {
+    navigator.clipboard.writeText(text);
+    showToast("উক্তি কপি করা হয়েছে!");
+  }
 }
 
-// On Click Calculate Button
+// Counter Calculation
+function countFridays(s, e) {
+  let count = 0, cur = new Date(s);
+  while (cur <= e) {
+    if (cur.getDay() === 5) count++;
+    cur.setDate(cur.getDate() + 1);
+  }
+  return count;
+}
+
+function updateCounter(dateStr) {
+  if (!dateStr) return;
+  const start = new Date(dateStr), now = new Date();
+  const diffDays = Math.max(0, Math.floor((now - start) / 86400000));
+  const fridays = countFridays(start, now);
+
+  document.getElementById("fridayNumber").textContent = toBn(fridays) + "তম";
+  document.getElementById("statDays").textContent = toBn(diffDays);
+  document.getElementById("statWeeks").textContent = toBn(Math.floor(diffDays/7));
+  document.getElementById("statMonths").textContent = toBn(Math.floor(diffDays/30));
+  document.getElementById("startDateLabel").textContent = `শুরু: ${toBn(start.getDate())} ${bnMonth[start.getMonth()]} ${toBn(start.getFullYear())}`;
+}
+
 document.getElementById("btnCalcCounter").addEventListener("click", () => {
-  const inputVal = document.getElementById("startDateInput").value;
-  if(!inputVal) return showToast("একটি শুরুর তারিখ নির্বাচন করুন!");
-  updateCounterData(inputVal);
-  showToast("হিসাব সফলভাবে আপডেট করা হয়েছে!");
+  const dateVal = document.getElementById("startDateInput").value;
+  if (dateVal) {
+    localStorage.setItem("bcf_start_date", dateVal);
+    updateCounter(dateVal);
+    showToast("হিসাব আপডেট হয়েছে!");
+  }
 });
 
-// Reset Counter Button
-document.getElementById("btnResetCounter").addEventListener("click", () => {
-  localStorage.removeItem(DEFAULT_START_KEY);
-  document.getElementById("startDateInput").value = "";
-  location.reload();
-});
+const savedDate = localStorage.getItem("bcf_start_date") || new Date(Date.now() - 30*86400000).toISOString().split('T')[0];
+document.getElementById("startDateInput").value = savedDate;
+updateCounter(savedDate);
 
-// Auto Load Saved Date if exists
-const savedStartDate = localStorage.getItem(DEFAULT_START_KEY);
-if(savedStartDate) {
-  document.getElementById("startDateInput").value = savedStartDate;
-  updateCounterData(savedStartDate);
-} else {
-  // Default to 30 days ago if no date is set
-  const defaultDate = new Date();
-  defaultDate.setDate(defaultDate.getDate() - 30);
-  const dateStr = defaultDate.toISOString().split('T')[0];
-  document.getElementById("startDateInput").value = dateStr;
-  updateCounterData(dateStr);
-}
-
-// Live Countdown to Next Friday
-function updateCountdown() {
-  const now = new Date();
-  let nextFriday = new Date(now);
-  nextFriday.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7));
-  nextFriday.setHours(0,0,0,0);
-  if(nextFriday <= now) nextFriday.setDate(nextFriday.getDate() + 7);
-
-  const diff = nextFriday - now;
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((diff / 1000 / 60) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  document.getElementById("cdDays").textContent = toBn(pad2(d));
-  document.getElementById("cdHours").textContent = toBn(pad2(h));
-  document.getElementById("cdMins").textContent = toBn(pad2(m));
-  document.getElementById("cdSecs").textContent = toBn(pad2(s));
-}
-setInterval(updateCountdown, 1000); updateCountdown();
-
-/* Quotes Sample Logic */
-let quotes = [
-  "আজ একটা মাছের রেসিপি চেষ্টা করলাম। ডাস্টবিন লাভবান হলো।",
-  "বউ ছাড়া রান্নাঘর এখন গবেষণাগার — প্রতিদিন নতুন বিস্ফোরণ।",
-  "রিমোট কন্ট্রোল এখন সম্পূর্ণ আমার — ক্ষমতার স্বাদ কী মধুর!",
-  "মোজা এখন যেখানে খুশি রাখি — এটাই তো স্বাধীনতা।"
-];
-let currentQuoteIdx = 0;
-function renderQuote(){
-  document.getElementById("homeQuoteText").textContent = quotes[currentQuoteIdx % quotes.length];
-  document.getElementById("homeQuoteMeta").textContent = `উক্তি ${toBn((currentQuoteIdx % quotes.length) + 1)} / ${toBn(quotes.length)}`;
-}
-renderQuote();
-document.getElementById("btnRefreshQuote").addEventListener("click", () => {
-  currentQuoteIdx = Math.floor(Math.random() * quotes.length);
-  renderQuote();
-});
-
-// Copy & Share Toast
-document.getElementById("btnCopyQuote").addEventListener("click", () => showToast("উক্তি কপি করা হয়েছে!"));
-document.getElementById("btnShareQuote").addEventListener("click", () => showToast("শেয়ার লিংক তৈরি হয়েছে!"));
-
-// Splash Hide
+// Splash Hide Animation
 window.addEventListener("load", () => {
-  setTimeout(() => document.getElementById("splash").classList.add("hide"), 600);
+  setTimeout(() => document.getElementById("splash").classList.add("hide"), 800);
 });
 </script>
 </body>
