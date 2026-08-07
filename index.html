@@ -574,34 +574,44 @@ function hideSplash() {
 setTimeout(hideSplash, 800);
 
 /* ==========================================================
-   PUSH NOTIFICATION ENGINE FOR APP: com.bowcharafriday.app
+   SOUND & PUSH NOTIFICATION ENGINE (HOPWEB/WEBVIEW READY)
    ========================================================== */
+function playNotificationSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
+
 function requestPushNotificationPermission() {
   if ("Notification" in window) {
     if (Notification.permission !== "granted" && Notification.permission !== "denied") {
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          console.log("Push Notification Permission Granted for com.bowcharafriday.app");
-        }
-      });
+      Notification.requestPermission();
     }
   }
 }
 
 function sendLocalPushNotification(title, body) {
+  playNotificationSound();
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+
   if ("Notification" in window && Notification.permission === "granted") {
     try {
-      const options = {
+      new Notification(title, {
         body: body,
         icon: "icon-192.png",
         badge: "icon-192.png",
-        vibrate: [200, 100, 200],
-        tag: "com.bowcharafriday.app.notification"
-      };
-      new Notification(title, options);
-    } catch(e) {
-      console.log("Notification error:", e);
-    }
+        vibrate: [200, 100, 200]
+      });
+    } catch(e) {}
   }
 }
 
@@ -623,6 +633,28 @@ function loadUserScopedData() {
 }
 loadUserScopedData();
 
+// GLOBAL ALL-TIME ADMIN SUPPORT NOTIFICATION LISTENER
+let globalAdminSupportListenerActive = false;
+function listenGlobalAdminSupportNotifications() {
+  if (!myUid || globalAdminSupportListenerActive || typeof db === "undefined") return;
+  globalAdminSupportListenerActive = true;
+
+  const supportRef = db.ref(`chatRooms/support/${myUid}/messages`);
+  let isFirstLoad = true;
+
+  supportRef.limitToLast(1).on("child_added", snap => {
+    if (isFirstLoad) {
+      isFirstLoad = false;
+      return;
+    }
+    const m = snap.val();
+    if (m && (m.isAdmin || m.uid !== myUid)) {
+      sendLocalPushNotification("এডমিন সাপোর্ট 🛡️", m.text);
+      showToast("🛡️ এডমিন সাপোর্ট থেকে মেসেজ এসেছে!");
+    }
+  });
+}
+
 function checkAuthGate() {
   try {
     const authGate = document.getElementById("authGateOverlay");
@@ -639,6 +671,7 @@ function checkAuthGate() {
         updateCounterData(userAccount.dob);
       }
       requestPushNotificationPermission();
+      listenGlobalAdminSupportNotifications();
     } else {
       if(authGate) authGate.classList.remove("hide");
       if(app) app.style.display = "none";
@@ -1064,9 +1097,9 @@ window.toggleFavorite = function(quoteId) {
 };
 
 window.shareQuoteCard = function(quoteText) {
-  const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-appdownload.vercel.app`;
+  const cardContent = `*বউ ছাড়া কততম শুক্রবার — বিশেষ উক্তি*\n\n"${quoteText}"\n\nশেয়ার করেছেন: ${myName}\nসাইট লিংক: https://bouchara-fun.vercel.app`;
   if (navigator.share) {
-    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://bouchara-appdownload.vercel.app" });
+    navigator.share({ title: "বউ ছাড়া কততম শুক্রবার", text: cardContent, url: "https://bouchara-fun.vercel.app" });
   } else {
     navigator.clipboard.writeText(cardContent);
     showToast("উক্তি লিংক সহ কপি করা হয়েছে!");
@@ -1081,7 +1114,7 @@ window.downloadAppApk = function() {
   }
 };
 
-// CHAT ROOMS & PUSH NOTIFICATIONS
+// CHAT ROOMS & REALTIME CHAT NOTIFICATIONS
 let loadChatMessages;
 let initialChatLoadDone = false;
 
@@ -1140,7 +1173,6 @@ if(typeof db !== "undefined") {
         chatBox.appendChild(div);
       });
 
-      // অন্যের বা এডমিনের নতুন মেসেজ আসলে পুশ নোটিফিকেশন দেওয়া
       if (initialChatLoadDone && keys.length > 0) {
         const lastMsg = msgs[keys[keys.length - 1]];
         if (lastMsg && lastMsg.uid !== myUid) {
@@ -1183,7 +1215,6 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
-      // অতিরিক্ত বন্ধুভাবাপন্ন ও মিষ্টিভাষী এআই প্রম্পট
       const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: তুমি 'বউ ছাড়া কততম শুক্রবার' অ্যাপের অত্যন্ত অমায়িক, মিষ্টিভাষী, রসিক ও বন্ধুবৎসল এআই সঙ্গী। সবার সাথে খুব আপন ছন্দে, কিউট ও ফ্রেন্ডলি ভাব নিয়ে বাংলায় কথা বলবে। মনে রাখবে অ্যাপের প্রতিষ্ঠাতা ও একমাত্র ডেভেলপার হলেন MD FIROZ HOSSAIN।]";
       const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের মিষ্টিভাষী ফ্রেন্ডলি এআই বন্ধু।") + devInstruction;
 
