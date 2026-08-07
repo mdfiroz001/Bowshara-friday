@@ -222,7 +222,6 @@ button, input, select{font-family:inherit;}
 </style>
 </head>
 <body>
-<script src="https://pl30720001.effectivecpmnetwork.com/24/17/b6/2417b6a0be2fac933cc229dd555525c0.js"></script>
 
 <!-- PRO SPLASH SCREEN -->
 <div id="splash">
@@ -333,7 +332,7 @@ button, input, select{font-family:inherit;}
     </div>
 
     <div class="card">
-      <div class="card-label">তোমার জীবন থেকে শুক্রবার চলে গেছে</div>
+      <div class="card-label">আজ জন্ম তারিখ থেকে বউ ছাড়া</div>
       <div class="friday-count" id="fridayNumber">০তম</div>
       <div class="friday-word">শুক্রবার</div>
       <div style="text-align:center; color:var(--muted); font-size:13px; margin-top:8px;" id="startDateLabel">তারিখ লোড হচ্ছে...</div>
@@ -574,6 +573,38 @@ function hideSplash() {
 }
 setTimeout(hideSplash, 800);
 
+/* ==========================================================
+   PUSH NOTIFICATION ENGINE FOR APP: com.bowcharafriday.app
+   ========================================================== */
+function requestPushNotificationPermission() {
+  if ("Notification" in window) {
+    if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          console.log("Push Notification Permission Granted for com.bowcharafriday.app");
+        }
+      });
+    }
+  }
+}
+
+function sendLocalPushNotification(title, body) {
+  if ("Notification" in window && Notification.permission === "granted") {
+    try {
+      const options = {
+        body: body,
+        icon: "icon-192.png",
+        badge: "icon-192.png",
+        vibrate: [200, 100, 200],
+        tag: "com.bowcharafriday.app.notification"
+      };
+      new Notification(title, options);
+    } catch(e) {
+      console.log("Notification error:", e);
+    }
+  }
+}
+
 // PERSISTENT AUTH & ISOLATED DATA STATE
 let myUid = localStorage.getItem("bcf_my_uid") || "";
 let userAccount = JSON.parse(localStorage.getItem("bcf_user_account") || "null");
@@ -607,6 +638,7 @@ function checkAuthGate() {
       if(userAccount.dob) {
         updateCounterData(userAccount.dob);
       }
+      requestPushNotificationPermission();
     } else {
       if(authGate) authGate.classList.remove("hide");
       if(app) app.style.display = "none";
@@ -693,7 +725,7 @@ function submitLogin() {
   }
 }
 
-// 2. SUBMIT REGISTRATION (ALWAYS UNIQUE UID)
+// 2. SUBMIT REGISTRATION
 function submitRegistration() {
   const name = document.getElementById("regNameInput").value.trim();
   const email = document.getElementById("regEmailInput").value.trim();
@@ -707,7 +739,6 @@ function submitRegistration() {
   if(!dob) return showToast("জন্ম তারিখ নির্বাচন করুন!");
   if(!pass || pass.length < 4) return showToast("পাসওয়ার্ড অন্তত ৪ অক্ষরের দিন!");
 
-  // নতুন অ্যাকাউন্টের জন্য সব সময় ইউনিক আইডি তৈরি করা হচ্ছে
   const newUid = "usr_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
 
   userAccount = {
@@ -785,7 +816,7 @@ function submitPasswordReset() {
   }
 }
 
-// 4. LOGOUT USER (CLEARS MEMORY DATA PERFECTLY)
+// 4. LOGOUT USER
 function logoutUser() {
   if(confirm("আপনি কি অ্যাকাউন্ট থেকে লগআউট করতে চান?")) {
     localStorage.removeItem("bcf_user_account");
@@ -841,7 +872,6 @@ function refreshActivePageAd() {
   const activePage = document.querySelector(".page.active");
   if(!activePage) return;
 
-  // পেজের আইডি থেকে কী (Key) বের করা (যেমন: page-home -> home)
   const pageKey = activePage.id.replace("page-", "");
   const pageScript = currentAdScripts[pageKey] || "";
 
@@ -867,7 +897,6 @@ function goToPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
   window.scrollTo({top:0, behavior:"smooth"});
-  
   refreshActivePageAd();
 }
 document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => goToPage(btn.dataset.page)));
@@ -925,7 +954,6 @@ if(typeof db !== "undefined") {
     }
   });
 
-  // পেজ-ওয়াইজ এড স্ক্রিপ্ট লিসেনার
   db.ref("settings/app/adScripts").on("value", snap => {
     currentAdScripts = snap.val() || {};
     refreshActivePageAd();
@@ -1053,13 +1081,16 @@ window.downloadAppApk = function() {
   }
 };
 
-// CHAT ROOMS
+// CHAT ROOMS & PUSH NOTIFICATIONS
 let loadChatMessages;
+let initialChatLoadDone = false;
+
 if(typeof db !== "undefined") {
   let activeChatMode = "global";
 
   window.switchChatRoom = function(mode) {
     activeChatMode = mode;
+    initialChatLoadDone = false;
     document.getElementById("btnTabGlobalChat").classList.toggle("active", mode === "global");
     document.getElementById("btnTabCommunityChat").classList.toggle("active", mode === "community");
     document.getElementById("btnTabSupportChat").classList.toggle("active", mode === "support");
@@ -1085,8 +1116,8 @@ if(typeof db !== "undefined") {
 
       if(keys.length === 0) {
         let emptyTxt = "মেসেজ পাঠাতে নিচে লিখুন!";
-        if(activeChatMode === "global") emptyTxt = "আপনার নিজস্ব AI চ্যাটবটের সাথে মেসেজ শুরু করুন!";
-        if(activeChatMode === "community") emptyTxt = "পাবলিক ফোরামে সবার সাথে মেসেজ শেয়ার করুন!";
+        if(activeChatMode === "global") emptyTxt = "আপনার বন্ধু এআই-এর সাথে কথা বলুন!";
+        if(activeChatMode === "community") emptyTxt = "পাবলিক গ্রুপে সবার সাথে চ্যাট করুন!";
         if(activeChatMode === "support") emptyTxt = "আপনার নিজস্ব সাপোর্ট মেসেজ পাঠান (এখানে শুধু এডমিন উত্তর দেবেন)।";
 
         chatBox.innerHTML = `<div style='text-align:center; padding:20px; font-size:13px; color:gray;'>${emptyTxt}</div>`;
@@ -1108,6 +1139,16 @@ if(typeof db !== "undefined") {
         `;
         chatBox.appendChild(div);
       });
+
+      // অন্যের বা এডমিনের নতুন মেসেজ আসলে পুশ নোটিফিকেশন দেওয়া
+      if (initialChatLoadDone && keys.length > 0) {
+        const lastMsg = msgs[keys[keys.length - 1]];
+        if (lastMsg && lastMsg.uid !== myUid) {
+          sendLocalPushNotification(`নতুন মেসেজ (${lastMsg.name})`, lastMsg.text);
+        }
+      }
+      initialChatLoadDone = true;
+
       chatBox.scrollTop = chatBox.scrollHeight;
     });
   }
@@ -1142,8 +1183,9 @@ if(typeof db !== "undefined") {
   async function fetchAiReply(aiConfig, userMsg) {
     try {
       let reply = "";
-      const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: এই সাইট ও অ্যাপের একমাত্র নির্মাতা এবং প্রধান ডেভেলপার হলেন MD FIROZ HOSSAIN।]";
-      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের একটি কৌতুকপ্রিয় এআই বট।") + devInstruction;
+      // অতিরিক্ত বন্ধুভাবাপন্ন ও মিষ্টিভাষী এআই প্রম্পট
+      const devInstruction = "\n[গুরুত্বপূর্ণ নির্দেশিকা: তুমি 'বউ ছাড়া কততম শুক্রবার' অ্যাপের অত্যন্ত অমায়িক, মিষ্টিভাষী, রসিক ও বন্ধুবৎসল এআই সঙ্গী। সবার সাথে খুব আপন ছন্দে, কিউট ও ফ্রেন্ডলি ভাব নিয়ে বাংলায় কথা বলবে। মনে রাখবে অ্যাপের প্রতিষ্ঠাতা ও একমাত্র ডেভেলপার হলেন MD FIROZ HOSSAIN।]";
+      const fullSystemPrompt = (aiConfig.systemPrompt || "তুমি বউ ছাড়া কততম শুক্রবার অ্যাপের মিষ্টিভাষী ফ্রেন্ডলি এআই বন্ধু।") + devInstruction;
 
       if(aiConfig.provider === "ollama") {
         const res = await fetch(aiConfig.endpoint, {
@@ -1179,7 +1221,7 @@ if(typeof db !== "undefined") {
       if(reply && reply.trim()) {
         db.ref(`chatRooms/ai/${myUid}/messages`).push({
           uid: "bot_ai",
-          name: "বউ ছাড়া AI (বট)",
+          name: "বউ ছাড়া AI (বন্ধু)",
           text: reply.trim(),
           isBot: true,
           time: Date.now()
